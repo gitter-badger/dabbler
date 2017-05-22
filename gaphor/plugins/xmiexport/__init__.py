@@ -23,7 +23,7 @@ This plugin extends Gaphor with XMI export functionality.
 """
 
 from __future__ import absolute_import
-import gtk
+from gi.repository import Gtk
 from zope import interface, component
 from gaphor.core import _, inject, action, build_action_group
 from gaphor.interfaces import IService, IActionProvider

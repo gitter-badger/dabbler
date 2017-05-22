@@ -26,7 +26,7 @@ diagram).
 
 from __future__ import absolute_import
 import inspect
-import gobject
+from gi.repository import GObject
 import uuid
 
 from gaphor.diagram.style import Style

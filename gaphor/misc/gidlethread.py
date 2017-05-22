@@ -33,7 +33,7 @@ QueueFull - raised when the queue reaches it's max size and the oldest item
 from __future__ import absolute_import
 from __future__ import print_function
 import sys
-import gobject
+from gi.repository import GObject
 import time
 import traceback
 import six
@@ -64,7 +64,7 @@ class GIdleThread(object):
     ...         yield x
     >>> t = GIdleThread(counter(123))
     >>> id = t.start()
-    >>> main = gobject.main_context_default()
+    >>> main = GObject.main_context_default()
     >>> while t.is_alive():
     ...     main.iteration(False) # doctest: +ELLIPSIS
     True
@@ -78,11 +78,11 @@ class GIdleThread(object):
         self._idle_id = 0
         self._exc_info = (None, None, None)
 
-    def start(self, priority=gobject.PRIORITY_LOW):
+    def start(self, priority=GObject.PRIORITY_LOW):
         """Start the generator. Default priority is low, so screen updates
         will be allowed to happen.
         """
-        idle_id = gobject.idle_add(self.__generator_executer,
+        idle_id = GObject.idle_add(self.__generator_executer,
                                    priority=priority)
         self._idle_id = idle_id
         return idle_id
@@ -93,7 +93,7 @@ class GIdleThread(object):
         """
         clock = time.clock
         start_time = clock()
-        main = gobject.main_context_default()
+        main = GObject.main_context_default()
         while self.is_alive():
             main.iteration(False)
             if timeout and (clock() - start_time >= timeout):
@@ -103,7 +103,7 @@ class GIdleThread(object):
         """Force the generator to stop running.
         """
         if self.is_alive():
-            gobject.source_remove(self._idle_id)
+            GObject.source_remove(self._idle_id)
             self._idle_id = 0
 
     def is_alive(self):
@@ -212,7 +212,7 @@ if __name__ == '__main__':
     c = GIdleThread(counter(23), queue)
     s = GIdleThread(shower(queue))
     
-    main = gobject.main_context_default()
+    main = GObject.main_context_default()
     c.start()
     s.start()
     s.wait(2)
@@ -222,7 +222,7 @@ if __name__ == '__main__':
     c = GIdleThread(counter(23), queue)
     s = GIdleThread(shower(queue))
     
-    main = gobject.main_context_default()
-    c.start(priority=gobject.PRIORITY_DEFAULT)
+    main = GObject.main_context_default()
+    c.start(priority=GObject.PRIORITY_DEFAULT)
     s.start()
     s.wait(3)

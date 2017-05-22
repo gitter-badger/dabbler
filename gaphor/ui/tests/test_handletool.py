@@ -23,7 +23,7 @@ Test handle tool functionality.
 
 from __future__ import absolute_import
 import unittest
-import gtk
+from gi.repository import Gtk
 
 from gaphor.UML import uml2
 from gaphor.diagram.comment import CommentItem
@@ -98,8 +98,8 @@ class HandleToolTestCase(unittest.TestCase):
         view = self.main_window.get_current_diagram_view()
 
         # realize view, forces bounding box recalculation
-        while gtk.events_pending():
-            gtk.main_iteration()
+        while Gtk.events_pending():
+            Gtk.main_iteration()
 
         return view
 

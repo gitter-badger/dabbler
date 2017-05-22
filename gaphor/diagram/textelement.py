@@ -49,9 +49,9 @@ def _text_layout(cr, text, font, width):
     cr = pangocairo.CairoContext(cr)
     layout = cr.create_layout()
     if font:
-        layout.set_font_description(pango.FontDescription(font))
+        layout.set_font_description(Pango.FontDescription(font))
     layout.set_text(text)
-    layout.set_width(int(width * pango.SCALE))
+    layout.set_width(int(width * Pango.SCALE))
     #layout.set_height(height)
     return layout
 
@@ -475,7 +475,7 @@ class TextElement(object):
             cr = pangocairo.CairoContext(context.cairo)
             cr.move_to(x, y)
             layout = cr.create_layout()
-            layout.set_font_description(pango.FontDescription(self._style.font))
+            layout.set_font_description(Pango.FontDescription(self._style.font))
             layout.set_text(self.text)
             cr.show_layout(layout)
         if self.editable and (context.hovered or context.focused):

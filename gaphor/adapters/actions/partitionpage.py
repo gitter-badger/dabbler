@@ -21,7 +21,7 @@
 Activity partition property page.
 """
 from __future__ import absolute_import
-import gtk
+from gi.repository import Gtk
 from gaphor.core import _, inject, transactional
 from gaphor.ui.interfaces import IPropertyPage
 from gaphor.diagram import items
@@ -45,16 +45,16 @@ class PartitionPropertyPage(NamedItemPropertyPage):
 
         if item.subject:
             if not item._toplevel:
-                hbox = gtk.HBox(spacing=12)
-                button = gtk.CheckButton(_('External'))
+                hbox = Gtk.HBox(spacing=12)
+                button = Gtk.CheckButton(_('External'))
                 button.set_active(item.subject.isExternal)
                 button.connect('toggled', self._on_external_change)
-                hbox.pack_start(button)
-                page.pack_start(hbox, expand=False)
+                hbox.pack_start(button, True, True, 0)
+                page.pack_start(hbox, False, True, 0)
             else:
                 pass
-                #hbox = gtk.HBox(spacing=12)
-                #button = gtk.CheckButton(_('Dimension'))
+                #hbox = Gtk.HBox(spacing=12)
+                #button = Gtk.CheckButton(_('Dimension'))
                 #button.set_active(item.subject.isDimension)
                 #button.connect('toggled', self._on_dimension_change)
 

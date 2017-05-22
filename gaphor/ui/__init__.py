@@ -22,11 +22,11 @@ main screen and diagram windows.
 """
 
 from __future__ import absolute_import
-import gtk
+from gi.repository import Gtk
 import pkg_resources
 import os.path
 
-icon_theme = gtk.icon_theme_get_default()
+icon_theme = Gtk.IconTheme.get_default()
 icon_theme.append_search_path(os.path.abspath(
                                 pkg_resources.resource_filename('gaphor.ui', 'pixmaps')))
 

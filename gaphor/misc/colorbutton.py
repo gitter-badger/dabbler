@@ -17,23 +17,23 @@
 # You should have received a copy of the GNU General Public License along with
 # Gaphor.  If not, see <http://www.gnu.org/licenses/>.
 """
-A version of the standard gtk.ColorButton tweaked towards Gaphor.
+A version of the standard Gtk.ColorButton tweaked towards Gaphor.
 
 Gaphor is using color values from 0 to 1 (cairo standard), so that required some tweaks
 on the color widget. The standard format is `(red, green, blue, alpha)`.
 """
 
 from __future__ import absolute_import
-import gtk
+from gi.repository import Gtk
 
 
-class ColorButton(gtk.ColorButton):
+class ColorButton(Gtk.ColorButton):
 
     __gtype_name__ = 'GaphorColorButton'
 
     def __init__(self, r, g, b, a):
-        gtk.Button.__init__(self)
-        self.set_color(gtk.gdk.Color(int(r * 65535),
+        GObject.GObject.__init__(self)
+        self.set_color(Gdk.Color(int(r * 65535),
                                      int(g * 65535),
                                      int(b * 65535)))
         self.set_use_alpha(True)

@@ -24,7 +24,7 @@ CommentLine -- A line that connects a comment to another model element.
 """
 
 from __future__ import absolute_import
-import gobject
+from gi.repository import GObject
 from zope import component
 
 from .diagramline import DiagramLine

@@ -22,7 +22,7 @@ Abstract classes for element-like Diagram items.
 """
 
 from __future__ import absolute_import
-import gobject
+from gi.repository import GObject
 import cairo
 import gaphas
 from zope import component

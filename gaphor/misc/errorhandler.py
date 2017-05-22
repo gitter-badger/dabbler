@@ -23,7 +23,7 @@ to a class' method and will raise the error dialog when the method exits with
 an exception.
 """
 from __future__ import absolute_import
-import gtk
+from gi.repository import Gtk
 import sys
 import pdb
 
@@ -38,20 +38,20 @@ def error_handler(message=None, exc_info=None):
     if not message:
         message = _('An error occured.')
 
-    buttons = gtk.BUTTONS_OK
+    buttons = Gtk.ButtonsType.OK
     message = '%s\n\nTechnical details:\n\t%s\n\t%s' % (message, exc_type, exc_value)
 
     if __debug__ and sys.stdin.isatty():
-        buttons = gtk.BUTTONS_YES_NO
+        buttons = Gtk.ButtonsType.YES_NO
         message += _('\n\nDo you want to debug?\n(Gaphor should have been started from the command line)')
 
-    dialog = gtk.MessageDialog(None,
-                    gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
-                    gtk.MESSAGE_ERROR,
+    dialog = Gtk.MessageDialog(None,
+                    Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
+                    Gtk.MessageType.ERROR,
                     buttons, message)
     answer = dialog.run()
     dialog.destroy()
-    if answer == gtk.RESPONSE_YES:
+    if answer == Gtk.ResponseType.YES:
         pdb.post_mortem(exc_traceback)
 
 # vim:sw=4:et:ai

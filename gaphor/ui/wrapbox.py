@@ -17,11 +17,11 @@
 # You should have received a copy of the GNU General Public License along with
 # Gaphor.  If not, see <http://www.gnu.org/licenses/>.
 from __future__ import absolute_import
-import gobject
-import gtk
+from gi.repository import GObject
+from gi.repository import Gtk
 
 
-class Wrapbox(gtk.Table):
+class Wrapbox(Gtk.Table):
     """
     A Wrapbox contains a set of items. A wrap box tries to optimize it's
     content by moving elements to a second row if the do not fit on the first.
@@ -85,7 +85,7 @@ class Wrapbox(gtk.Table):
         #print 'size_allocate', rows, cols
         if not self.resize_idle_id and (rows != self.rows or cols != self.cols):
             #print 'size_allocate', 'setting idle handler'
-            self.resize_idle_id = gobject.idle_add(self._idle_handler)
+            self.resize_idle_id = GObject.idle_add(self._idle_handler)
         self.rows = rows
         self.cols = cols
 
@@ -99,7 +99,7 @@ class Wrapbox(gtk.Table):
                           top_attach=row-1, bottom_attach=row)
         self.children.append(widget)
 
-gobject.type_register(Wrapbox)
+GObject.type_register(Wrapbox)
 
 
 # vim:sw=4:et

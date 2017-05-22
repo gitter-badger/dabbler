@@ -142,8 +142,8 @@ class _Application(object):
             return self.init_service(name)
 
     def run(self):
-        import gtk
-        gtk.main()
+        from gi.repository import Gtk
+        Gtk.main()
 
     def shutdown(self):
         for name, srv in self.component_registry.get_utilities(IService):

@@ -19,7 +19,7 @@
 # Gaphor.  If not, see <http://www.gnu.org/licenses/>.
 from __future__ import absolute_import
 
-import gtk
+from gi.repository import Gtk
 
 from gaphor.UML import uml2
 from gaphor.adapters.propertypages import AttributesPage, OperationsPage
@@ -121,7 +121,7 @@ class EditorTestCase(TestCase):
         editor = AttributesPage(klass)
         page = editor.construct()
         tree_view = page.get_children()[1]
-        self.assertSame(gtk.TreeView, type(tree_view))
+        self.assertSame(Gtk.TreeView, type(tree_view))
 
         attr = self.element_factory.create(uml2.Property)
         attr.name = "blah"
@@ -145,7 +145,7 @@ class EditorTestCase(TestCase):
         editor = OperationsPage(klass)
         page = editor.construct()
         tree_view = page.get_children()[1]
-        self.assertSame(gtk.TreeView, type(tree_view))
+        self.assertSame(Gtk.TreeView, type(tree_view))
 
         oper = self.element_factory.create(uml2.Operation)
         oper.name = 'o'

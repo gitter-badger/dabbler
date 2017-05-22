@@ -102,12 +102,12 @@ class FeatureItem(object):
         if isinstance(cr, cairo.Context):
             cr = pangocairo.CairoContext(cr)
             layout = cr.create_layout()
-            layout.set_font_description(pango.FontDescription(self.font))
+            layout.set_font_description(Pango.FontDescription(self.font))
             layout.set_text(self.render() or '')
         
             if hasattr(self.subject, 'isStatic') and self.subject.isStatic:
-                attrlist = pango.AttrList()
-                attrlist.insert(pango.AttrUnderline(pango.UNDERLINE_SINGLE,
+                attrlist = Pango.AttrList()
+                attrlist.insert(Pango.AttrUnderline(Pango.Underline.SINGLE,
                                 2, -1))
                 layout.set_attributes(attrlist)
             cr.show_layout(layout)

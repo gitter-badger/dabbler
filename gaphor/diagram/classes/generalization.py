@@ -23,7 +23,7 @@ Generalization --
 """
 
 from __future__ import absolute_import
-import gobject
+from gi.repository import GObject
 
 from gaphor.UML import uml2
 from gaphor.diagram.diagramline import DiagramLine

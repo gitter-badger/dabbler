@@ -19,7 +19,7 @@
 # Gaphor.  If not, see <http://www.gnu.org/licenses/>.
 from __future__ import absolute_import
 
-import gtk
+from gi.repository import Gtk
 from logging import getLogger
 from zope import interface, component
 
@@ -112,9 +112,9 @@ class ActionManager(object):
             self.register_action_provider(event.service)
 
 
-class UIManager(gtk.UIManager):
+class UIManager(Gtk.UIManager):
     """
-    Service version of gtk.UIManager.
+    Service version of Gtk.UIManager.
     """
 
     interface.implements(IService)
