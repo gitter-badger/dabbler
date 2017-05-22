@@ -27,7 +27,7 @@ from xml.etree.ElementTree import Element, SubElement, tostring, fromstring
 
 from gi.repository import Gtk
 
-from etk.docking import DockFrame, DockPaned, DockGroup, DockItem
+# from etk.docking import DockFrame, DockPaned, DockGroup, DockItem
 from gaphor.core import _
 from six.moves import map
 
@@ -96,6 +96,7 @@ def attributes(widget):
 def widget_attributes(widget):
     return { 'name': widget.get_name() or 'empty' }
 
+# TODO Remove
 @attributes.when_type(DockItem)
 def dock_item_attributes(widget):
     d = { 'title': widget.props.title,
@@ -106,6 +107,7 @@ def dock_item_attributes(widget):
         d['stock_id'] = widget.props.stock
     return d
 
+# TODO Remove
 @attributes.when_type(DockGroup)
 def dock_group_attributes(widget):
     d = parent_attributes(widget)
@@ -114,11 +116,13 @@ def dock_group_attributes(widget):
         d['name'] = name
     return d
 
+# TODO Remove
 @attributes.when_type(DockPaned)
 def dock_paned_attributes(widget):
     return dict(orientation=(widget.get_orientation() == Gtk.Orientation.HORIZONTAL and 'horizontal' or 'vertical'),
                 **parent_attributes(widget))
 
+# TODO Remove
 @attributes.when_type(DockFrame)
 def dock_frame_attributes(widget):
     a = widget.allocation
@@ -141,6 +145,7 @@ def factory(typename):
 
     return _factory
 
+# TODO Remove
 @factory('dockitem')
 def dock_item_factory(parent, title, tooltip, icon_name=None, stock_id=None, pos=None, vispos=None, current=None, name=None):
     item = DockItem(_(title), _(tooltip), icon_name, stock_id)
@@ -156,6 +161,7 @@ def dock_item_factory(parent, title, tooltip, icon_name=None, stock_id=None, pos
 
     return item
 
+# TODO Remove
 @factory('dockgroup')
 def dock_group_factory(parent, weight=None, name=None):
     group = DockGroup()
@@ -172,6 +178,7 @@ def dock_group_factory(parent, weight=None, name=None):
 
     return group
 
+# TODO Remove
 @factory('dockpaned')
 def dock_paned_factory(parent, orientation, weight=None, name=None):
     paned = DockPaned()
@@ -193,6 +200,7 @@ def dock_paned_factory(parent, orientation, weight=None, name=None):
 
     return paned
 
+# TODO Remove
 @factory('dockframe')
 def dock_frame_factory(parent, width, height, floating=None, x=None, y=None):
     frame = DockFrame()
