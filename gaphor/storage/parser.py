@@ -51,15 +51,16 @@ takes a long time. The yielded values are the percentage of the file read.
 """
 
 from __future__ import absolute_import
-from six.moves import range
-__all__ = [ 'parse', 'ParserException' ]
 
 import os
-import types
 from xml.sax import handler
-from cStringIO import InputType
+from io import StringIO
+
+from six.moves import range
 
 from gaphor.misc.odict import odict
+
+__all__ = [ 'parse', 'ParserException' ]
 
 class base(object):
     """Simple base class for element, canvas and canvasitem.
@@ -314,11 +315,12 @@ class ProgressGenerator(object):
         self.input = input
         self.output = output
         self.block_size = block_size
-        if isinstance(self.input, types.FileType):
-            self.file_size = os.fstat(self.input.fileno())[6]
-        elif isinstance(self.input, InputType):
+        if isinstance(self.input, str):
             self.file_size = len(self.input.getvalue())
             self.input.reset()
+        else:
+            self.file_size = os.fstat(self.input.fileno())[6]
+
                 
     def __iter__(self):
         """Return a generator that yields the progress of reading data
@@ -344,7 +346,7 @@ def parse_file(filename, parser):
     
     is_fd = True
     
-    if isinstance(filename, (types.FileType, InputType)):
+    if isinstance(filename, bytes):
         file_obj = filename
     else:
         is_fd = False
