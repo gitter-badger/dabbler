@@ -72,7 +72,7 @@ class Overrides:
         for lines, startline in bufs:
             line = lines[0]
             rest = lines[1:]
-            words = string.split(line)
+            words = str.split(line)
 
             # TODO: Create a mech to define dependencies
             if words[0] == 'override':
@@ -80,7 +80,7 @@ class Overrides:
                 deps = ()
                 if len(words) > 3 and words[2] == 'derives':
                     deps = tuple(words[3:])
-                self.overrides[func] = (deps, string.join(rest, ''), '%d: %s' % (startline, line))
+                self.overrides[func] = (deps, rest.extend(''), '%d: %s' % (startline, line))
             elif words[0] == 'comment':
                 pass  # ignore comments
             else:
