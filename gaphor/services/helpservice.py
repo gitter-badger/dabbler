@@ -31,9 +31,10 @@ from gaphor.application import Application
 from gaphor.interfaces import IService, IActionProvider
 from gaphor.core import _, inject, action, build_action_group
 
+
+@interface.implementer(IService, IActionProvider)
 class HelpService(object):
 
-    interface.implements(IService, IActionProvider)
 
     menu_xml = """
       <ui>

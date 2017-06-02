@@ -62,6 +62,7 @@ class TransactionError(Exception):
     """
 
 
+@interface.implementer(ITransaction)
 class Transaction(object):
     """
     The transaction. On start and end of a transaction an event is emited.
@@ -86,7 +87,6 @@ class Transaction(object):
     ...     pass
     """
 
-    interface.implements(ITransaction)
     component_registry = application.inject('component_registry')
 
     _stack = []
