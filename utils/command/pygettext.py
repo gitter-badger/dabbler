@@ -1,8 +1,8 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 # -*- coding: iso-8859-1 -*-
-# Originally written by Barry Warsaw <barry@zope.com>
+# Originally written by Barry Warsaw <barry@python.org>
 #
-# Minimally patched to make it even more xgettext compatible 
+# Minimally patched to make it even more xgettext compatible
 # by Peter Funk <pf@artcom-gmbh.de>
 #
 # 2002-11-22 Jürgen Hermann <jh@web.de>
@@ -14,10 +14,6 @@
 #
 
 # for selftesting
-from __future__ import absolute_import
-from __future__ import print_function
-from six.moves import range
-from functools import reduce
 try:
     import fintl
     _ = fintl.gettext
@@ -29,17 +25,17 @@ __doc__ = _("""pygettext -- Python equivalent of xgettext(1)
 Many systems (Solaris, Linux, Gnu) provide extensive tools that ease the
 internationalization of C programs. Most of these tools are independent of
 the programming language and can be used from within Python programs.
-Martin von Loewis' work[1] helps considerably in this regard. 
+Martin von Loewis' work[1] helps considerably in this regard.
 
 There's one problem though; xgettext is the program that scans source code
 looking for message strings, but it groks only C (or C++). Python
 introduces a few wrinkles, such as dual quoting characters, triple quoted
-strings, and raw strings. xgettext understands none of this. 
+strings, and raw strings. xgettext understands none of this.
 
 Enter pygettext, which uses Python's standard tokenize module to scan
 Python source code, generating .pot files identical to what GNU xgettext[2]
 generates for C and C++ code. From there, the standard GNU tools can be
-used. 
+used.
 
 A word about marking Python strings as candidates for translation. GNU
 xgettext recognizes the following keywords: gettext, dgettext, dcgettext,
@@ -47,7 +43,7 @@ and gettext_noop. But those can be a lot of text to include all over your
 code. C and C++ have a trick: they use the C preprocessor. Most
 internationalized C source includes a #define for gettext() to _() so that
 what has to be written in the source is much less. Thus these are both
-translatable strings: 
+translatable strings:
 
     gettext("Translatable String")
     _("Translatable String")
@@ -63,7 +59,7 @@ NOTE: pygettext attempts to be option and feature compatible with GNU
 xgettext where ever possible. However some options are still missing or are
 not fully implemented. Also, xgettext's use of command line switches with
 option arguments is broken, and in these cases, pygettext just defines
-additional switches. 
+additional switches.
 
 Usage: pygettext [options] inputfile ...
 
@@ -160,12 +156,14 @@ If `inputfile' is -, standard input is read.
 """)
 
 import os
+import importlib.machinery
+import importlib.util
 import sys
+import glob
 import time
 import getopt
 import token
 import tokenize
-import operator
 
 __version__ = '1.5'
 
@@ -191,8 +189,8 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\\n"
 "Language-Team: LANGUAGE <LL@li.org>\\n"
 "MIME-Version: 1.0\\n"
-"Content-Type: text/plain; charset=CHARSET\\n"
-"Content-Transfer-Encoding: ENCODING\\n"
+"Content-Type: text/plain; charset=%(charset)s\\n"
+"Content-Transfer-Encoding: %(encoding)s\\n"
 "Generated-By: pygettext.py %(version)s\\n"
 
 ''')
@@ -206,35 +204,32 @@ def usage(code, msg=''):
 
 
 
-escapes = []
-
-def make_escapes(pass_iso8859):
-    global escapes
-    if pass_iso8859:
-        # Allow iso-8859 characters to pass through so that e.g. 'msgid
+def make_escapes(pass_nonascii):
+    global escapes, escape
+    if pass_nonascii:
+        # Allow non-ascii characters to pass through so that e.g. 'msgid
         # "Höhe"' would result not result in 'msgid "H\366he"'.  Otherwise we
         # escape any character outside the 32..126 range.
         mod = 128
+        escape = escape_ascii
     else:
         mod = 256
-    for i in range(256):
-        if 32 <= (i % mod) <= 126:
-            escapes.append(chr(i))
-        else:
-            escapes.append("\\%03o" % i)
-    escapes[ord('\\')] = '\\\\'
-    escapes[ord('\t')] = '\\t'
-    escapes[ord('\r')] = '\\r'
-    escapes[ord('\n')] = '\\n'
-    escapes[ord('\"')] = '\\"'
+        escape = escape_nonascii
+    escapes = [r"\%03o" % i for i in range(mod)]
+    for i in range(32, 127):
+        escapes[i] = chr(i)
+    escapes[ord('\\')] = r'\\'
+    escapes[ord('\t')] = r'\t'
+    escapes[ord('\r')] = r'\r'
+    escapes[ord('\n')] = r'\n'
+    escapes[ord('\"')] = r'\"'
 
 
-def escape(s):
-    global escapes
-    s = list(s)
-    for i in range(len(s)):
-        s[i] = escapes[ord(s[i])]
-    return EMPTYSTRING.join(s)
+def escape_ascii(s, encoding):
+    return ''.join(escapes[ord(c)] if ord(c) < 128 else c for c in s)
+
+def escape_nonascii(s, encoding):
+    return ''.join(escapes[b] for b in s.encode(encoding))
 
 
 def safe_eval(s):
@@ -242,37 +237,34 @@ def safe_eval(s):
     return eval(s, {'__builtins__':{}}, {})
 
 
-def normalize(s):
+def normalize(s, encoding):
     # This converts the various Python string types into a format that is
     # appropriate for .po files, namely much closer to C style.
     lines = s.split('\n')
     if len(lines) == 1:
-        s = '"' + escape(s) + '"'
+        s = '"' + escape(s, encoding) + '"'
     else:
         if not lines[-1]:
             del lines[-1]
             lines[-1] = lines[-1] + '\n'
         for i in range(len(lines)):
-            lines[i] = escape(lines[i])
+            lines[i] = escape(lines[i], encoding)
         lineterm = '\\n"\n"'
         s = '""\n"' + lineterm.join(lines) + '"'
     return s
 
 
 def containsAny(str, set):
-    """ Check whether 'str' contains ANY of the chars in 'set'
-    """
+    """Check whether 'str' contains ANY of the chars in 'set'"""
     return 1 in [c in str for c in set]
 
 
 def _visit_pyfiles(list, dirname, names):
-    """ Helper for getFilesForName().
-    """
+    """Helper for getFilesForName()."""
     # get extension for python source files
     if '_py_ext' not in globals():
-        import imp
         global _py_ext
-        _py_ext = [triple[0] for triple in imp.get_suffixes() if triple[2] == imp.PY_SOURCE][0]
+        _py_ext = importlib.machinery.SOURCE_SUFFIXES[0]
 
     # don't recurse into CVS directories
     if 'CVS' in names:
@@ -280,60 +272,18 @@ def _visit_pyfiles(list, dirname, names):
 
     # add all *.py files to list
     list.extend(
-        [os.path.join(dirname, file)
-            for file in names
-                if os.path.splitext(file)[1] == _py_ext])
-
-
-def _get_modpkg_path(dotted_name, pathlist=None):
-    """ Get the filesystem path for a module or a package.
-
-        Return the file system path to a file for a module,
-        and to a directory for a package. Return None if
-        the name is not found, or is a builtin or extension module.
-    """
-    import imp
-
-    # split off top-most name
-    parts = dotted_name.split('.', 1)
-
-    if len(parts) > 1:
-        # we have a dotted path, import top-level package
-        try:
-            file, pathname, description = imp.find_module(parts[0], pathlist)
-            if file: file.close()
-        except ImportError:
-            return None
-
-        # check if it's indeed a package
-        if description[2] == imp.PKG_DIRECTORY:
-            # recursively handle the remaining name parts
-            pathname = _get_modpkg_path(parts[1], [pathname])
-        else:
-            pathname = None
-    else:
-        # plain name
-        try:
-            file, pathname, description = imp.find_module(dotted_name, pathlist)
-            if file: file.close()
-            if description[2] not in [imp.PY_SOURCE, imp.PKG_DIRECTORY]:
-                pathname = None
-        except ImportError:
-            pathname = None
-
-    return pathname
+        [os.path.join(dirname, file) for file in names
+         if os.path.splitext(file)[1] == _py_ext]
+        )
 
 
 def getFilesForName(name):
-    """ Get a list of module files for a filename, a module or package name,
-        or a directory.
+    """Get a list of module files for a filename, a module or package name,
+    or a directory.
     """
-    import imp
-
     if not os.path.exists(name):
         # check for glob chars
         if containsAny(name, "*?[]"):
-            import glob
             files = glob.glob(name)
             list = []
             for file in files:
@@ -341,14 +291,18 @@ def getFilesForName(name):
             return list
 
         # try to find module or package
-        name = _get_modpkg_path(name)
+        try:
+            spec = importlib.util.find_spec(name)
+            name = spec.origin
+        except ImportError:
+            name = None
         if not name:
             return []
 
     if os.path.isdir(name):
         # find all python files in directory
         list = []
-        os.path.walk(name, _visit_pyfiles, list)
+        os.walk(name, _visit_pyfiles, list)
         return list
     elif os.path.exists(name):
         # a single file
@@ -419,7 +373,7 @@ class TokenEater:
     def __openseen(self, ttype, tstring, lineno):
         if ttype == tokenize.OP and tstring == ')':
             # We've seen the last of the translatable strings.  Record the
-            # line number of the first line of the strings and update the list 
+            # line number of the first line of the strings and update the list
             # of messages seen.  Reset state for the next batch.  If there
             # were no strings inside _(), then just ignore this entry.
             if self.__data:
@@ -430,8 +384,13 @@ class TokenEater:
         elif ttype not in [tokenize.COMMENT, token.INDENT, token.DEDENT,
                            token.NEWLINE, tokenize.NL]:
             # warn if we see anything else than STRING or whitespace
-            print(_('*** %(file)s:%(lineno)s: Seen unexpected token "%(token)s"') % {
-                'token': tstring, 'file': self.__curfile, 'lineno': self.__lineno}, file=sys.stderr)
+            print(_(
+                '*** %(file)s:%(lineno)s: Seen unexpected token "%(token)s"'
+                ) % {
+                'token': tstring,
+                'file': self.__curfile,
+                'lineno': self.__lineno
+                }, file=sys.stderr)
             self.__state = self.__waiting
 
     def __addentry(self, msg, lineno=None, isdocstring=0):
@@ -447,34 +406,30 @@ class TokenEater:
 
     def write(self, fp):
         options = self.__options
-        timestamp = time.ctime(time.time())
-        # The time stamp in the header doesn't have the same format as that
-        # generated by xgettext...
-        print(pot_header % {'time': timestamp, 'version': __version__}, file=fp)
+        timestamp = time.strftime('%Y-%m-%d %H:%M%z')
+        encoding = fp.encoding if fp.encoding else 'UTF-8'
+        print(pot_header % {'time': timestamp, 'version': __version__,
+                            'charset': encoding,
+                            'encoding': '8bit'}, file=fp)
         # Sort the entries.  First sort each particular entry's keys, then
         # sort all the entries by their first item.
         reverse = {}
         for k, v in self.__messages.items():
-            keys = list(v.keys())
-            keys.sort()
+            keys = sorted(v.keys())
             reverse.setdefault(tuple(keys), []).append((k, v))
-        rkeys = list(reverse.keys())
-        rkeys.sort()
+        rkeys = sorted(reverse.keys())
         for rkey in rkeys:
             rentries = reverse[rkey]
             rentries.sort()
             for k, v in rentries:
-                isdocstring = 0
                 # If the entry was gleaned out of a docstring, then add a
                 # comment stating so.  This is to aid translators who may wish
                 # to skip translating some unimportant docstrings.
-                if reduce(operator.__add__, list(v.values())):
-                    isdocstring = 1
+                isdocstring = any(v.values())
                 # k is the message string, v is a dictionary-set of (filename,
                 # lineno) tuples.  We want to sort the entries in v first by
                 # file name and then by line number.
-                v = list(v.keys())
-                v.sort()
+                v = sorted(v.keys())
                 if not options.writelocations:
                     pass
                 # location comments are different b/w Solaris and GNU:
@@ -485,7 +440,7 @@ class TokenEater:
                             '# File: %(filename)s, line: %(lineno)d') % d, file=fp)
                 elif options.locationstyle == options.GNU:
                     # fit as many locations on one line, as long as the
-                    # resulting line length doesn't exceeds 'options.width'
+                    # resulting line length doesn't exceed 'options.width'
                     locline = '#:'
                     for filename, lineno in v:
                         d = {'filename': filename, 'lineno': lineno}
@@ -499,7 +454,7 @@ class TokenEater:
                         print(locline, file=fp)
                 if isdocstring:
                     print('#, docstring', file=fp)
-                print('msgid', normalize(k), file=fp)
+                print('msgid', normalize(k, encoding), file=fp)
                 print('msgstr ""\n', file=fp)
 
 
@@ -595,7 +550,7 @@ def main():
                 fp.close()
 
     # calculate escapes
-    make_escapes(options.escape)
+    make_escapes(not options.escape)
 
     # calculate all keywords
     options.keywords.extend(default_keywords)
@@ -628,20 +583,23 @@ def main():
         if filename == '-':
             if options.verbose:
                 print(_('Reading standard input'))
-            fp = sys.stdin
+            fp = sys.stdin.buffer
             closep = 0
         else:
             if options.verbose:
                 print(_('Working on %s') % filename)
-            fp = open(filename)
+            fp = open(filename, 'rb')
             closep = 1
         try:
             eater.set_filename(filename)
             try:
-                tokenize.tokenize(fp.readline, eater)
+                tokens = tokenize.tokenize(fp.readline)
+                for _token in tokens:
+                    eater(*_token)
             except tokenize.TokenError as e:
                 print('%s: %s, line %d, column %d' % (
-                    e[0], filename, e[1][0], e[1][1]), file=sys.stderr)
+                    e.args[0], filename, e.args[1][0], e.args[1][1]),
+                    file=sys.stderr)
         finally:
             if closep:
                 fp.close()
@@ -665,7 +623,6 @@ def main():
 if __name__ == '__main__':
     main()
     # some more test strings
-    _(u'a unicode string')
-    _('*** Seen unexpected token "%(token)s"' % {'token': 'test'}) # this one creates a warning
+    # this one creates a warning
+    _('*** Seen unexpected token "%(token)s"') % {'token': 'test'}
     _('more' 'than' 'one' 'string')
-
