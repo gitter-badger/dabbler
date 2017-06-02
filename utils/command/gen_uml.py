@@ -142,7 +142,7 @@ class Writer:
         print(a.class_name, a.name, 'type is', type)
         if type.lower() == 'boolean':
             # FixMe: Should this be a boolean or an integer?
-            # Integer is save and compattable with python2.2.
+            # Integer is save and compatible with python2.2.
             type = 'int'
         elif type.lower() in ('integer', 'unlimitednatural'):
             type = 'int'
@@ -175,7 +175,7 @@ class Writer:
         elif eval(a.isDerived or '0'):
             msg('ignoring derived attribute %s.%s: no definition' % (a.class_name, a.name))
         elif type.endswith('Kind') or type.endswith('Sort'):
-            e = filter(lambda e: e['name'] == type, list(enumerations.values()))[0]
+            e = next(filter(lambda e: e['name'] == type, list(enumerations.values())))
             self.write_property("%s.%s" % (a.class_name, a.name),
                                 "enumeration('%s', %s, '%s')" % (a.name, e.enumerates, default or e.enumerates[0]))
         else:
