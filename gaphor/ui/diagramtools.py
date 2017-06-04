@@ -27,27 +27,25 @@ Although Gaphas has quite a few useful tools, some tools need to be extended:
 """
 
 from __future__ import absolute_import
-from gi.repository import Gtk
+
+from gi.repository import Gtk, Gdk
 from zope import component
 
-from gaphas.geometry import distance_point_point, distance_point_point_fast, \
-                            distance_line_point, distance_rectangle_point
-from gaphas.tool import Tool, HandleTool, PlacementTool as _PlacementTool, \
-    ToolChain, HoverTool, ItemTool, RubberbandTool, ConnectHandleTool
 from gaphas.aspect import Connector, InMotion
 from gaphas.guide import GuidedItemInMotion
-from gaphor.core import inject, Transaction, transactional
+from gaphas.tool import Tool, PlacementTool as _PlacementTool
+from gaphas.tool import ToolChain, HoverTool, ItemTool, RubberbandTool, ConnectHandleTool
 
-from gaphor.diagram.interfaces import IEditor, IConnect, IGroup
+from gaphor.core import Transaction, transactional
 from gaphor.diagram.diagramline import DiagramLine
 from gaphor.diagram.elementitem import ElementItem
-
+from gaphor.diagram.interfaces import IEditor, IConnect, IGroup
 
 # cursor to indicate grouping
-IN_CURSOR = Gdk.Cursor.new(Gdk.DIAMOND_CROSS)
+IN_CURSOR = Gdk.Cursor.new_for_display(Gdk.Display.get_default(), Gdk.CursorType(36))
 
 # cursor to indicate ungrouping
-OUT_CURSOR = Gdk.Cursor.new(Gdk.SIZING)
+OUT_CURSOR = Gdk.Cursor.new_for_display(Gdk.Display.get_default(), Gdk.CursorType(120))
 
 
 @Connector.when_type(DiagramLine)
@@ -64,7 +62,6 @@ class DiagramItemConnector(Connector.default):
         adapter = component.queryMultiAdapter((sink.item, self.item), IConnect)
         return adapter and adapter.allow(self.handle, sink.port)
 
-
     @transactional
     def connect(self, sink):
         """
@@ -78,7 +75,7 @@ class DiagramItemConnector(Connector.default):
             callback = DisconnectHandle(self.item, self.handle)
             if cinfo and cinfo.connected is sink.item:
                 # reconnect only constraint - leave model intact
-                log.debug('performing reconnect constraint')
+                self.logger.debug('performing reconnect constraint')
                 constraint = sink.port.constraint(item.canvas, item, handle, sink.item)
                 item.canvas.reconnect_item(item, handle, constraint=constraint)
             elif cinfo:
@@ -104,13 +101,11 @@ class DiagramItemConnector(Connector.default):
                 self.connect_handle(sink, callback=callback)
                 adapter.connect(handle, sink.port)
         except Exception as e:
-            log.error('Error during connect', exc_info=True)
-
+            self.logger.error('Error during connect', exc_info=True)
 
     @transactional
     def disconnect(self):
         super(DiagramItemConnector, self).disconnect()
-
 
 
 class DisconnectHandle(object):
@@ -128,11 +123,11 @@ class DisconnectHandle(object):
      disable
         If set, then disconnection is disabled.
     """
+
     def __init__(self, item, handle):
         self.item = item
         self.handle = handle
         self.disable = False
-
 
     def __call__(self):
         handle = self.handle
@@ -141,13 +136,12 @@ class DisconnectHandle(object):
         cinfo = canvas.get_connection(handle)
 
         if self.disable:
-            log.debug('Not disconnecting %s.%s (disabled)' % (item, handle))
+            self.logger.debug('Not disconnecting %s.%s (disabled)' % (item, handle))
         else:
-            log.debug('Disconnecting %s.%s' % (item, handle))
+            self.logger.debug('Disconnecting %s.%s' % (item, handle))
             if cinfo:
                 adapter = component.queryMultiAdapter((cinfo.connected, item), IConnect)
                 adapter.disconnect(handle)
-
 
 
 class TextEditTool(Tool):
@@ -165,7 +159,7 @@ class TextEditTool(Tool):
         window.set_property('decorated', False)
         window.set_property('skip-taskbar-hint', True)
         window.set_resize_mode(Gtk.RESIZE_IMMEDIATE)
-        #window.set_modal(True)
+        # window.set_modal(True)
         window.set_parent_window(view.window)
         buffer = Gtk.TextBuffer()
         if text:
@@ -175,32 +169,32 @@ class TextEditTool(Tool):
             buffer.move_mark_by_name('insert', enditer)
         text_view = Gtk.TextView()
         text_view.set_buffer(buffer)
-        #text_view.set_border_width(2)
+        # text_view.set_border_width(2)
         text_view.set_left_margin(2)
         text_view.set_right_margin(2)
         text_view.show()
-        
+
         frame = Gtk.Frame()
         frame.set_shadow_type(Gtk.ShadowType.IN)
-        #frame.set_border_width(1)
+        # frame.set_border_width(1)
         frame.add(text_view)
         frame.show()
 
         window.add(frame)
-        #window.set_border_width(1)
+        # window.set_border_width(1)
         window.size_allocate((int(x), int(y), 50, 50))
-        #window.move(int(x), int(y))
+        # window.move(int(x), int(y))
         cursor_pos = view.get_toplevel().get_screen().get_display().get_pointer()
         window.move(cursor_pos[1], cursor_pos[2])
         window.connect('focus-out-event', self._on_focus_out_event,
                        buffer, editor)
         text_view.connect('key-press-event', self._on_key_press_event,
                           buffer, editor)
-        #text_view.set_size_request(50, 50)
+        # text_view.set_size_request(50, 50)
         window.show()
-        #text_view.grab_focus()
-        #window.set_uposition(event.x, event.y)
-        #window.focus
+        # text_view.grab_focus()
+        # window.set_uposition(event.x, event.y)
+        # window.focus
 
     @transactional
     def submit_text(self, widget, buffer, editor):
@@ -220,7 +214,7 @@ class TextEditTool(Tool):
             except TypeError:
                 # Could not adapt to IEditor
                 return False
-            log.debug('Found editor %r' % editor)
+            self.logger.debug('Found editor %r' % editor)
             x, y = view.get_matrix_v2i(item).transform_point(event.x, event.y)
             if editor.is_editable(x, y):
                 text = editor.get_text()
@@ -250,8 +244,8 @@ class PlacementTool(_PlacementTool):
         that is displayed on the diagram.
         """
         _PlacementTool.__init__(self, view, factory=item_factory,
-                                      handle_tool=ConnectHandleTool(),
-                                      handle_index=handle_index)
+                                handle_tool=ConnectHandleTool(),
+                                handle_index=handle_index)
         self.after_handler = after_handler
         self._tx = None
 
@@ -284,7 +278,7 @@ class PlacementTool(_PlacementTool):
                     self.handle_tool.connect(self.new_item, opposite, vpos)
             return True
         return False
-            
+
     def on_button_release(self, event):
         try:
             if self.after_handler:
@@ -302,9 +296,8 @@ class GroupPlacementTool(PlacementTool):
 
     def __init__(self, view, item_factory, after_handler=None, handle_index=-1):
         super(GroupPlacementTool, self).__init__(view,
-                item_factory, after_handler, handle_index)
+                                                 item_factory, after_handler, handle_index)
         self._parent = None
-
 
     def on_motion_notify(self, event):
         """
@@ -340,7 +333,6 @@ class GroupPlacementTool(PlacementTool):
             view.dropzone_item = None
             view.window.set_cursor(None)
 
-
     def _create_item(self, pos, **kw):
         """
         Create diagram item and place it within parent's boundaries.
@@ -369,8 +361,6 @@ class GroupPlacementTool(PlacementTool):
 
 @InMotion.when_type(ElementItem)
 class DropZoneInMotion(GuidedItemInMotion):
-
-
     def move(self, pos):
         """
         Move the item. x and y are in view coordinates.
@@ -402,7 +392,6 @@ class DropZoneInMotion(GuidedItemInMotion):
                 view.dropzone_item = over_item
                 view.window.set_cursor(IN_CURSOR)
                 over_item.request_update(matrix=False)
-
 
     def stop_move(self):
         """
@@ -444,7 +433,7 @@ class DropZoneInMotion(GuidedItemInMotion):
             view.dropzone_item = None
             view.window.set_cursor(None)
 
-    
+
 class TransactionalToolChain(ToolChain):
     """
     In addition to a normal toolchain, this chain begins an undo-transaction
@@ -457,7 +446,7 @@ class TransactionalToolChain(ToolChain):
 
     def handle(self, event):
         # For double click: button_press, double_click, button_release
-        #print 'event', self.EVENT_HANDLERS.get(event.type)
+        # print 'event', self.EVENT_HANDLERS.get(event.type)
         if self.EVENT_HANDLERS.get(event.type) in ('on_button_press',):
             assert not self._tx
             self._tx = Transaction()
@@ -465,7 +454,8 @@ class TransactionalToolChain(ToolChain):
         try:
             super(TransactionalToolChain, self).handle(event)
         finally:
-            if self._tx and self.EVENT_HANDLERS.get(event.type) in ('on_button_release', 'on_double_click', 'on_triple_click'):
+            if self._tx and self.EVENT_HANDLERS.get(event.type) in (
+            'on_button_release', 'on_double_click', 'on_triple_click'):
                 self._tx.commit()
                 self._tx = None
 
@@ -481,6 +471,5 @@ def DefaultTool():
     chain.append(TextEditTool())
     chain.append(RubberbandTool())
     return chain
-
 
 # vim:sw=4:et:ai
