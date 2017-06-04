@@ -23,7 +23,13 @@ Diagram item with compartments.
 """
 
 from __future__ import absolute_import
-import cairo, pango, pangocairo
+
+import gi
+
+gi.require_version('Gtk', '3.0')
+from gi.repository import Pango, PangoCairo
+
+import cairo
 from gaphas.state import observed, reversible_property
 
 from gaphor.UML import uml2, event, modelfactory
