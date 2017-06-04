@@ -33,7 +33,6 @@ from __future__ import print_function
 
 import gc
 import os.path
-from cStringIO import InputType
 
 import gaphas
 from six.moves import map
@@ -195,7 +194,7 @@ def load_elements_generator(elements, factory, gaphor_version=None):
     Exceptions: IOError, ValueError.
     """
     # TODO: restructure loading code, first load model, then add canvas items
-    log.debug(_('Loading %d elements...') % len(elements))
+    self.logger.debug(_('Loading %d elements...') % len(elements))
 
     # The elements are iterated three times:
     size = len(elements) * 3
@@ -272,7 +271,7 @@ def load_elements_generator(elements, factory, gaphor_version=None):
                         try:
                             elem.element.load(name, ref.element)
                         except:
-                            log.error('Loading %s.%s with value %s failed' % (
+                            self.logger.error('Loading %s.%s with value %s failed' % (
                                 type(elem.element).__name__, name, ref.element.id))
                             raise
             else:
@@ -284,7 +283,7 @@ def load_elements_generator(elements, factory, gaphor_version=None):
                     try:
                         elem.element.load(name, ref.element)
                     except:
-                        log.error(
+                        self.logger.error(
                             'Loading %s.%s with value %s failed' % (type(elem.element).__name__, name, ref.element.id))
                         raise
 
@@ -336,10 +335,10 @@ def load_generator(filename, factory):
     This function is a generator. It will yield values from 0 to 100 (%)
     to indicate its progression.
     """
-    if isinstance(filename, (file, InputType)):
-        log.info('Loading file from file descriptor')
+    if isinstance(filename, (file, bytes)):
+        self.logger.info('Loading file from file descriptor')
     else:
-        log.info('Loading file %s' % os.path.basename(filename))
+        self.logger.info('Loading file %s' % os.path.basename(filename))
     try:
         # Use the incremental parser and yield the percentage of the file.
         loader = parser.GaphorLoader()
@@ -354,7 +353,7 @@ def load_generator(filename, factory):
         # elements = parser.parse(filename)
         # yield 100
     except Exception as e:
-        log.error('File could no be parsed', exc_info=True)
+        self.logger.error('File could no be parsed', exc_info=True)
         raise
 
     try:
@@ -365,7 +364,7 @@ def load_generator(filename, factory):
     try:
         factory.flush()
         gc.collect()
-        log.info("Read %d elements from file" % len(elements))
+        self.logger.info("Read %d elements from file" % len(elements))
         if component_registry:
             component_registry.register_subscription_adapter(ElementChangedEventBlocker)
         try:
@@ -383,7 +382,7 @@ def load_generator(filename, factory):
         gc.collect()
         yield 100
     except Exception as e:
-        log.info('file %s could not be loaded' % filename)
+        self.logger.info('file %s could not be loaded' % filename)
         raise
 
 
@@ -530,7 +529,7 @@ def version_0_15_0_post(elements, factory, gaphor_version):
                             key, val = tv.split('=', 1)
                             key = key.strip()
                         except ValueError:
-                            log.info('Tagged value "%s" has no key=value format, trying key_value ' % tv)
+                            self.logger.info('Tagged value "%s" has no key=value format, trying key_value ' % tv)
                             try:
                                 key, val = tv.split(' ', 1)
                                 key = key.strip()
@@ -544,10 +543,10 @@ def version_0_15_0_post(elements, factory, gaphor_version):
                                 rest = ', '.join(tviter)
                                 val = ', '.join([val, rest]) if rest else val
                                 val = val.replace('\n', ' ')
-                                log.info('Special case: UML metamodel "%s %s"' % (key, val))
+                                self.logger.info('Special case: UML metamodel "%s %s"' % (key, val))
                         create_slot(key, val)
                     except Exception as e:
-                        log.warning('Unable to process tagged value "%s" as key=value pair' % tv, exc_info=True)
+                        self.logger.warning('Unable to process tagged value "%s" as key=value pair' % tv, exc_info=True)
 
         def find(messages, attr):
             occurrences = set(getattr(m, attr) for m in messages
@@ -703,7 +702,7 @@ def version_0_14_0(elements, factory, gaphor_version):
                     et.references['appliedStereotype'] = applied
 
             except Exception as e:
-                log.error('Error while updating stereotypes', exc_info=True)
+                self.logger.error('Error while updating stereotypes', exc_info=True)
 
 
 def version_0_9_0(elements, factory, gaphor_version):
@@ -727,7 +726,7 @@ def version_0_9_0(elements, factory, gaphor_version):
                         del elem.values['color']
 
             except Exception as e:
-                log.error('Error while updating from DiaCanvas2', exc_info=True)
+                self.logger.error('Error while updating from DiaCanvas2', exc_info=True)
 
 
 def version_0_7_2(elements, factory, gaphor_version):
@@ -749,7 +748,7 @@ def version_0_7_2(elements, factory, gaphor_version):
                     tv = elements[elem.taggedValue]
                     if tv.value:
                         for t in map(str.strip, str(tv.value).split(',')):
-                            # log.debug("Tagged value: %s" % t)
+                            # self.loggerdebug("Tagged value: %s" % t)
                             newtv = parser.element(str(uuid.uuid1()),
                                                    'LiteralSpecification')
                             newtv.values['value'] = t
@@ -757,7 +756,7 @@ def version_0_7_2(elements, factory, gaphor_version):
                             tvlist.append(newtv.id)
                         elem.references['taggedValue'] = tvlist
             except Exception as e:
-                log.error('Error while updating taggedValues', exc_info=True)
+                self.logger.error('Error while updating taggedValues', exc_info=True)
 
 
 def version_0_7_1(elements, factory, gaphor_version):
@@ -783,7 +782,7 @@ def version_0_7_1(elements, factory, gaphor_version):
             del end1.owningAssociation
 
     if version_lower_than(gaphor_version, (0, 7, 1)):
-        log.info('Fix navigability of Associations (file version: %s)' % gaphor_version)
+        self.logger.info('Fix navigability of Associations (file version: %s)' % gaphor_version)
         for elem in elements.values():
             try:
                 if elem.type == 'Association':
@@ -794,7 +793,7 @@ def version_0_7_1(elements, factory, gaphor_version):
                         fix(end1, end2)
                         fix(end2, end1)
             except Exception as e:
-                log.error('Error while updating Association', exc_info=True)
+                self.logger.error('Error while updating Association', exc_info=True)
 
 
 def version_0_6_2(elements, factory, gaphor_version):
@@ -814,7 +813,7 @@ def version_0_6_2(elements, factory, gaphor_version):
                         elif p.type == 'InterfaceItem':
                             p.values['drawing-style'] = '2'
             except Exception as e:
-                log.error('Error while updating InterfaceItems', exc_info=True)
+                self.logger.error('Error while updating InterfaceItems', exc_info=True)
 
 
 def version_0_5_2(elements, factory, gaphor_version):
@@ -823,7 +822,7 @@ def version_0_5_2(elements, factory, gaphor_version):
     holding the aggregation information.
     """
     if version_lower_than(gaphor_version, (0, 5, 2)):
-        log.info('Fix composition on Associations (file version: %s)' % gaphor_version)
+        self.logger.info('Fix composition on Associations (file version: %s)' % gaphor_version)
         for elem in elements.values():
             try:
                 if elem.type == 'Association':
@@ -833,6 +832,6 @@ def version_0_5_2(elements, factory, gaphor_version):
                     a.memberEnd[0].aggregation = agg2
                     a.memberEnd[1].aggregation = agg1
             except Exception as e:
-                log.error('Error while updating Association', exc_info=True)
+                self.logger.error('Error while updating Association', exc_info=True)
 
 # vim: sw=4:et:ai
