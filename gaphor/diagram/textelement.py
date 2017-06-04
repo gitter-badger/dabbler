@@ -25,7 +25,7 @@ item, guard of flow item, etc.
 from __future__ import absolute_import
 import math
 
-import cairo, pango, pangocairo
+import cairo, Pango, pangocairo
 from gaphor.diagram.style import Style
 from gaphor.diagram.style import ALIGN_CENTER, ALIGN_TOP
 
