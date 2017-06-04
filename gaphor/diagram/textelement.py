@@ -23,9 +23,14 @@ item, guard of flow item, etc.
 """
 
 from __future__ import absolute_import
+
+import gi
 import math
 
-import cairo, Pango, pangocairo
+gi.require_version('Gtk', '3.0')
+from gi.repository import Pango, PangoCairo
+
+import cairo
 from gaphor.diagram.style import Style
 from gaphor.diagram.style import ALIGN_CENTER, ALIGN_TOP
 
