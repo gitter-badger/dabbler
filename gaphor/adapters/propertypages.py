@@ -47,19 +47,23 @@ TODO:
 
 from __future__ import absolute_import
 from __future__ import print_function
+
+import math
 from gi.repository import GObject
 from gi.repository import Gtk
-import math
-from gaphor.core import _, inject, transactional
-from gaphor.services.elementdispatcher import EventWatcher
-from gaphor.ui.interfaces import IPropertyPage
-from gaphor.diagram import items
 from zope import interface, component
-from gaphor.UML import uml2, modelfactory
+
 import gaphas.item
 from gaphas.decorators import async
 from six.moves import range
 from six.moves import zip
+
+from gaphor.UML import uml2, modelfactory
+from gaphor.core import _, inject, transactional
+from gaphor.diagram import items
+from gaphor.services.elementdispatcher import EventWatcher
+from gaphor.ui.interfaces import IPropertyPage
+
 
 class EditableTreeModel(Gtk.ListStore):
     """
@@ -99,13 +103,12 @@ class EditableTreeModel(Gtk.ListStore):
 
     def refresh(self, obj):
         for row in self:
-            #print 'refresh for', obj
+            # print 'refresh for', obj
             if row[-1] is obj:
                 seIlf._set_object_value(row, len(row) - 1, obj)
                 self.row_changed(row.path, row.iter)
-                #print 'found!'
+                # print 'found!'
                 return
-            
 
     def _get_rows(self):
         """
@@ -114,13 +117,11 @@ class EditableTreeModel(Gtk.ListStore):
         """
         raise NotImplemented
 
-
     def _create_object(self):
         """
         Create new object.
         """
         raise NotImplemented
-
 
     def _set_object_value(self, row, col, value):
         """
@@ -128,13 +129,11 @@ class EditableTreeModel(Gtk.ListStore):
         """
         raise NotImplemented
 
-
     def _swap_objects(self, o1, o2):
         """
         Swap two objects. If objects are swapped, then return ``True``.
         """
         raise NotImplemented
-
 
     def _get_object(self, iter):
         """
@@ -142,7 +141,6 @@ class EditableTreeModel(Gtk.ListStore):
         """
         path = self.get_path(iter)
         return self[path][-1]
-
 
     def swap(self, a, b):
         """
@@ -156,16 +154,14 @@ class EditableTreeModel(Gtk.ListStore):
         o1 = self[a][-1]
         o2 = self[b][-1]
         if o1 and o2 and self._swap_objects(o1, o2):
-            #self._item.request_update(matrix=False)
+            # self._item.request_update(matrix=False)
             super(EditableTreeModel, self).swap(a, b)
-
 
     def _add_empty(self):
         """
         Add empty row to the end of the model.
         """
         self.append([None] * self.get_n_columns())
-
 
     def iter_prev(self, iter):
         """
@@ -175,7 +171,6 @@ class EditableTreeModel(Gtk.ListStore):
         if i == 0:
             return None
         return self.get_iter((i - 1,))
-
 
     @transactional
     def set_value(self, iter, col, value):
@@ -195,8 +190,7 @@ class EditableTreeModel(Gtk.ListStore):
 
         elif row[-1]:
             self._set_object_value(row, col, value)
-        #self._item.request_update(matrix=False)
-
+            # self._item.request_update(matrix=False)
 
     def remove(self, iter):
         """
@@ -205,11 +199,10 @@ class EditableTreeModel(Gtk.ListStore):
         obj = self._get_object(iter)
         if obj:
             obj.unlink()
-            #self._item.request_update(matrix=False)
+            # self._item.request_update(matrix=False)
             return super(EditableTreeModel, self).remove(iter)
         else:
             return iter
-
 
 
 class ClassAttributes(EditableTreeModel):
@@ -222,12 +215,10 @@ class ClassAttributes(EditableTreeModel):
             if not attr.association:
                 yield [format(attr), attr.isStatic, attr]
 
-
     def _create_object(self):
         attr = self.element_factory.create(uml2.Property)
         self._item.subject.ownedAttribute = attr
         return attr
-
 
     @transactional
     def _set_object_value(self, row, col, value):
@@ -243,10 +234,8 @@ class ClassAttributes(EditableTreeModel):
             row[0] = format(attr)
             row[1] = attr.isStatic
 
-
     def _swap_objects(self, o1, o2):
         return self._item.subject.ownedAttribute.swap(o1, o2)
-
 
 
 class ClassOperations(EditableTreeModel):
@@ -258,12 +247,10 @@ class ClassOperations(EditableTreeModel):
         for operation in self._item.subject.ownedOperation:
             yield [format(operation), operation.isAbstract, operation.isStatic, operation]
 
-
     def _create_object(self):
         operation = self.element_factory.create(uml2.Operation)
         self._item.subject.ownedOperation = operation
         return operation
-
 
     @transactional
     def _set_object_value(self, row, col, value):
@@ -282,16 +269,15 @@ class ClassOperations(EditableTreeModel):
             row[1] = operation.isAbstract
             row[2] = operation.isStatic
 
-
     def _swap_objects(self, o1, o2):
         return self._item.subject.ownedOperation.swap(o1, o2)
-
 
 
 class CommunicationMessageModel(EditableTreeModel):
     """
     GTK tree model for list of messages on communication diagram.
     """
+
     def __init__(self, item, cols=None, inverted=False):
         self.inverted = inverted
         super(CommunicationMessageModel, self).__init__(item, cols)
@@ -304,7 +290,6 @@ class CommunicationMessageModel(EditableTreeModel):
             for message in self._item._messages:
                 yield [message.name, message]
 
-
     def remove(self, iter):
         """
         Remove message from message item and destroy it.
@@ -314,7 +299,6 @@ class CommunicationMessageModel(EditableTreeModel):
         super(CommunicationMessageModel, self).remove(iter)
         item.remove_message(message, self.inverted)
 
-
     def _create_object(self):
         item = self._item
         subject = item.subject
@@ -322,17 +306,14 @@ class CommunicationMessageModel(EditableTreeModel):
         item.add_message(message, self.inverted)
         return message
 
-
     def _set_object_value(self, row, col, value):
         message = row[-1]
         message.name = value
         row[0] = value
         self._item.set_message_text(message, value, self.inverted)
 
-
     def _swap_objects(self, o1, o2):
         return self._item.swap_messages(o1, o2, self.inverted)
-
 
 
 @transactional
@@ -361,7 +342,7 @@ def swap_on_keypress(tree, event):
         model, iter = tree.get_selection().get_selected()
         model.swap(iter, model.iter_prev(iter))
         return True
-        
+
 
 @transactional
 def on_text_cell_edited(renderer, path, value, model, col=0):
@@ -400,6 +381,7 @@ class UMLComboModel(Gtk.ListStore):
     - _data: model data
     - _indices: dictionary of values' indices
     """
+
     def __init__(self, data):
         super(UMLComboModel, self).__init__(str)
 
@@ -411,20 +393,17 @@ class UMLComboModel(Gtk.ListStore):
             self.append([label])
             self._indices[value] = i
 
-        
     def get_index(self, value):
         """
         Return index of a ``value``.
         """
         return self._indices[value]
 
-
     def get_value(self, index):
         """
         Get value for given ``index``.
         """
         return self._data[index][1]
-
 
 
 def create_uml_combo(data, callback):
@@ -475,7 +454,7 @@ def create_tree_view(model, names, tip='', ro_cols=None):
 
     tree_view = Gtk.TreeView(model)
     tree_view.set_rules_hint(True)
-    
+
     n = model.get_n_columns() - 1
     for name, i in zip(names, list(range(n))):
         col_type = model.get_column_type(i)
@@ -507,12 +486,11 @@ Use -/= to move items up or down.\
     return tree_view
 
 
-
+@interface.implementer(IPropertyPage)
 class CommentItemPropertyPage(object):
     """
     Property page for Comments
     """
-    interface.implements(IPropertyPage)
     component.adapts(uml2.Comment)
 
     order = 0
@@ -551,7 +529,7 @@ class CommentItemPropertyPage(object):
                 buffer.handler_unblock(changed_id)
 
         self.watcher.watch('body', handler) \
-                    .register_handlers()
+            .register_handlers()
         text_view.connect("destroy", self.watcher.unregister_handlers)
 
         return page
@@ -559,10 +537,12 @@ class CommentItemPropertyPage(object):
     @transactional
     def _on_body_change(self, buffer):
         self.subject.body = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
-        
+
+
 component.provideAdapter(CommentItemPropertyPage, name='Properties')
 
 
+@interface.implementer(IPropertyPage)
 class NamedElementPropertyPage(object):
     """
     An adapter which works for any named item view.
@@ -570,7 +550,6 @@ class NamedElementPropertyPage(object):
     It also sets up a table view which can be extended.
     """
 
-    interface.implements(IPropertyPage)
     component.adapts(uml2.NamedElement)
 
     order = 10
@@ -582,7 +561,7 @@ class NamedElementPropertyPage(object):
         self.subject = subject
         self.watcher = EventWatcher(subject)
         self.size_group = Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL)
-    
+
     def construct(self):
         page = Gtk.VBox()
 
@@ -591,7 +570,7 @@ class NamedElementPropertyPage(object):
             return page
 
         hbox = create_hbox_label(self, page, self.NAME_LABEL)
-        entry = Gtk.Entry()        
+        entry = Gtk.Entry()
         entry.set_text(subject and subject.name or '')
         hbox.pack_start(entry, True, True, 0)
         page.set_data('default', entry)
@@ -606,7 +585,7 @@ class NamedElementPropertyPage(object):
                 entry.handler_unblock(changed_id)
 
         self.watcher.watch('name', handler) \
-                    .register_handlers()
+            .register_handlers()
         entry.connect("destroy", self.watcher.unregister_handlers)
 
         return page
@@ -614,7 +593,8 @@ class NamedElementPropertyPage(object):
     @transactional
     def _on_name_change(self, entry):
         self.subject.name = entry.get_text()
-        
+
+
 component.provideAdapter(NamedElementPropertyPage, name='Properties')
 
 
@@ -637,7 +617,7 @@ class ClassPropertyPage(NamedElementPropertyPage):
 
     def __init__(self, subject):
         super(ClassPropertyPage, self).__init__(subject)
-        
+
     def construct(self):
         page = super(ClassPropertyPage, self).construct()
 
@@ -652,7 +632,7 @@ class ClassPropertyPage(NamedElementPropertyPage):
         hbox.pack_start(label, False, True, 0)
         button = Gtk.CheckButton(_("Abstract"))
         button.set_active(self.subject.isAbstract)
-        
+
         button.connect('toggled', self._on_abstract_change)
         hbox.pack_start(button, True, True, 0)
         page.pack_start(hbox, False, True, 0)
@@ -662,6 +642,7 @@ class ClassPropertyPage(NamedElementPropertyPage):
     @transactional
     def _on_abstract_change(self, button):
         self.subject.isAbstract = button.get_active()
+
 
 component.provideAdapter(ClassPropertyPage, name='Properties')
 
@@ -691,7 +672,7 @@ class InterfacePropertyPage(NamedItemPropertyPage):
         connected_items = [c.item for c in item.canvas.get_connections(connected=item)]
         allowed = (items.DependencyItem, items.ImplementationItem)
         can_fold = len(connected_items) == 0 \
-            or len(connected_items) == 1 and isinstance(connected_items[0], allowed)
+                   or len(connected_items) == 1 and isinstance(connected_items[0], allowed)
 
         button.set_sensitive(can_fold)
         hbox.pack_start(button, True, True, 0)
@@ -709,7 +690,6 @@ class InterfacePropertyPage(NamedItemPropertyPage):
         line = None
         if len(connected_items) == 1:
             line = connected_items[0]
-
 
         fold = button.get_active()
 
@@ -732,14 +712,12 @@ class InterfacePropertyPage(NamedItemPropertyPage):
 component.provideAdapter(InterfacePropertyPage, name='Properties')
 
 
-
-
+@interface.implementer(IPropertyPage)
 class AttributesPage(object):
     """
     An editor for attributes associated with classes and interfaces.
     """
 
-    interface.implements(IPropertyPage)
     component.adapts(items.ClassItem)
 
     order = 20
@@ -748,7 +726,7 @@ class AttributesPage(object):
         super(AttributesPage, self).__init__()
         self.item = item
         self.watcher = EventWatcher(item.subject)
-        
+
     def construct(self):
         page = Gtk.VBox()
 
@@ -770,7 +748,7 @@ class AttributesPage(object):
             return ClassAttributes(self.item, (str, bool, object))
 
         self.model = create_model()
-        
+
         tip = """\
 Add and edit class attributes according to UML syntax. Attribute syntax examples
 - attr
@@ -798,22 +776,22 @@ Add and edit class attributes according to UML syntax. Attribute syntax examples
             .register_handlers()
         tree_view.connect('destroy', self.watcher.unregister_handlers)
         return page
-        
+
     @transactional
     def _on_show_attributes_change(self, button):
         self.item.show_attributes = button.get_active()
         self.item.request_update()
-        
+
 
 component.provideAdapter(AttributesPage, name='Attributes')
 
 
+@interface.implementer(IPropertyPage)
 class OperationsPage(object):
     """
     An editor for operations associated with classes and interfaces.
     """
 
-    interface.implements(IPropertyPage)
     component.adapts(items.ClassItem)
 
     order = 30
@@ -822,7 +800,7 @@ class OperationsPage(object):
         super(OperationsPage, self).__init__()
         self.item = item
         self.watcher = EventWatcher(item.subject)
-        
+
     def construct(self):
         page = Gtk.VBox()
 
@@ -873,7 +851,7 @@ Add and edit class operations according to UML syntax. Operation syntax examples
         tree_view.connect('destroy', self.watcher.unregister_handlers)
 
         return page
-        
+
     @transactional
     def _on_show_operations_change(self, button):
         self.item.show_operations = button.get_active()
@@ -883,13 +861,12 @@ Add and edit class operations according to UML syntax. Operation syntax examples
 component.provideAdapter(OperationsPage, name='Operations')
 
 
-
+@interface.implementer(IPropertyPage)
 class DependencyPropertyPage(object):
     """
     Dependency item editor.
     """
 
-    interface.implements(IPropertyPage)
     component.adapts(items.DependencyItem)
 
     order = 0
@@ -908,14 +885,13 @@ class DependencyPropertyPage(object):
         self.size_group = Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL)
         self.watcher = EventWatcher(self.item)
 
-        
     def construct(self):
         page = Gtk.VBox()
 
         hbox = create_hbox_label(self, page, _('Dependency type'))
 
         self.combo = create_uml_combo(self.DEPENDENCY_TYPES,
-            self._on_dependency_type_change)
+                                      self._on_dependency_type_change)
         hbox.pack_start(self.combo, False, True, 0)
 
         hbox = create_hbox_label(self, page, '')
@@ -932,10 +908,8 @@ class DependencyPropertyPage(object):
 
         return page
 
-
     def _on_subject_change(self, event):
         self.update()
-
 
     def update(self):
         """
@@ -949,7 +923,6 @@ class DependencyPropertyPage(object):
         combo.props.sensitive = not item.auto_dependency
         combo.set_active(index)
 
-
     @transactional
     def _on_dependency_type_change(self, combo):
         combo = self.combo
@@ -958,7 +931,6 @@ class DependencyPropertyPage(object):
         if self.item.subject:
             self.element_factory.swap_element(self.item.subject, cls)
             self.item.request_update()
-
 
     @transactional
     def _on_auto_dependency_change(self, button):
@@ -993,7 +965,7 @@ class AssociationPropertyPage(NamedItemPropertyPage):
 
     def construct(self):
         page = super(AssociationPropertyPage, self).construct()
-        
+
         if not self.subject:
             return page
 
@@ -1044,11 +1016,11 @@ class AssociationPropertyPage(NamedItemPropertyPage):
         adaptermap = {}
         try:
             if item.subject:
-                for name, adapter in component.getAdapters([item.subject,], IPropertyPage):
+                for name, adapter in component.getAdapters([item.subject, ], IPropertyPage):
                     adaptermap[name] = (adapter.order, name, adapter)
         except AttributeError:
             pass
-        for name, adapter in component.getAdapters([item,], IPropertyPage):
+        for name, adapter in component.getAdapters([item, ], IPropertyPage):
             adaptermap[name] = (adapter.order, name, adapter)
 
         adapters = list(adaptermap.values())
@@ -1082,15 +1054,16 @@ class AssociationPropertyPage(NamedItemPropertyPage):
             except Exception as e:
                 log.error('Could not construct property page for ' + name, exc_info=True)
 
+
 component.provideAdapter(AssociationPropertyPage, name='Properties')
 
 
+@interface.implementer(IPropertyPage)
 class AssociationEndPropertyPage(object):
     """
     Property page for association end properties.
     """
 
-    interface.implements(IPropertyPage)
     component.adapts(uml2.Property)
 
     order = 0
@@ -1105,26 +1078,28 @@ class AssociationEndPropertyPage(object):
         vbox = Gtk.VBox()
 
         entry = Gtk.Entry()
-        #entry.set_text(format(self.subject, visibility=True, is_derived=Truemultiplicity=True) or '')
+        # entry.set_text(format(self.subject, visibility=True, is_derived=Truemultiplicity=True) or '')
 
         # monitor subject attribute (all, cause it contains many children)
         changed_id = entry.connect('changed', self._on_end_name_change)
+
         def handler(event):
             if not entry.props.has_focus:
                 entry.handler_block(changed_id)
                 entry.set_text(format(self.subject,
-                                          visibility=True, is_derived=True,
-                                          multiplicity=True) or '')
-                #entry.set_text(format(self.subject, multiplicity=True) or '')
+                                      visibility=True, is_derived=True,
+                                      multiplicity=True) or '')
+                # entry.set_text(format(self.subject, multiplicity=True) or '')
                 entry.handler_unblock(changed_id)
+
         handler(None)
 
         self.watcher.watch('name', handler) \
-                    .watch('aggregation', handler)\
-                    .watch('visibility', handler)\
-                    .watch('lowerValue', handler)\
-                    .watch('upperValue', handler)\
-                    .register_handlers()
+            .watch('aggregation', handler) \
+            .watch('visibility', handler) \
+            .watch('lowerValue', handler) \
+            .watch('upperValue', handler) \
+            .register_handlers()
         entry.connect("destroy", self.watcher.unregister_handlers)
 
         vbox.pack_start(entry, True, True, 0)
@@ -1141,7 +1116,7 @@ Enter attribute name and multiplicity, for example
         combo = Gtk.ComboBoxText()
         for t in ('Unknown navigation', 'Not navigable', 'Navigable'):
             combo.append_text(t)
-        
+
         nav = self.subject.navigability
         combo.set_active(self.NAVIGABILITY.index(nav))
 
@@ -1151,12 +1126,12 @@ Enter attribute name and multiplicity, for example
         combo = Gtk.ComboBoxText()
         for t in ('No aggregation', 'Shared', 'Composite'):
             combo.append_text(t)
-        
+
         combo.set_active(['none', 'shared', 'composite'].index(self.subject.aggregation))
 
         combo.connect('changed', self._on_aggregation_change)
         vbox.pack_start(combo, False, True, 0)
-     
+
         return vbox
 
     @transactional
@@ -1172,14 +1147,16 @@ Enter attribute name and multiplicity, for example
     def _on_aggregation_change(self, combo):
         self.subject.aggregation = ('none', 'shared', 'composite')[combo.get_active()]
 
+
 component.provideAdapter(AssociationEndPropertyPage, name='Properties')
 
+
+@interface.implementer(IPropertyPage)
 class LineStylePage(object):
     """
     Basic line style properties: color, orthogonal, etc.
     """
 
-    interface.implements(IPropertyPage)
     component.adapts(gaphas.item.Line)
 
     order = 400
@@ -1188,7 +1165,7 @@ class LineStylePage(object):
         super(LineStylePage, self).__init__()
         self.item = item
         self.size_group = Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL)
-        
+
     def construct(self):
         page = Gtk.VBox()
 
@@ -1232,6 +1209,7 @@ class LineStylePage(object):
     def _on_horizontal_change(self, button):
         self.item.horizontal = button.get_active()
 
+
 component.provideAdapter(LineStylePage, name='Style')
 
 
@@ -1247,12 +1225,12 @@ class ObjectNodePropertyPage(NamedItemPropertyPage):
         page = super(ObjectNodePropertyPage, self).construct()
 
         subject = self.subject
-        
+
         if not subject:
             return page
 
         hbox = create_hbox_label(self, page, _('Upper bound'))
-        entry = Gtk.Entry()        
+        entry = Gtk.Entry()
         entry.set_text(subject.upperBound or '')
         entry.connect('changed', self._on_upper_bound_change)
         hbox.pack_start(entry, True, True, 0)
@@ -1272,7 +1250,6 @@ class ObjectNodePropertyPage(NamedItemPropertyPage):
         hbox.pack_start(button, False, True, 0)
 
         return page
-
 
     def update(self):
         pass
@@ -1306,7 +1283,7 @@ class JoinNodePropertyPage(NamedItemPropertyPage):
         page = super(JoinNodePropertyPage, self).construct()
 
         subject = self.subject
-        
+
         if not subject:
             return page
 
@@ -1315,7 +1292,7 @@ class JoinNodePropertyPage(NamedItemPropertyPage):
 
         if isinstance(subject, uml2.JoinNode):
             hbox = create_hbox_label(self, page, _('Join specification'))
-            entry = Gtk.Entry()        
+            entry = Gtk.Entry()
             entry.set_text(subject.joinSpec or '')
             entry.connect('changed', self._on_join_spec_change)
             hbox.pack_start(entry, True, True, 0)
@@ -1338,10 +1315,11 @@ class JoinNodePropertyPage(NamedItemPropertyPage):
 
     def _on_horizontal_change(self, button):
         if button.get_active():
-            self.item.matrix.rotate(math.pi/2)
+            self.item.matrix.rotate(math.pi / 2)
         else:
-            self.item.matrix.rotate(-math.pi/2)
+            self.item.matrix.rotate(-math.pi / 2)
         self.item.request_update()
+
 
 component.provideAdapter(JoinNodePropertyPage, name='Properties')
 
@@ -1350,16 +1328,17 @@ class FlowPropertyPageAbstract(NamedElementPropertyPage):
     """
     Flow item element editor.
     """
+
     def construct(self):
         page = super(FlowPropertyPageAbstract, self).construct()
 
         subject = self.subject
-        
+
         if not subject:
             return page
 
         hbox = create_hbox_label(self, page, _('Guard'))
-        entry = Gtk.Entry()        
+        entry = Gtk.Entry()
         entry.set_text(subject.guard or '')
         changed_id = entry.connect('changed', self._on_guard_change)
         hbox.pack_start(entry, True, True, 0)
@@ -1386,6 +1365,7 @@ class FlowPropertyPageAbstract(NamedElementPropertyPage):
 class ControlFlowPropertyPage(FlowPropertyPageAbstract):
     component.adapts(uml2.ControlFlow)
 
+
 class ObjectFlowPropertyPage(FlowPropertyPageAbstract):
     component.adapts(uml2.ObjectFlow)
 
@@ -1404,7 +1384,7 @@ class ComponentPropertyPage(NamedItemPropertyPage):
         page = super(ComponentPropertyPage, self).construct()
 
         subject = self.subject
-        
+
         if not subject:
             return page
 
@@ -1496,14 +1476,13 @@ class MessagePropertyPage(NamedItemPropertyPage):
                 del sort_data[4]
 
             combo = self.combo = create_uml_combo(sort_data,
-                    self._on_message_sort_change)
+                                                  self._on_message_sort_change)
             hbox.pack_start(combo, False, True, 0)
 
             index = combo.get_model().get_index(subject.messageSort)
             combo.set_active(index)
 
         return page
-
 
     @transactional
     def _on_message_sort_change(self, combo):
@@ -1535,7 +1514,7 @@ class MessagePropertyPage(NamedItemPropertyPage):
         subject.messageSort = ms
         # TODO: is required here?
         item.request_update()
-         
+
 
 component.provideAdapter(MessagePropertyPage, name='Properties')
 

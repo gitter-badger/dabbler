@@ -27,6 +27,9 @@ from __future__ import absolute_import
 
 import os.path
 from gi.repository import Gtk, Gdk
+import toga
+from colosseum import CSS
+
 from logging import getLogger
 from zope import interface, component
 
@@ -76,12 +79,12 @@ STATIC_MENU_XML = """
 """
 
 
-class MainWindow(object):
+@interface.implementer(IService, IActionProvider)
+class MainWindow(toga.App):
     """
     The main window for the application.
     It contains a Namespace-based tree view and a menu and a statusbar.
     """
-    interface.implements(IService, IActionProvider)
 
     component_registry = inject('component_registry')
     properties = inject('properties')
@@ -178,6 +181,10 @@ class MainWindow(object):
             if IActionProvider.providedBy(uicomp):
                 self.action_manager.register_action_provider(uicomp)
 
+    def startup(self):
+        # Build UI
+        pass
+
     def shutdown(self):
         if self.window:
             self.window.destroy()
@@ -200,6 +207,7 @@ class MainWindow(object):
                             ('tools', '_Tools'),
                             ('window', '_Window'),
                             ('help', '_Help')):
+            # TODO Gtk.Action is deprecated
             a = Gtk.Action(name, label, None, None)
             a.set_property('hide-if-empty', False)
             self.action_group.add_action(a)
@@ -245,10 +253,10 @@ class MainWindow(object):
         application running or save the model and quit afterwards.
         """
         if self.model_changed:
-            dialog = Gtk.MessageDialog(self.window, Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
-                                       Gtk.MessageType.WARNING, Gtk.ButtonsType.NONE,
-                                       _('Save changed to your model before closing?')
-                                       )
+            dialog = toga.Window(self.window, Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
+                                 Gtk.MessageType.WARNING, Gtk.ButtonsType.NONE,
+                                 _('Save changed to your model before closing?')
+                                 )
             dialog.format_secondary_text(
                 _('If you close without saving, your changes will be discarded.'))
             dialog.add_buttons('Close _without saving', Gtk.ResponseType.REJECT, Gtk.STOCK_CANCEL,
@@ -554,9 +562,13 @@ class MainWindow(object):
 
 Gtk.AccelMap.add_filter('gaphor')
 
+if __name__ == '__main__':
+    app = MyApp(title, 'io.gitlab.mbse.gaphor', startup=build)
+    app.main_loop()
 
+
+@interface.implementer(IUIComponent, IActionProvider)
 class Namespace(object):
-    interface.implements(IUIComponent, IActionProvider)
 
     title = _('Namespace')
     placement = ('left', 'diagrams')
@@ -677,8 +689,9 @@ class Namespace(object):
         self.action_group.get_action('tree-view-create-package').props.sensitive = isinstance(element, uml2.Package)
 
         self.action_group.get_action('tree-view-delete-diagram').props.visible = isinstance(element, uml2.Diagram)
-        self.action_group.get_action('tree-view-delete-package').props.visible = isinstance(element,
-                                                                                            uml2.Package) and not element.presentation
+        self.action_group.get_action('tree-view-delete-package').props.visible = (isinstance(element, uml2.Package)
+                                                                                  and not element.presentation
+                                                                                  )
 
         self.action_group.get_action('tree-view-open').props.sensitive = isinstance(element, uml2.Diagram)
 
@@ -783,8 +796,8 @@ class Namespace(object):
         self._namespace.get_model().refresh()
 
 
+@interface.implementer(IUIComponent, IActionProvider)
 class Toolbox(object):
-    interface.implements(IUIComponent, IActionProvider)
 
     title = _('Toolbox')
     placement = ('left', 'diagrams')

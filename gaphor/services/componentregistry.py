@@ -32,6 +32,7 @@ from gaphor.interfaces import IService, IEventFilter
 from six.moves import map
 
 
+@interface.implementer(IService)
 class ZopeComponentRegistry(object):
     """
     The ZopeComponentRegistry provides a subset of the
@@ -41,8 +42,6 @@ class ZopeComponentRegistry(object):
     This service should not be called directly, but through more specific
     service such as Dispatcher and AdapterRegistry.
     """
-
-    interface.implements(IService)
 
     def __init__(self):
         pass

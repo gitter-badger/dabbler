@@ -20,18 +20,17 @@
 from __future__ import absolute_import
 from .interfaces import *
 
+
+@interface.implementer(IDiagramTabChange)
 class DiagramTabChange(object):
 
-    interface.implements(IDiagramTabChange)
-    
     def __init__(self, item):
         self.item = item
         self.diagram_tab = item.diagram_tab
 
 
+@interface.implementer(IDiagramSelectionChange)
 class DiagramSelectionChange(object):
-
-    interface.implements(IDiagramSelectionChange)
     
     def __init__(self, diagram_view, focused_item, selected_items):
         self.diagram_view = diagram_view

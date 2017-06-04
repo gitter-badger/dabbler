@@ -38,8 +38,8 @@ from gaphor.interfaces import IService, IActionProvider
 from . import toposort
 
 
+@interface.implementer(IService, IActionProvider)
 class DiagramLayout(object):
-    interface.implements(IService, IActionProvider)
 
     main_window = inject('main_window')
 

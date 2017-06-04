@@ -33,6 +33,7 @@ from gaphas.decorators import async
 from gaphor.misc import get_user_data_dir
 import six
 
+
 class IPropertyChangeEvent(interface.Interface):
     
     """A property changed event has a name, an old value, and a new value."""
@@ -42,12 +43,11 @@ class IPropertyChangeEvent(interface.Interface):
     new_value = interface.Attribute("The property value after the change")
 
 
+@interface.implementer(IPropertyChangeEvent)
 class PropertyChangeEvent(object):
     
     """This event is triggered any time a property is changed.  This event
     holds the property name, the current value, and the new value."""
-    
-    interface.implements(IPropertyChangeEvent)
 
     def __init__(self, name, old_value, new_value):
         self.name = name
@@ -56,12 +56,12 @@ class PropertyChangeEvent(object):
 
 _no_default = object()
 
+
+@interface.implementer(IService)
 class Properties(object):
     """The Properties class holds a collection of application wide properties.
 
     Properties are persisted to the local file system."""
-    
-    interface.implements(IService)
 
     component_registry = inject('component_registry')
 
@@ -141,11 +141,12 @@ class Properties(object):
             self.component_registry.handle(PropertyChangeEvent(key, old_value, value))
             self._backend.update(resources, key, value)
 
+
 class FileBackend(object):
     """Resource backend that stores data to a resource file
     ($HOME/.gaphor/resource)."""
     
-    RESOURCE_FILE='resources'
+    RESOURCE_FILE = 'resources'
    
     def __init__(self, datadir=get_user_data_dir()):
         """Constructor.  Initialize the directory used for storing 

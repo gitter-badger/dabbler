@@ -36,9 +36,10 @@ PYELEMENT_COLUMN = 0
 ELEMENT_COLUMN = 1
 REASON_COLUMN = 2
 
+
+@interface.implementer(IService, IActionProvider)
 class CheckModelWindow(object):
 
-    interface.implements(IService, IActionProvider)
 
     element_factory = inject('element_factory')
     main_window = inject('main_window')

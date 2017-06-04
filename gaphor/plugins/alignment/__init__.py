@@ -31,8 +31,8 @@ from gaphor.interfaces import IService, IActionProvider
 from gaphor.ui.interfaces import IDiagramSelectionChange
 
 
+@interface.implementer(IService, IActionProvider)
 class Alignment(object):
-    interface.implements(IService, IActionProvider)
 
     component_registry = inject('component_registry')
 

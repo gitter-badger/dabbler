@@ -27,10 +27,10 @@ from gaphor.action import action, open_action, build_action_group
 from gaphor.misc.console import GTKInterpreterConsole
 from gaphor.misc import get_user_data_dir
 
+
+@interface.implementer(IUIComponent, IActionProvider)
 class ConsoleWindow(object):
     
-    interface.implements(IUIComponent, IActionProvider)
-
     component_registry = inject('component_registry')
 
     menu_xml = """
@@ -50,7 +50,7 @@ class ConsoleWindow(object):
     def __init__(self):
         self.action_group = build_action_group(self)
         self.console = None
-        self.ui_manager = None # injected
+        self.ui_manager = None  # injected
 
     def load_console_py(self):
         """
@@ -62,7 +62,7 @@ class ConsoleWindow(object):
                 for line in f:
                     self.console.push(line)
         except IOError:
-            log.info('No initiation script %s' % console_py)
+            self.logger.info('No initiation script %s' % console_py)
 
     @open_action(name='ConsoleWindow:open', label='_Console')
     def open_console(self):

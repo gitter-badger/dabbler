@@ -198,10 +198,8 @@ def create_stereotype_tree_view(model):
     return tree_view
 
 
-
+@interface.implementer(IPropertyPage)
 class StereotypePage(object):
-
-    interface.implements(IPropertyPage)
 
     order = 40
 

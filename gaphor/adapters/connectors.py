@@ -39,6 +39,7 @@ from gaphor.diagram.interfaces import IConnect
 logger = getLogger('Connector')
 
 
+@interface.implementer(IConnect)
 class AbstractConnect(object):
     """
     Connection adapter for Gaphor diagram items.
@@ -63,7 +64,6 @@ class AbstractConnect(object):
     By convention the adapters are registered by (element, line) -- in that order.
 
     """
-    interface.implements(IConnect)
 
     element_factory = inject('element_factory')
 

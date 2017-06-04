@@ -53,11 +53,11 @@ def editable_slot(el):
     return el.value
 
 
+@interface.implementer(IEditor)
 class CommentItemEditor(object):
     """
     Text edit support for Comment item.
     """
-    interface.implements(IEditor)
     component.adapts(items.CommentItem)
 
     def __init__(self, item):
@@ -81,11 +81,11 @@ class CommentItemEditor(object):
 component.provideAdapter(CommentItemEditor)
 
 
+@interface.implementer(IEditor)
 class NamedItemEditor(object):
     """
     Text edit support for Named items.
     """
-    interface.implements(IEditor)
     component.adapts(items.NamedItem)
 
     def __init__(self, item):
@@ -112,11 +112,11 @@ class NamedItemEditor(object):
 component.provideAdapter(NamedItemEditor)
 
 
+@interface.implementer(IEditor)
 class DiagramItemTextEditor(object):
     """
     Text edit support for diagram items containing text elements.
     """
-    interface.implements(IEditor)
     component.adapts(items.DiagramItem)
 
     def __init__(self, item):
@@ -152,11 +152,11 @@ class DiagramItemTextEditor(object):
 component.provideAdapter(DiagramItemTextEditor)
 
 
+@interface.implementer(IEditor)
 class CompartmentItemEditor(object):
     """
     Text editor support for compartment items.
     """
-    interface.implements(IEditor)
     component.adapts(items.CompartmentItem)
 
     def __init__(self, item):
@@ -184,10 +184,10 @@ class CompartmentItemEditor(object):
         pass
 
 component.provideAdapter(CompartmentItemEditor)
- 
 
+
+@interface.implementer(IEditor)
 class AssociationItemEditor(object):
-    interface.implements(IEditor)
     component.adapts(items.AssociationItem)
 
     def __init__(self, item):
@@ -227,11 +227,10 @@ class AssociationItemEditor(object):
 component.provideAdapter(AssociationItemEditor)
     
 
-
+@interface.implementer(IEditor)
 class ForkNodeItemEditor(object):
     """Text edit support for fork node join specification.
     """
-    interface.implements(IEditor)
     component.adapts(items.ForkNodeItem)
 
     element_factory = inject('element_factory')

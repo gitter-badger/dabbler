@@ -194,11 +194,11 @@ class ElementFactory(object):
         component.handle(event)
 
 
+@interface.implementer(IService)
 class ElementFactoryService(ElementFactory):
     """
     Service version of the ElementFctory.
     """
-    interface.implements(IService)
 
     component_registry = inject('component_registry')
 
@@ -256,14 +256,15 @@ class ElementFactoryService(ElementFactory):
         self.component_registry.handle(event)
 
 
+@interface.implementer(IEventFilter)
 class ElementChangedEventBlocker(object):
     """
     Blocks all events of type IElementChangeEvent.
 
     This filter is placed when the the element factory flushes it's content.
     """
+
     component.adapts(IElementChangeEvent)
-    interface.implements(IEventFilter)
 
     def __init__(self, event):
         self._event = event

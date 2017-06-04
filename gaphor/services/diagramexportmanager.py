@@ -38,12 +38,12 @@ from gaphas.view import View
 from gaphas.painter import ItemPainter, BoundingBoxPainter
 from gaphas.freehand import FreeHandPainter
 
+
+@interface.implementer(IService, IActionProvider)
 class DiagramExportManager(object):
     """
     Service for exporting diagrams as images (SVG, PNG, PDF).
     """
-
-    interface.implements(IService, IActionProvider)
 
     main_window = inject('main_window')
     properties = inject('properties')

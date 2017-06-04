@@ -36,9 +36,9 @@ ICONS = (
     'gaphor-256x256.png',
 )
 
-class ToplevelWindow(object):
 
-    interface.implements(IUIComponent)
+@interface.implementer(IUIComponent)
+class ToplevelWindow(object):
 
     menubar_path = ''
     toolbar_path = ''

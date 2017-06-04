@@ -39,9 +39,8 @@ from .engineer import Engineer
 NAME_COLUMN = 0
 
 
+@interface.implementer(IService, IActionProvider)
 class PyNSource(object):
-
-    interface.implements(IService, IActionProvider)
 
     main_window = inject('main_window')
 

@@ -99,6 +99,7 @@ class EventWatcher(object):
             dispatcher.unregister_handler(handler)
 
 
+@interface.implementer(IService)
 class ElementDispatcher(object):
     """
     The Element based Dispatcher allows handlers to receive only events
@@ -126,7 +127,6 @@ class ElementDispatcher(object):
     every time).
     """
 
-    interface.implements(IService)
     logger = getLogger('ElementDispatcher')
 
     component_registry = inject('component_registry')

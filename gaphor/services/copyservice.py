@@ -34,6 +34,7 @@ from gaphor.interfaces import IService, IActionProvider
 from gaphor.ui.interfaces import IDiagramSelectionChange
 
 
+@interface.implementer(IService, IActionProvider)
 class CopyService(object):
     """
     Copy/Cut/Paste functionality required a lot of thinking:
@@ -49,8 +50,6 @@ class CopyService(object):
       The diagram should act as if we have placed a copy of the removed item
       on the canvas and make the uml element visible again.
     """
-
-    interface.implements(IService, IActionProvider)
 
     component_registry = inject('component_registry')
     element_factory = inject('element_factory')

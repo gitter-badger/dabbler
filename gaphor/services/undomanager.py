@@ -79,16 +79,17 @@ class ActionStack(object):
                 log.error('Error while undoing action %s' % action, exc_info=True)
 
 
+@interface.implementer(IServiceEvent)
 class UndoManagerStateChanged(object):
     """
     Event class used to send state changes on the ndo Manager.
     """
-    interface.implements(IServiceEvent)
 
     def __init__(self, service):
         self.service = service
 
 
+@interface.implementer(IService, IActionProvider)
 class UndoManager(object):
     """
     Simple transaction manager for Gaphor.
@@ -99,8 +100,6 @@ class UndoManager(object):
     If something is returned by an action, that is considered the callable
     to be used to undo or redo the last performed action.
     """
-
-    interface.implements(IService, IActionProvider)
 
     menu_xml = """
       <ui>

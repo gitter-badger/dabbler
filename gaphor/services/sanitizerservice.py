@@ -33,12 +33,13 @@ from gaphor.UML.interfaces import IAssociationDeleteEvent, IAssociationSetEvent
 from gaphor.interfaces import IService
 from gaphor.core import inject
 
+
+@interface.implementer(IService)
 class SanitizerService(object):
     """
     Does some background cleanup jobs, such as removing elements from the
     model that have no presentations (and should have some).
     """
-    interface.implements(IService)
 
     logger = getLogger('Sanitizer')
 
@@ -70,9 +71,9 @@ class SanitizerService(object):
         """
         
         self.logger.debug('Handling IAssociationDeleteEvent')
-        #self.logger.debug('Property is %s' % event.property.name)
-        #self.logger.debug('Element is %s' % event.element)
-        #self.logger.debug('Old value is %s' % event.old_value)
+        # self.logger.debug('Property is %s' % event.property.name)
+        # self.logger.debug('Element is %s' % event.element)
+        # self.logger.debug('Old value is %s' % event.old_value)
         
         if event.property is uml2.Element.presentation:
             old_presentation = event.old_value
@@ -82,8 +83,8 @@ class SanitizerService(object):
     def perform_unlink_for_instances(self, st, meta):
         
         self.logger.debug('Performing unlink for instances')
-        #self.logger.debug('Stereotype is %s' % st)
-        #self.logger.debug('Meta is %s' % meta)
+        # self.logger.debug('Stereotype is %s' % st)
+        # self.logger.debug('Meta is %s' % meta)
                 
         inst = modelfactory.find_instances(self.element_factory, st)
 
@@ -100,9 +101,9 @@ class SanitizerService(object):
         """
         
         self.logger.debug('Handling IAssociationDeleteEvent')
-        #self.logger.debug('Property is %s' % event.property.name)
-        #self.logger.debug('Element is %s' % event.element)
-        #self.logger.debug('Old value is %s' % event.old_value)
+        # self.logger.debug('Property is %s' % event.property.name)
+        # self.logger.debug('Element is %s' % event.element)
+        # self.logger.debug('Old value is %s' % event.old_value)
         
         if isinstance(event.element, uml2.Extension) and \
                 event.property is uml2.Association.memberEnd and \
@@ -120,9 +121,9 @@ class SanitizerService(object):
     def _disconnect_extension_end(self, event):
         
         self.logger.debug('Handling IAssociationSetEvent')
-        #self.logger.debug('Property is %s' % event.property.name)
-        #self.logger.debug('Element is %s' % event.element)
-        #self.logger.debug('Old value is %s' % event.old_value)
+        # self.logger.debug('Property is %s' % event.property.name)
+        # self.logger.debug('Element is %s' % event.element)
+        # self.logger.debug('Old value is %s' % event.old_value)
         
         if event.property is uml2.ExtensionEnd.type and event.old_value:
             ext = event.element
@@ -133,7 +134,6 @@ class SanitizerService(object):
             meta = getattr(uml2, p.type.name)
             self.perform_unlink_for_instances(st, meta)
 
-
     @component.adapter(IAssociationDeleteEvent)
     def _unlink_on_stereotype_delete(self, event):
         """
@@ -141,9 +141,9 @@ class SanitizerService(object):
         """
         
         self.logger.debug('Handling IAssociationDeleteEvent')
-        #self.logger.debug('Property is %s' % event.property)
-        #self.logger.debug('Element is %s' % event.element)
-        #self.logger.debug('Old value is %s' % event.old_value)
+        # self.logger.debug('Property is %s' % event.property)
+        # self.logger.debug('Element is %s' % event.element)
+        # self.logger.debug('Old value is %s' % event.old_value)
         
         if event.property is uml2.InstanceSpecification.classifier:
             if isinstance(event.old_value, uml2.Stereotype):

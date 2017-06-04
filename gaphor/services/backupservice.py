@@ -37,12 +37,11 @@ class MyPickler(LatePickler):
         return isinstance(obj, Element)
 
 
+@interface.implementer(IService)
 class BackupService(object):
     """
     This service makes backups every *x* minutes.
     """
-
-    interface.implements(IService)
 
     element_factory = inject('element_factory')
 

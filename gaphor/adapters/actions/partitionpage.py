@@ -29,11 +29,11 @@ from zope import interface, component
 from gaphor.adapters.propertypages import NamedItemPropertyPage
 
 
+@interface.implementer(IPropertyPage)
 class PartitionPropertyPage(NamedItemPropertyPage):
     """
     Partition property page.
     """
-    interface.implements(IPropertyPage)
     component.adapts(items.PartitionItem)
 
     element_factory = inject('element_factory')

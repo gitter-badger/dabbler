@@ -38,13 +38,12 @@ def _issubclass(c, b):
         return False
 
 
+@interface.implementer(IPropertyPage)
 class MetaclassNameEditor(object):
     """
     Metaclass name editor. Provides editable combo box entry with
     predefined list of names of UML classes.
     """
-
-    interface.implements(IPropertyPage)
 
     order = 10
 

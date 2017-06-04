@@ -31,9 +31,9 @@ from gaphor.ui.filedialog import FileDialog
 
 from . import exportmodel
 
-class XMIExport(object):
 
-    interface.implements(IService, IActionProvider)
+@interface.implementer(IService, IActionProvider)
+class XMIExport(object):
 
     element_factory = inject('element_factory')
     main_window = inject('main_window')

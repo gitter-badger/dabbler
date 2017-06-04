@@ -112,12 +112,11 @@ class ActionManager(object):
             self.register_action_provider(event.service)
 
 
+@interface.implementer(IService)
 class UIManager(Gtk.UIManager):
     """
     Service version of Gtk.UIManager.
     """
-
-    interface.implements(IService)
 
     def init(self, app=None):
         pass

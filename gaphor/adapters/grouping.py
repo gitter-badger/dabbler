@@ -42,6 +42,8 @@ from gaphor.core import inject
 from gaphor.diagram import items
 from gaphor.diagram.interfaces import IGroup
 
+
+@interface.implementer(IGroup)
 class AbstractGroup(object):
     """
     Base class for grouping UML objects.
@@ -52,8 +54,6 @@ class AbstractGroup(object):
      item
         Item to be grouped.
     """
-    interface.implements(IGroup)
-
     element_factory = inject('element_factory')
 
     def __init__(self, parent, item):

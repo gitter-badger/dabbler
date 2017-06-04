@@ -27,12 +27,12 @@ from gaphor.core import _, inject, open_action, build_action_group
 from gaphor.ui.propertyeditor import PropertyEditor
 from gaphor.ui.interfaces import IUIComponent
 
+
+@interface.implementer(IUIComponent, IActionProvider)
 class ElementEditor(object):
     """The ElementEditor class is a utility window used to edit UML elements.
     It will display the properties of the currently selected element in the
     diagram."""
-
-    interface.implements(IUIComponent, IActionProvider)
 
     element_factory = inject('element_factory')
     properties = inject('properties')
@@ -81,10 +81,10 @@ class ElementEditor(object):
         idempotent if set."""
         
         log.debug('ElementEditor.close')
-        #self.action_group.get_action('ElementEditor:open').set_active(False)
+        # self.action_group.get_action('ElementEditor:open').set_active(False)
         self.widget.unparent()
-        #self.dock_item.destroy()
-        #return True
+        # self.dock_item.destroy()
+        # return True
 
 
 # vim:sw=4:et:ai

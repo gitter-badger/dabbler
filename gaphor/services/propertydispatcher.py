@@ -26,6 +26,7 @@ from gaphor.interfaces import IService
 from gaphor.UML.interfaces import IElementChangeEvent
 
 
+@interface.implementer(IService)
 class PropertyDispatcher(object):
     """
     The Propery Dispatcher allows classes to register on events originated
@@ -36,7 +37,6 @@ class PropertyDispatcher(object):
     originate on a whole lot of classes.
     """
 
-    interface.implements(IService)
     logger = getLogger('PropertyDispatcher')
 
     component_registry = inject('component_registry')
@@ -94,7 +94,7 @@ class PropertyDispatcher(object):
             try:
                 handler(event)
             except Exception as e:
-                log.error('problem executing handler %s' % handler, exc_info=True)
+                self.logger.error('problem executing handler %s' % handler, exc_info=True)
 
 
 # vim:sw=4:et:ai

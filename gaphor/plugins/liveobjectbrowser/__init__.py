@@ -29,9 +29,8 @@ from gaphor.interfaces import IService, IActionProvider
 from .browser import Browser
 
 
+@interface.implementer(IService, IActionProvider)
 class LiveObjectBrowser(object):
-
-    interface.implements(IService, IActionProvider)
 
     element_factory = inject('element_factory')
 
