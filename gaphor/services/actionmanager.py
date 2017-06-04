@@ -28,12 +28,12 @@ from gaphor.event import ServiceInitializedEvent, ActionExecuted
 from gaphor.interfaces import IService, IActionProvider
 
 
+@interface.implementer(IService)
 class ActionManager(object):
     """
     This service is responsible for maintaining actions.
     """
 
-    interface.implements(IService)
     logger = getLogger('ActionManager')
 
     component_registry = inject('component_registry')
