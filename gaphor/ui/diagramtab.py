@@ -24,7 +24,7 @@ from __future__ import absolute_import
 from __future__ import print_function
 from gi.repository import Gtk
 from zope import component
-from etk.docking import DockItem
+# from etk.docking import DockItem
 
 from gaphas.view import GtkView
 from gaphas.painter import PainterChain, ItemPainter, HandlePainter, \
@@ -89,7 +89,7 @@ class DiagramTab(object):
     def __init__(self, diagram):
         self.diagram = diagram
         self.view = None
-        #self.owning_window = owning_window
+        # self.owning_window = owning_window
         self.action_group = build_action_group(self)
         self.toolbox = None
         self.component_registry.register_handler(self._on_element_change)
