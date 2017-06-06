@@ -81,7 +81,7 @@ def catchall(func):
     return catchall_wrapper
 
 
-class NamespaceModel(Gtk.GenericTreeModel):
+class NamespaceModel(GObject.GObject, Gtk.TreeModel):
     """
     The NamespaceModel holds a view on the data model based on namespace
     relationships (such as a Package containing a Class).
