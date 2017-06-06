@@ -25,8 +25,12 @@ The main application window.
 
 from __future__ import absolute_import
 
+import gi
 import os.path
+
+gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk
+
 import toga
 from colosseum import CSS
 
@@ -52,8 +56,6 @@ from gaphor.ui.toolbox import Toolbox as _Toolbox
 
 logger = getLogger(name='MainWindow')
 
-gi.require_version('Gtk', '3.0')
-
 ICONS = (
     'gaphor-24x24.png',
     'gaphor-48x48.png',
@@ -62,11 +64,11 @@ ICONS = (
 )
 
 # TODO settings removal
-settings['diagrams'].expand = True
-settings['diagrams'].auto_remove = False
-settings['diagrams'].inherit_settings = False
-settings['EtkDockGroup'].expand = False
-settings['EtkDockPaned'].expand = False
+# settings['diagrams'].expand = True
+# settings['diagrams'].auto_remove = False
+# settings['diagrams'].inherit_settings = False
+# settings['EtkDockGroup'].expand = False
+# settings['EtkDockPaned'].expand = False
 
 STATIC_MENU_XML = """
   <ui>
@@ -569,7 +571,6 @@ if __name__ == '__main__':
 
 @interface.implementer(IUIComponent, IActionProvider)
 class Namespace(object):
-
     title = _('Namespace')
     placement = ('left', 'diagrams')
 
@@ -798,7 +799,6 @@ class Namespace(object):
 
 @interface.implementer(IUIComponent, IActionProvider)
 class Toolbox(object):
-
     title = _('Toolbox')
     placement = ('left', 'diagrams')
 
