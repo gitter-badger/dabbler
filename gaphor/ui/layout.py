@@ -31,7 +31,7 @@ from gi.repository import Gtk
 from gaphor.core import _
 from six.moves import map
 
-SERIALIZABLE = ( DockFrame, DockPaned, DockGroup, DockItem )
+# SERIALIZABLE = ( DockFrame, DockPaned, DockGroup, DockItem )
 
 
 def serialize(layout):
@@ -97,7 +97,7 @@ def widget_attributes(widget):
     return { 'name': widget.get_name() or 'empty' }
 
 # TODO Remove
-@attributes.when_type(DockItem)
+# @attributes.when_type(DockItem)
 def dock_item_attributes(widget):
     d = { 'title': widget.props.title,
              'tooltip': widget.props.title_tooltip_text }
@@ -108,7 +108,7 @@ def dock_item_attributes(widget):
     return d
 
 # TODO Remove
-@attributes.when_type(DockGroup)
+# @attributes.when_type(DockGroup)
 def dock_group_attributes(widget):
     d = parent_attributes(widget)
     name = widget.get_name()
@@ -117,13 +117,13 @@ def dock_group_attributes(widget):
     return d
 
 # TODO Remove
-@attributes.when_type(DockPaned)
+# @attributes.when_type(DockPaned)
 def dock_paned_attributes(widget):
     return dict(orientation=(widget.get_orientation() == Gtk.Orientation.HORIZONTAL and 'horizontal' or 'vertical'),
                 **parent_attributes(widget))
 
 # TODO Remove
-@attributes.when_type(DockFrame)
+# @attributes.when_type(DockFrame)
 def dock_frame_attributes(widget):
     a = widget.allocation
     d = dict(width=str(a.width), height=str(a.height))
