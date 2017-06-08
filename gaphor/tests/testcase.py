@@ -27,7 +27,7 @@ services and start off.
 from __future__ import absolute_import
 import unittest
 import logging
-from cStringIO import StringIO
+from io import StringIO
 from zope import component
 
 from gaphas.aspect import ConnectionSink, Connector
