@@ -26,13 +26,10 @@ The main application window.
 from __future__ import absolute_import
 
 import gi
-import os.path
-
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gdk
+from gi.repository import Gtk, Gdk, GdkPixbuf
 
-import toga
-from colosseum import CSS
+import os.path
 
 from logging import getLogger
 from zope import interface, component
@@ -80,9 +77,8 @@ STATIC_MENU_XML = """
   </ui>
 """
 
-
 @interface.implementer(IService, IActionProvider)
-class MainWindow(toga.App):
+class MainWindow(object):
     """
     The main window for the application.
     It contains a Namespace-based tree view and a menu and a statusbar.
@@ -183,10 +179,6 @@ class MainWindow(toga.App):
             if IActionProvider.providedBy(uicomp):
                 self.action_manager.register_action_provider(uicomp)
 
-    def startup(self):
-        # Build UI
-        pass
-
     def shutdown(self):
         if self.window:
             self.window.destroy()
@@ -209,7 +201,6 @@ class MainWindow(toga.App):
                             ('tools', '_Tools'),
                             ('window', '_Window'),
                             ('help', '_Help')):
-            # TODO Gtk.Action is deprecated
             a = Gtk.Action(name, label, None, None)
             a.set_property('hide-if-empty', False)
             self.action_group.add_action(a)
@@ -255,10 +246,10 @@ class MainWindow(toga.App):
         application running or save the model and quit afterwards.
         """
         if self.model_changed:
-            dialog = toga.Window(self.window, Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
-                                 Gtk.MessageType.WARNING, Gtk.ButtonsType.NONE,
-                                 _('Save changed to your model before closing?')
-                                 )
+            dialog = Gtk.MessageDialog(self.window, Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
+                                       Gtk.MessageType.WARNING, Gtk.ButtonsType.NONE,
+                                       _('Save changed to your model before closing?')
+                                       )
             dialog.format_secondary_text(
                 _('If you close without saving, your changes will be discarded.'))
             dialog.add_buttons('Close _without saving', Gtk.ResponseType.REJECT, Gtk.STOCK_CANCEL,
@@ -307,8 +298,8 @@ class MainWindow(toga.App):
 
         # set default icons of gaphor windows
         icon_dir = os.path.abspath(pkg_resources.resource_filename('gaphor.ui', 'pixmaps'))
-        icons = (GdkPixbuf.Pixbuf.new_from_file(os.path.join(icon_dir, f)) for f in ICONS)
-        self.window.set_icon_list(*icons)
+        icons = [GdkPixbuf.Pixbuf.new_from_file(os.path.join(icon_dir, f)) for f in ICONS]
+        self.window.set_icon_list(icons)
 
         self.window.add_accel_group(self.ui_manager.get_accel_group())
 
@@ -331,14 +322,14 @@ class MainWindow(toga.App):
             return comp.open()
 
         # TODO DockLayout Removal
-        filename = pkg_resources.resource_filename('gaphor.ui', 'layout.xml')
-        self.layout = DockLayout()
+        # filename = pkg_resources.resource_filename('gaphor.ui', 'layout.xml')
+        # self.layout = DockLayout()
 
-        with open(filename) as f:
-            deserialize(self.layout, vbox, f.read(), _factory)
+        # with open(filename) as f:
+        #    deserialize(self.layout, vbox, f.read(), _factory)
 
-        self.layout.connect('item-closed', self._on_item_closed)
-        self.layout.connect('item-selected', self._on_item_selected)
+        # self.layout.connect('item-closed', self._on_item_closed)
+        # self.layout.connect('item-selected', self._on_item_selected)
 
         vbox.show()
         # TODO: add statusbar
@@ -348,7 +339,7 @@ class MainWindow(toga.App):
         self.window.connect('delete-event', self._on_window_delete)
 
         # We want to store the window size, so it can be reloaded on startup
-        self.window.set_property('allow-shrink', True)
+        # self.window.set_property('allow-shrink', True)
         self.window.connect('size-allocate', self._on_window_size_allocate)
         self.window.connect('destroy', self._on_window_destroy)
         # self.window.connect_after('key-press-event', self._on_key_press_event)
@@ -564,13 +555,10 @@ class MainWindow(toga.App):
 
 Gtk.AccelMap.add_filter('gaphor')
 
-if __name__ == '__main__':
-    app = MyApp(title, 'io.gitlab.mbse.gaphor', startup=build)
-    app.main_loop()
-
 
 @interface.implementer(IUIComponent, IActionProvider)
 class Namespace(object):
+
     title = _('Namespace')
     placement = ('left', 'diagrams')
 
@@ -690,9 +678,8 @@ class Namespace(object):
         self.action_group.get_action('tree-view-create-package').props.sensitive = isinstance(element, uml2.Package)
 
         self.action_group.get_action('tree-view-delete-diagram').props.visible = isinstance(element, uml2.Diagram)
-        self.action_group.get_action('tree-view-delete-package').props.visible = (isinstance(element, uml2.Package)
-                                                                                  and not element.presentation
-                                                                                  )
+        self.action_group.get_action('tree-view-delete-package').props.visible = isinstance(element,
+                                                                                            uml2.Package) and not element.presentation
 
         self.action_group.get_action('tree-view-open').props.sensitive = isinstance(element, uml2.Diagram)
 
@@ -799,6 +786,7 @@ class Namespace(object):
 
 @interface.implementer(IUIComponent, IActionProvider)
 class Toolbox(object):
+
     title = _('Toolbox')
     placement = ('left', 'diagrams')
 
