@@ -143,11 +143,4 @@ class Element(object):
         self.__dict__.update(state)
 
 
-try:
-    import psyco
-except ImportError:
-    pass
-else:
-    psyco.bind(Element)
-
 # vim:sw=4:et
