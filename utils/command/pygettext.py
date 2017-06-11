@@ -13,6 +13,8 @@
 # Made docstring fit in 80 chars wide displays using pydoc.
 #
 
+from __future__ import print_function
+
 # for selftesting
 try:
     import fintl
@@ -156,8 +158,8 @@ If `inputfile' is -, standard input is read.
 """)
 
 import os
-import importlib.machinery
-import importlib.util
+# import importlib.machinery
+# import importlib.util
 import sys
 import glob
 import time
@@ -197,9 +199,9 @@ msgstr ""
 
 
 def usage(code, msg=''):
-    print(__doc__ % globals(), file=sys.stderr)
+    print(__doc__ % globals(), sys.stderr)
     if msg:
-        print(msg, file=sys.stderr)
+        print(msg, sys.stderr)
     sys.exit(code)
 
 
@@ -390,7 +392,7 @@ class TokenEater:
                 'token': tstring,
                 'file': self.__curfile,
                 'lineno': self.__lineno
-                }, file=sys.stderr)
+                }, sys.stderr)
             self.__state = self.__waiting
 
     def __addentry(self, msg, lineno=None, isdocstring=0):
@@ -563,7 +565,7 @@ def main():
             fp.close()
         except IOError:
             print(_(
-                "Can't read --exclude-file: %s") % options.excludefilename, file=sys.stderr)
+                "Can't read --exclude-file: %s") % options.excludefilename, sys.stderr)
             sys.exit(1)
     else:
         options.toexclude = []
@@ -599,7 +601,7 @@ def main():
             except tokenize.TokenError as e:
                 print('%s: %s, line %d, column %d' % (
                     e.args[0], filename, e.args[1][0], e.args[1][1]),
-                    file=sys.stderr)
+                    sys.stderr)
         finally:
             if closep:
                 fp.close()
