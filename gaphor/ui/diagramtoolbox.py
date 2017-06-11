@@ -30,6 +30,8 @@ from __future__ import absolute_import
 
 from zope import component
 
+from six.moves import zip
+
 from gaphas.item import SE
 
 from gaphor.UML import uml2
