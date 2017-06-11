@@ -49,7 +49,7 @@ from __future__ import absolute_import
 import sys
 from zope import component
 
-from six.moves import map
+from six.moves import map, intern
 
 from gaphor.UML.collection import collection, collectionlist
 from gaphor.UML.event import AttributeChangeEvent, AssociationSetEvent, AssociationAddEvent, AssociationDeleteEvent
@@ -193,8 +193,8 @@ class enumeration(umlproperty):
     type = property(lambda s: str)
 
     def __init__(self, name, values, default):
-        self.name = sys.intern(name)
-        self._name = sys.intern('_' + name)
+        self.name = intern(name)
+        self._name = intern('_' + name)
         self.values = values
         self.default = default
         self.lower = 0
