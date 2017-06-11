@@ -117,8 +117,8 @@ class attribute(umlproperty):
 
     # TODO: check if lower and upper are actually needed for attributes
     def __init__(self, name, type, default=None, lower=0, upper=1):
-        self.name = sys.intern(name)
-        self._name = sys.intern('_' + name)
+        self.name = intern(name)
+        self._name = intern('_' + name)
         self.type = type
         self.default = default
         self.lower = lower
@@ -252,13 +252,13 @@ class association(umlproperty):
     """
 
     def __init__(self, name, type, lower=0, upper='*', composite=False, opposite=None):
-        self.name = sys.intern(name)
-        self._name = sys.intern('_' + name)
+        self.name = intern(name)
+        self._name = intern('_' + name)
         self.type = type
         self.lower = lower
         self.upper = upper
         self.composite = composite
-        self.opposite = opposite and sys.intern(opposite)
+        self.opposite = opposite and intern(opposite)
         self.stub = None
 
     def load(self, obj, value):
@@ -443,7 +443,7 @@ class associationstub(umlproperty):
 
     def __init__(self, association):
         self.association = association
-        self._name = sys.intern('_stub_%x' % id(self))
+        self._name = intern('_stub_%x' % id(self))
 
     def __get__(self, obj, class_=None):
         if obj:
@@ -508,8 +508,8 @@ class derived(umlproperty):
     """
 
     def __init__(self, name, type, lower, upper, *subsets):
-        self.name = sys.intern(name)
-        self._name = sys.intern('_' + name)
+        self.name = intern(name)
+        self._name = intern('_' + name)
         self.version = 1
         self.type = type
         self.lower = lower
@@ -729,8 +729,8 @@ class redefine(umlproperty):
 
     def __init__(self, decl_class, name, type, original):
         self.decl_class = decl_class
-        self.name = sys.intern(name)
-        self._name = sys.intern('_' + name)
+        self.name = intern(name)
+        self._name = intern('_' + name)
         self.type = type
         self.original = original
 
