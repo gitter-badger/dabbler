@@ -22,13 +22,16 @@
 # Gaphor.  If not, see <http://www.gnu.org/licenses/>.
 from __future__ import absolute_import
 from __future__ import print_function
+
+import gi
+gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
+
 from zope import component
 # from etk.docking import DockItem
 
 from gaphas.view import GtkView
-from gaphas.painter import PainterChain, ItemPainter, HandlePainter, \
-                           FocusedItemPainter, ToolPainter, BoundingBoxPainter
+from gaphas.painter import PainterChain, ItemPainter, HandlePainter, FocusedItemPainter, ToolPainter, BoundingBoxPainter
 from gaphas.freehand import FreeHandPainter
 from gaphor.UML import uml2
 from gaphor.core import _, inject, transactional, action, build_action_group

@@ -37,7 +37,7 @@ class Element(object):
     Base class for UML data classes.
     """
 
-    def __init__(self, id=None, factory=None):
+    def __init__(self, id_=None, factory=None):
         """
         Create an element. As optional parameters an id and factory can be
         given.
@@ -50,7 +50,7 @@ class Element(object):
         Factory can be provided to refer to the class that maintains the
         lifecycle of the element.
         """
-        self._id = id or (id is not False and str(uuid.uuid1()) or False)
+        self._id = id_ or (id_ is not False and str(uuid.uuid1()) or False)
         # The factory this element belongs to.
         self._factory = factory
         self._unlink_lock = threading.Lock()

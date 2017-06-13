@@ -26,6 +26,7 @@ The main application window.
 from __future__ import absolute_import
 
 import gi
+
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk, GdkPixbuf
 
@@ -50,6 +51,7 @@ from gaphor.ui.interfaces import IDiagramTabChange, IUIComponent
 from gaphor.ui.layout import deserialize
 from gaphor.ui.namespace import NamespaceModel, NamespaceView
 from gaphor.ui.toolbox import Toolbox as _Toolbox
+from gaphor.ui import stock
 
 logger = getLogger(name='MainWindow')
 
@@ -76,6 +78,7 @@ STATIC_MENU_XML = """
     </menubar>
   </ui>
 """
+
 
 @interface.implementer(IService, IActionProvider)
 class MainWindow(object):
@@ -163,8 +166,7 @@ class MainWindow(object):
 
     def init_stock_icons(self):
         # Load stock items
-        import gaphor.ui.stock
-        gaphor.ui.stock.load_stock_icons()
+        stock.load_stock_icons()
 
     def init_ui_components(self):
         component_registry = self.component_registry
@@ -322,14 +324,14 @@ class MainWindow(object):
             return comp.open()
 
         # TODO DockLayout Removal
-        # filename = pkg_resources.resource_filename('gaphor.ui', 'layout.xml')
-        # self.layout = DockLayout()
+        filename = pkg_resources.resource_filename('gaphor.ui', 'layout.xml')
+        self.layout = DockLayout()
 
-        # with open(filename) as f:
-        #    deserialize(self.layout, vbox, f.read(), _factory)
+        with open(filename) as f:
+            deserialize(self.layout, vbox, f.read(), _factory)
 
-        # self.layout.connect('item-closed', self._on_item_closed)
-        # self.layout.connect('item-selected', self._on_item_selected)
+        self.layout.connect('item-closed', self._on_item_closed)
+        self.layout.connect('item-selected', self._on_item_selected)
 
         vbox.show()
         # TODO: add statusbar
@@ -413,7 +415,8 @@ class MainWindow(object):
         """
         # TODO: Make handlers for ModelFactoryEvent from within the GUI obj
         for diagram in self.element_factory.select(
-                lambda e: e.isKindOf(uml2.Diagram) and not (e.namespace and e.namespace.namespace)):
+                lambda e: e.isKindOf(uml2.Diagram) and not (e.namespace and e.namespace.namespace)
+        ):
             self.show_diagram(diagram)
 
     @component.adapter(FileManagerStateChanged)
@@ -558,7 +561,6 @@ Gtk.AccelMap.add_filter('gaphor')
 
 @interface.implementer(IUIComponent, IActionProvider)
 class Namespace(object):
-
     title = _('Namespace')
     placement = ('left', 'diagrams')
 
@@ -786,7 +788,6 @@ class Namespace(object):
 
 @interface.implementer(IUIComponent, IActionProvider)
 class Toolbox(object):
-
     title = _('Toolbox')
     placement = ('left', 'diagrams')
 

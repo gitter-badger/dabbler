@@ -26,8 +26,7 @@ Factory for and registration of model elements.
 from __future__ import absolute_import
 
 import uuid
-from zope import component
-from zope import interface
+from zope import component, interface
 
 import six
 
@@ -58,22 +57,22 @@ class ElementFactory(object):
         self._elements = odict.odict()
         self._observers = list()
 
-    def create(self, type):
+    def create(self, type_):
         """
-        Create a new model element of type ``type``.
+        Create a new model element of type 'type_'.
         """
-        obj = self.create_as(type, str(uuid.uuid1()))
+        obj = self.create_as(type_, str(uuid.uuid1()))
         return obj
 
-    def create_as(self, type, id):
+    def create_as(self, type_, id_):
         """
-        Create a new model element of type 'type' with 'id' as its ID.
+        Create a new model element of type 'type_' with 'id' as its ID.
         This method should only be used when loading models, since it does
         not emit an ElementCreateEvent event.
         """
-        assert issubclass(type, Element)
-        obj = type(id, self)
-        self._elements[id] = obj
+        # assert issubclass(type_, Element)
+        obj = type_
+        self._elements[id_] = obj
         return obj
 
     def bind(self, element):
@@ -95,11 +94,11 @@ class ElementFactory(object):
         """
         return len(self._elements)
 
-    def lookup(self, id):
+    def lookup(self, id_):
         """
         Find element with a specific id.
         """
-        return self._elements.get(id)
+        return self._elements.get(id_)
 
     __getitem__ = lookup
 
@@ -199,7 +198,6 @@ class ElementFactoryService(ElementFactory):
     """
     Service version of the ElementFctory.
     """
-
     component_registry = inject('component_registry')
 
     def init(self, app):
@@ -208,11 +206,11 @@ class ElementFactoryService(ElementFactory):
     def shutdown(self):
         self.flush()
 
-    def create(self, type):
+    def create(self, type_):
         """
         Create a new model element of type ``type``.
         """
-        obj = super(ElementFactoryService, self).create(type)
+        obj = super(ElementFactoryService, self).create(type_)
         self.component_registry.handle(ElementCreateEvent(self, obj))
         return obj
 

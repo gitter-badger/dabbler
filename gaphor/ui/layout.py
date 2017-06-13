@@ -1,5 +1,5 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# vim:sw=4:et:ai
 
 # Copyright (C) 2011-2017 Arjan Molenaar <gaphor@gmail.com>
 #                         Dan Yeaw <dan@yeaw.me>
@@ -27,7 +27,7 @@ from xml.etree.ElementTree import Element, SubElement, tostring, fromstring
 
 from gi.repository import Gtk
 
-# from etk.docking import DockFrame, DockPaned, DockGroup, DockItem
+from etk.docking import DockFrame, DockPaned, DockGroup, DockItem
 from gaphor.core import _
 from six.moves import map
 

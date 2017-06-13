@@ -23,10 +23,15 @@ main screen and diagram windows.
 """
 
 from __future__ import absolute_import
-import os, os.path
+import os
+from os import path
+
+import gi
+gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
 from gaphor.misc import get_user_data_dir
+
 
 def _get_accel_map_filename():
     """
@@ -35,9 +40,9 @@ def _get_accel_map_filename():
     
     user_data_dir = get_user_data_dir()
     
-    if not os.path.exists(user_data_dir):
+    if not path.exists(user_data_dir):
         os.mkdir(user_data_dir)
-    return os.path.join(user_data_dir, 'accelmap')
+    return path.join(user_data_dir, 'accelmap')
 
 
 def load_accel_map():
@@ -45,7 +50,7 @@ def load_accel_map():
     Load the user accelerator map from the gaphor user home directory
     """
     filename = _get_accel_map_filename()
-    if os.path.exists(filename) and os.path.isfile(filename):
+    if path.exists(filename) and path.isfile(filename):
         Gtk.AccelMap.load(filename)
 
 

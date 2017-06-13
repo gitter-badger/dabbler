@@ -24,6 +24,10 @@ See also gaphor/service/actionmanager.py for the management module.
 
 from __future__ import absolute_import, print_function
 
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk
+
 from gaphor.application import Application
 
 
@@ -145,7 +149,6 @@ def build_action_group(obj, name=None):
     >>> group.get_action('baz').activate()
     Say 0 baz
     """
-    from gi.repository import Gtk
     group = Gtk.ActionGroup(name or obj)
     objtype = type(obj)
 
