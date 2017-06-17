@@ -21,9 +21,10 @@
 a queue."""
 
 from __future__ import absolute_import
-from gi.repository import GObject
-from gi.repository import Pango
-from gi.repository import Gtk
+import gi
+
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk, GObject, Pango
 
 from gaphor.misc.gidlethread import QueueEmpty
 

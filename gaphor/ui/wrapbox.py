@@ -17,8 +17,10 @@
 # You should have received a copy of the GNU General Public License along with
 # Gaphor.  If not, see <http://www.gnu.org/licenses/>.
 from __future__ import absolute_import
-from gi.repository import GObject
-from gi.repository import Gtk
+import gi
+
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk, GObject
 
 
 class Wrapbox(Gtk.Table):

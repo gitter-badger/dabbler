@@ -26,10 +26,13 @@ a result only classifiers are shown here.
 
 from __future__ import absolute_import
 from __future__ import print_function
-from gi.repository import GObject
-from gi.repository import Gtk
+
+import gi
+
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk, GObject
+
 import operator
-from . import stock
 
 from zope import component
 
@@ -38,7 +41,8 @@ from gaphor.UML import uml2
 from gaphor.UML.event import ElementCreateEvent, ModelFactoryEvent, FlushFactoryEvent, DerivedSetEvent
 from gaphor.UML.interfaces import IAttributeChangeEvent, IElementDeleteEvent
 from gaphor.transaction import Transaction
-from .iconoption import get_icon_option
+from gaphor.ui.iconoption import get_icon_option
+from gaphor.ui import stock
 from six.moves import map
 
 # The following items will be shown in the treeview, although they

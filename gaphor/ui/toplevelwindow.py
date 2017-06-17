@@ -24,7 +24,11 @@ Basic stuff for toplevel windows.
 from __future__ import absolute_import
 import os.path
 import pkg_resources
+import gi
+
+gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
+
 from zope import interface
 from .interfaces import IUIComponent
 

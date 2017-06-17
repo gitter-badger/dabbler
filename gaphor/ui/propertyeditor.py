@@ -18,12 +18,16 @@
 # You should have received a copy of the GNU General Public License along with
 # Gaphor.  If not, see <http://www.gnu.org/licenses/>.
 from __future__ import absolute_import
+import gi
+
+gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
+
 from zope import component
 from gaphor.core import _, inject
 from gaphor.UML.interfaces import IAssociationChangeEvent
 from gaphor.UML.uml2 import Presentation
-from .interfaces import IPropertyPage, IDiagramSelectionChange
+from gaphor.ui.interfaces import IPropertyPage, IDiagramSelectionChange
 
 
 class PropertyEditor(object):
