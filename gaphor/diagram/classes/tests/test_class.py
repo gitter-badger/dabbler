@@ -152,7 +152,7 @@ class ClassTestCase(TestCase):
         oper.name = 'method'
         klass.subject.ownedOperation = oper
 
-        self.assertEquals(100, klass.width)
+        self.assertEqual(100, klass.width)
 
         attr.name = 'x' * 25
         log.debug('name: %s' % attr.name)
@@ -160,6 +160,6 @@ class ClassTestCase(TestCase):
         diagram.canvas.update()
 
         width = klass.width
-        self.assertEquals(170.0, width)
+        self.assertEqual(170.0, width)
 
 # vim:sw=4:et:ai

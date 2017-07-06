@@ -33,9 +33,9 @@ class DiagramTabTestCase(unittest.TestCase):
         self.element_factory = element_factory
         self.diagram = element_factory.create(uml2.Diagram)
         self.tab = main_window.show_diagram(self.diagram)
-        self.assertEquals(self.tab.diagram, self.diagram)
-        self.assertEquals(self.tab.view.canvas, self.diagram.canvas)
-        self.assertEquals(len(element_factory.lselect()), 1)
+        self.assertEqual(self.tab.diagram, self.diagram)
+        self.assertEqual(self.tab.view.canvas, self.diagram.canvas)
+        self.assertEqual(len(element_factory.lselect()), 1)
 
     def tearDown(self):
         self.tab.close()
@@ -60,6 +60,6 @@ class DiagramTabTestCase(unittest.TestCase):
         
         from gaphor.diagram.comment import CommentItem
         comment = self.diagram.create(CommentItem, subject=self.element_factory.create(uml2.Comment))
-        self.assertEquals(len(self.element_factory.lselect()), 2)
+        self.assertEqual(len(self.element_factory.lselect()), 2)
         
 # vim:sw=4:et:ai

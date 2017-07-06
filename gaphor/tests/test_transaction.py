@@ -83,15 +83,15 @@ class TransactionTestCase(TestCase):
         tx = Transaction()
 
         self.assertTrue(tx._stack, 'Transaction has no stack')
-        self.assertEquals(1, len(begins), 'Incorrect number of TrasactionBegin events')
-        self.assertEquals(0, len(commits), 'Incorrect number of TransactionCommit events')
-        self.assertEquals(0, len(rollbacks), 'Incorrect number of TransactionRollback events')
+        self.assertEqual(1, len(begins), 'Incorrect number of TrasactionBegin events')
+        self.assertEqual(0, len(commits), 'Incorrect number of TransactionCommit events')
+        self.assertEqual(0, len(rollbacks), 'Incorrect number of TransactionRollback events')
 
         tx.commit()
 
-        self.assertEquals(1, len(begins), 'Incorrect number of TrasactionBegin events')
-        self.assertEquals(1, len(commits), 'Incorrect number of TransactionCommit events')
-        self.assertEquals(0, len(rollbacks), 'Incorrect number of TransactionRollback events')
+        self.assertEqual(1, len(begins), 'Incorrect number of TrasactionBegin events')
+        self.assertEqual(1, len(commits), 'Incorrect number of TransactionCommit events')
+        self.assertEqual(0, len(rollbacks), 'Incorrect number of TransactionRollback events')
         self.assertFalse(tx._stack, 'Transaction stack is not empty')
 
         try:
@@ -107,15 +107,15 @@ class TransactionTestCase(TestCase):
         tx = Transaction()
 
         self.assertTrue(tx._stack, 'Transaction has no stack')
-        self.assertEquals(1, len(begins), 'Incorrect number of TrasactionBegin events')
-        self.assertEquals(0, len(commits), 'Incorrect number of TransactionCommit events')
-        self.assertEquals(0, len(rollbacks), 'Incorrect number of TransactionRollback events')
+        self.assertEqual(1, len(begins), 'Incorrect number of TrasactionBegin events')
+        self.assertEqual(0, len(commits), 'Incorrect number of TransactionCommit events')
+        self.assertEqual(0, len(rollbacks), 'Incorrect number of TransactionRollback events')
 
         tx.rollback()
 
-        self.assertEquals(1, len(begins), 'Incorrect number of TrasactionBegin events')
-        self.assertEquals(0, len(commits), 'Incorrect number of TransactionCommit events')
-        self.assertEquals(1, len(rollbacks), 'Incorrect number of TransactionRollback events')
+        self.assertEqual(1, len(begins), 'Incorrect number of TrasactionBegin events')
+        self.assertEqual(0, len(commits), 'Incorrect number of TransactionCommit events')
+        self.assertEqual(1, len(rollbacks), 'Incorrect number of TransactionRollback events')
 
         self.assertFalse(tx._stack, 'Transaction stack is not empty')
 
@@ -129,9 +129,9 @@ class TransactionTestCase(TestCase):
         tx2.rollback()
         tx1.commit()
 
-        self.assertEquals(1, len(begins), 'Incorrect number of TrasactionBegin events')
-        self.assertEquals(0, len(commits), 'Incorrect number of TransactionCommit events')
-        self.assertEquals(1, len(rollbacks), 'Incorrect number of TransactionRollback events')
+        self.assertEqual(1, len(begins), 'Incorrect number of TrasactionBegin events')
+        self.assertEqual(0, len(commits), 'Incorrect number of TransactionCommit events')
+        self.assertEqual(1, len(rollbacks), 'Incorrect number of TransactionRollback events')
 
     def test_transaction_stack(self):
         """Test the transaction stack."""
@@ -162,7 +162,7 @@ class TransactionTestCase(TestCase):
             with Transaction():
                 raise TypeError('transaction error')
         except TypeError as e:
-            self.assertEquals('transaction error', str(e), 'Transaction context manager did no raise correct exception')
+            self.assertEqual('transaction error', str(e), 'Transaction context manager did no raise correct exception')
         else:
             self.fail('Transaction context manager did not raise exception when it should have')
 

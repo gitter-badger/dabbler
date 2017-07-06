@@ -68,7 +68,7 @@ class CommentLineTestCase(TestCase):
         self.connect(line, line.head, comment)
         self.connect(line, line.tail, ac)
         self.assertTrue(self.get_connected(line.tail) is ac)
-        self.assertEquals(1, len(comment.subject.annotatedElement))
+        self.assertEqual(1, len(comment.subject.annotatedElement))
         self.assertTrue(ac.subject in comment.subject.annotatedElement)
 
 
@@ -82,7 +82,7 @@ class CommentLineTestCase(TestCase):
         self.connect(line, line.head, comment)
         self.connect(line, line.tail, ac)
         self.assertTrue(self.get_connected(line.tail) is ac)
-        self.assertEquals(1, len(comment.subject.annotatedElement))
+        self.assertEqual(1, len(comment.subject.annotatedElement))
         self.assertTrue(ac.subject in comment.subject.annotatedElement)
 
 
@@ -96,7 +96,7 @@ class CommentLineTestCase(TestCase):
         self.connect(line, line.head, comment)
         self.connect(line, line.tail, ac)
         self.assertTrue(self.get_connected(line.tail) is ac)
-        self.assertEquals(1, len(comment.subject.annotatedElement))
+        self.assertEqual(1, len(comment.subject.annotatedElement))
         self.assertTrue(ac.subject in comment.subject.annotatedElement)
 
         ac2 = self.create(items.ActorItem, uml2.Actor)
@@ -104,7 +104,7 @@ class CommentLineTestCase(TestCase):
         self.disconnect(line, line.tail)
         self.connect(line, line.tail, ac2)
         self.assertTrue(self.get_connected(line.tail) is ac2)
-        self.assertEquals(1, len(comment.subject.annotatedElement))
+        self.assertEqual(1, len(comment.subject.annotatedElement))
         self.assertTrue(ac2.subject in comment.subject.annotatedElement)
 
 

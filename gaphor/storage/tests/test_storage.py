@@ -255,11 +255,11 @@ class StorageTestCase(TestCase):
         fd.close()
 
         diagrams = list(self.kindof(uml2.Diagram))
-        self.assertEquals(1, len(diagrams))
+        self.assertEqual(1, len(diagrams))
         d = diagrams[0]
         a = d.canvas.select(lambda e: isinstance(e, items.AssociationItem))[0]
         self.assertTrue(a.subject is not None)
-        self.assertEquals(old_a_subject_id, a.subject.id)
+        self.assertEqual(old_a_subject_id, a.subject.id)
         cinfo_head = a.canvas.get_connection(a.head)
         self.assertTrue(cinfo_head.connected is not None)
         cinfo_tail = a.canvas.get_connection(a.tail)
@@ -293,7 +293,7 @@ class StorageTestCase(TestCase):
         orig = expr.sub('%VER%', orig)
         copy = expr.sub('%VER%', copy)
 
-        self.assertEquals(copy, orig, 'Saved model does not match copy')
+        self.assertEqual(copy, orig, 'Saved model does not match copy')
 
 
 class FileUpgradeTestCase(TestCase):
@@ -308,7 +308,7 @@ class FileUpgradeTestCase(TestCase):
             storage.load(ifile, factory=self.element_factory)
 
         diagrams = list(self.kindof(uml2.Diagram))
-        self.assertEquals(1, len(diagrams))
+        self.assertEqual(1, len(diagrams))
         diagram = diagrams[0]
         assocs = diagram.canvas.select(lambda e: isinstance(e, items.AssociationItem))
         assert len(assocs) == 8
@@ -362,32 +362,32 @@ class FileUpgradeTestCase(TestCase):
             storage.load(ifile, factory=self.element_factory)
 
         diagrams = list(self.kindof(uml2.Diagram))
-        self.assertEquals(1, len(diagrams))
+        self.assertEqual(1, len(diagrams))
         diagram = diagrams[0]
         classes = diagram.canvas.select(lambda e: isinstance(e, items.ClassItem))
         profiles = self.element_factory.lselect(lambda e: isinstance(e, uml2.Profile))
         stereotypes = self.element_factory.lselect(lambda e: isinstance(e, uml2.Stereotype))
 
-        self.assertEquals(2, len(classes))
+        self.assertEqual(2, len(classes))
         c1, c2 = classes
 
-        self.assertEquals(1, len(profiles))
+        self.assertEqual(1, len(profiles))
         profile = profiles[0]
-        self.assertEquals('version 0.15 conversion', profile.name)
+        self.assertEqual('version 0.15 conversion', profile.name)
 
-        self.assertEquals(1, len(stereotypes))
+        self.assertEqual(1, len(stereotypes))
         stereotype = stereotypes[0]
-        self.assertEquals('Tagged', stereotype.name)
-        self.assertEquals(profile, stereotype.namespace)
-        self.assertEquals('c1', c1.subject.name)
-        self.assertEquals('c2', c2.subject.name)
-        self.assertEquals(stereotype, c1.subject.appliedStereotype[0].classifier[0])
-        self.assertEquals(stereotype, c2.subject.appliedStereotype[0].classifier[0])
-        self.assertEquals('t1', c1.subject.appliedStereotype[0].slot[0].definingFeature.name)
-        self.assertEquals('t2', c1.subject.appliedStereotype[0].slot[1].definingFeature.name)
-        self.assertEquals('t5', c2.subject.appliedStereotype[0].slot[0].definingFeature.name)
-        self.assertEquals('t6', c2.subject.appliedStereotype[0].slot[1].definingFeature.name)
-        self.assertEquals('t7', c2.subject.appliedStereotype[0].slot[2].definingFeature.name)
+        self.assertEqual('Tagged', stereotype.name)
+        self.assertEqual(profile, stereotype.namespace)
+        self.assertEqual('c1', c1.subject.name)
+        self.assertEqual('c2', c2.subject.name)
+        self.assertEqual(stereotype, c1.subject.appliedStereotype[0].classifier[0])
+        self.assertEqual(stereotype, c2.subject.appliedStereotype[0].classifier[0])
+        self.assertEqual('t1', c1.subject.appliedStereotype[0].slot[0].definingFeature.name)
+        self.assertEqual('t2', c1.subject.appliedStereotype[0].slot[1].definingFeature.name)
+        self.assertEqual('t5', c2.subject.appliedStereotype[0].slot[0].definingFeature.name)
+        self.assertEqual('t6', c2.subject.appliedStereotype[0].slot[1].definingFeature.name)
+        self.assertEqual('t7', c2.subject.appliedStereotype[0].slot[2].definingFeature.name)
 
     def test_lifeline_messages_upgrade(self):
         """Test message occurrence specification upgrade in Gaphor 0.15.0
@@ -400,17 +400,17 @@ class FileUpgradeTestCase(TestCase):
             storage.load(ifile, factory=self.element_factory)
 
         diagrams = list(self.kindof(uml2.Diagram))
-        self.assertEquals(1, len(diagrams))
+        self.assertEqual(1, len(diagrams))
         diagram = diagrams[0]
 
         lifelines = diagram.canvas.select(lambda e: isinstance(e, items.LifelineItem))
         occurrences = self.kindof(uml2.MessageOccurrenceSpecification)
         messages = self.kindof(uml2.Message)
 
-        self.assertEquals(2, len(lifelines))
-        self.assertEquals(12, len(messages))
+        self.assertEqual(2, len(lifelines))
+        self.assertEqual(12, len(messages))
         # 2 * 12 but there are 4 lost/found messages
-        self.assertEquals(20, len(set(occurrences)))
+        self.assertEqual(20, len(set(occurrences)))
 
         l1, l2 = lifelines
         if l1.subject.name == 'a2':

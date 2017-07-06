@@ -35,19 +35,19 @@ class StereotypesTestCase(TestCaseBase):
         """
         stereotype = self.factory.create(uml2.Stereotype)
         stereotype.name = 'Test'
-        self.assertEquals('test', modelfactory.stereotype_name(stereotype))
+        self.assertEqual('test', modelfactory.stereotype_name(stereotype))
 
         stereotype.name = 'TEST'
-        self.assertEquals('TEST', modelfactory.stereotype_name(stereotype))
+        self.assertEqual('TEST', modelfactory.stereotype_name(stereotype))
 
         stereotype.name = 'T'
-        self.assertEquals('t', modelfactory.stereotype_name(stereotype))
+        self.assertEqual('t', modelfactory.stereotype_name(stereotype))
 
         stereotype.name = ''
-        self.assertEquals('', modelfactory.stereotype_name(stereotype))
+        self.assertEqual('', modelfactory.stereotype_name(stereotype))
 
         stereotype.name = None
-        self.assertEquals('', modelfactory.stereotype_name(stereotype))
+        self.assertEqual('', modelfactory.stereotype_name(stereotype))
 
 
     def test_stereotypes_conversion(self):
@@ -65,14 +65,14 @@ class StereotypesTestCase(TestCaseBase):
         modelfactory.apply_stereotype(self.factory, cls, s2)
         modelfactory.apply_stereotype(self.factory, cls, s3)
 
-        self.assertEquals(fmt % 's1, s2, s3', modelfactory.stereotypes_str(cls))
+        self.assertEqual(fmt % 's1, s2, s3', modelfactory.stereotypes_str(cls))
 
 
     def test_no_stereotypes(self):
         """Test stereotypes conversion without applied stereotypes
         """
         cls = self.factory.create(uml2.Class)
-        self.assertEquals('', modelfactory.stereotypes_str(cls))
+        self.assertEqual('', modelfactory.stereotypes_str(cls))
 
 
     def test_additional_stereotypes(self):
@@ -91,7 +91,7 @@ class StereotypesTestCase(TestCaseBase):
         modelfactory.apply_stereotype(self.factory, cls, s3)
 
         result = modelfactory.stereotypes_str(cls, ('test',))
-        self.assertEquals(fmt % 'test, s1, s2, s3', result)
+        self.assertEqual(fmt % 'test, s1, s2, s3', result)
 
 
     def test_just_additional_stereotypes(self):
@@ -100,7 +100,7 @@ class StereotypesTestCase(TestCaseBase):
         cls = self.factory.create(uml2.Class)
 
         result = modelfactory.stereotypes_str(cls, ('test',))
-        self.assertEquals(fmt % 'test', result)
+        self.assertEqual(fmt % 'test', result)
 
 
     def test_getting_stereotypes(self):
@@ -119,7 +119,7 @@ class StereotypesTestCase(TestCaseBase):
 
         c1 = self.factory.create(uml2.Class)
         result = tuple(st.name for st in modelfactory.get_stereotypes(self.factory, c1))
-        self.assertEquals(('st1', 'st2'), result)
+        self.assertEqual(('st1', 'st2'), result)
 
 
     def test_getting_stereotypes_unique(self):
@@ -143,7 +143,7 @@ class StereotypesTestCase(TestCaseBase):
 
         c1 = self.factory.create(uml2.Component)
         result = tuple(st.name for st in modelfactory.get_stereotypes(self.factory, c1))
-        self.assertEquals(('st1', 'st2'), result)
+        self.assertEqual(('st1', 'st2'), result)
 
 
     def test_finding_stereotype_instances(self):
@@ -161,7 +161,7 @@ class StereotypesTestCase(TestCaseBase):
         modelfactory.apply_stereotype(self.factory, c2, s1)
 
         result = [e.classifier[0].name for e in modelfactory.find_instances(self.factory, s1)]
-        self.assertEquals(2, len(result))
+        self.assertEqual(2, len(result))
         self.assertTrue('s1' in result, result)
         self.assertFalse('s2' in result, result)
 
@@ -299,7 +299,7 @@ class DependencyTypeTestCase(TestCaseBase):
         cls = self.factory.create(uml2.Class)
         iface = self.factory.create(uml2.Interface)
         dt = modelfactory.dependency_type(cls, iface)
-        self.assertEquals(uml2.Usage, dt)
+        self.assertEqual(uml2.Usage, dt)
 
 
     def test_usage_by_component(self):
@@ -310,7 +310,7 @@ class DependencyTypeTestCase(TestCaseBase):
         dt = modelfactory.dependency_type(c, iface)
         # it should be usage not realization (interface is classifier as
         # well)
-        self.assertEquals(uml2.Usage, dt)
+        self.assertEqual(uml2.Usage, dt)
 
 
     def test_realization(self):
@@ -319,7 +319,7 @@ class DependencyTypeTestCase(TestCaseBase):
         c = self.factory.create(uml2.Component)
         cls = self.factory.create(uml2.Class)
         dt = modelfactory.dependency_type(c, cls)
-        self.assertEquals(uml2.Realization, dt)
+        self.assertEqual(uml2.Realization, dt)
 
 
 class MessageTestCase(TestCaseBase):

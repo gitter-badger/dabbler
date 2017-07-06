@@ -88,8 +88,8 @@ class DependencyTestCase(TestCase):
         self.connect(dep, dep.tail, a3)
 
         self.assertSame(d, dep.subject)
-        self.assertEquals(1, len(dep.subject.supplier))
-        self.assertEquals(1, len(dep.subject.client))
+        self.assertEqual(1, len(dep.subject.supplier))
+        self.assertEqual(1, len(dep.subject.client))
         self.assertTrue(a1.subject in dep.subject.supplier)
         self.assertTrue(a3.subject in dep.subject.client)
         self.assertTrue(a2.subject not in dep.subject.client, dep.subject.client)
@@ -152,9 +152,9 @@ class DependencyTestCase(TestCase):
         self.connect(dep, dep.tail, actoritem2)
 
         self.assertTrue(dep.subject)
-        self.assertEquals(1, len(actor1.supplierDependency))
+        self.assertEqual(1, len(actor1.supplierDependency))
         self.assertTrue(actor1.supplierDependency[0] is dep.subject)
-        self.assertEquals(1, len(actor2.clientDependency))
+        self.assertEqual(1, len(actor2.clientDependency))
         self.assertTrue(actor2.clientDependency[0] is dep.subject)
 
         # Do the same thing, but now on a new diagram:
@@ -170,9 +170,9 @@ class DependencyTestCase(TestCase):
         self.assertSame(cinfo.connected, actoritem3)
         self.connect(dep2, dep2.tail, actoritem4)
         self.assertNotSame(dep2.subject, None)
-        self.assertEquals(1, len(actor1.supplierDependency))
+        self.assertEqual(1, len(actor1.supplierDependency))
         self.assertTrue(actor1.supplierDependency[0] is dep.subject)
-        self.assertEquals(1, len(actor2.clientDependency))
+        self.assertEqual(1, len(actor2.clientDependency))
         self.assertTrue(actor2.clientDependency[0] is dep.subject)
 
         self.assertSame(dep.subject, dep2.subject)
@@ -261,9 +261,9 @@ class GeneralizationTestCase(TestCase):
 
         self.connect(gen2, gen2.tail, c4)
         self.assertNotSame(gen.subject, gen2.subject)
-        self.assertEquals(1, len(c1.subject.generalization))
+        self.assertEqual(1, len(c1.subject.generalization))
         self.assertSame(c1.subject.generalization[0], gen.subject)
-        # self.assertEquals(1, len(actor2.clientDependency))
+        # self.assertEqual(1, len(actor2.clientDependency))
         # self.assertTrue(actor2.clientDependency[0] is dep.subject)
 
     def test_reconnection2(self):
@@ -323,7 +323,7 @@ class AssociationConnectorTestCase(TestCase):
         self.assertTrue(asc.subject is not None)
 
         # Diagram, Class *2, Property *2, Association
-        self.assertEquals(6, len(list(self.element_factory.select())))
+        self.assertEqual(6, len(list(self.element_factory.select())))
         self.assertTrue(asc.head_end.subject is not None)
         self.assertTrue(asc.tail_end.subject is not None)
 
@@ -366,6 +366,6 @@ class AssociationConnectorTestCase(TestCase):
         self.disconnect(asc, asc.head)
 
         # after disconnection: one diagram and two classes
-        self.assertEquals(3, len(list(self.element_factory.select())))
+        self.assertEqual(3, len(list(self.element_factory.select())))
 
 # vim:sw=4:et:ai

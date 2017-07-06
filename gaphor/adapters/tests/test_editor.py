@@ -128,14 +128,14 @@ class EditorTestCase(TestCase):
         klass.subject.ownedAttribute = attr
 
         self.assertSame(attr, tree_view.get_model()[0][-1])
-        self.assertEquals("+ blah", tree_view.get_model()[0][0])
+        self.assertEqual("+ blah", tree_view.get_model()[0][0])
 
         attr.name = "foo"
-        self.assertEquals("+ foo", tree_view.get_model()[0][0])
+        self.assertEqual("+ foo", tree_view.get_model()[0][0])
         attr.typeValue = 'int'
-        self.assertEquals("+ foo: int", tree_view.get_model()[0][0])
+        self.assertEqual("+ foo: int", tree_view.get_model()[0][0])
         attr.isDerived = True
-        self.assertEquals("+ /foo: int", tree_view.get_model()[0][0])
+        self.assertEqual("+ /foo: int", tree_view.get_model()[0][0])
         page.destroy()
 
     def test_class_operation_editor(self):
@@ -152,11 +152,11 @@ class EditorTestCase(TestCase):
         klass.subject.ownedOperation = oper
 
         self.assertSame(oper, tree_view.get_model()[0][-1])
-        self.assertEquals("+ o()", tree_view.get_model()[0][0])
+        self.assertEqual("+ o()", tree_view.get_model()[0][0])
         p = self.element_factory.create(uml2.Parameter)
         p.name = 'blah'
         oper.formalParameter = p
-        self.assertEquals("+ o(in blah)", tree_view.get_model()[0][0])
+        self.assertEqual("+ o(in blah)", tree_view.get_model()[0][0])
 
         page.destroy()
 

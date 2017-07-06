@@ -147,11 +147,11 @@ class DiagramToolboxTestCase(TestCase):
 
     def test_placement_object_node(self):
         self._test_placement_action('toolbox-object-node')
-        self.assertEquals(1, len(self.kindof(uml2.ObjectNode)))
+        self.assertEqual(1, len(self.kindof(uml2.ObjectNode)))
 
     def test_placement_partition(self):
         self._test_placement_action('toolbox-partition')
-        self.assertEquals(0, len(self.kindof(uml2.ActivityPartition)))
+        self.assertEqual(0, len(self.kindof(uml2.ActivityPartition)))
 
     def test_placement_flow(self):
         self._test_placement_action('toolbox-flow')

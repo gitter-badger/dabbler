@@ -274,8 +274,8 @@ class Uml2TestCase(unittest.TestCase):
         c = factory.create(uml2.Class)
         p = factory.create(uml2.Package)
         c.package = p
-        self.assertEquals(c.package, p)
-        self.assertEquals(c.namespace, p)
+        self.assertEqual(c.package, p)
+        self.assertEqual(c.namespace, p)
         self.failUnless(c in p.ownedElement)
         
     def testOwnedMember_Unlink(self):
@@ -286,7 +286,7 @@ class Uml2TestCase(unittest.TestCase):
 
         c.unlink()
 
-        self.assertEquals([p], factory.lselect())
+        self.assertEqual([p], factory.lselect())
 
 
 #    def test_lower_upper(self):
@@ -368,11 +368,11 @@ class Uml2TestCase(unittest.TestCase):
         c = factory.create(uml2.Class)
         c.name = 'Class'
 
-        self.assertEquals(('Class',), c.qualifiedName)
+        self.assertEqual(('Class',), c.qualifiedName)
 
         p.ownedClassifier = c
 
-        self.assertEquals(('Package', 'Class'), c.qualifiedName)
+        self.assertEqual(('Package', 'Class'), c.qualifiedName)
 
 
     def test_extension_metaclass(self):
@@ -384,7 +384,7 @@ class Uml2TestCase(unittest.TestCase):
 
         e = modelfactory.create_extension(factory, c, s)
 
-        self.assertEquals(c, e.metaclass)
+        self.assertEqual(c, e.metaclass)
 
     def test_metaclass_extension(self):
         factory = elementfactory.ElementFactory()
@@ -393,19 +393,19 @@ class Uml2TestCase(unittest.TestCase):
         s = factory.create(uml2.Stereotype)
         s.name = 'Stereotype'
 
-        self.assertEquals([], c.extension)
-        self.assertEquals([], s.extension)
+        self.assertEqual([], c.extension)
+        self.assertEqual([], s.extension)
 
         e = modelfactory.create_extension(factory, c, s)
 
         print(e.memberEnd)
-        self.assertEquals([e], c.extension)
-        self.assertEquals([], s.extension)
+        self.assertEqual([e], c.extension)
+        self.assertEqual([], s.extension)
         assert e.ownedEnd.type is s
 
     def test_operation_parameter_deletion(self):
         factory = elementfactory.ElementFactory()
-        self.assertEquals(0, len(factory.lselect()))
+        self.assertEqual(0, len(factory.lselect()))
 
         c = factory.create(uml2.Class)
         c.name = 'Class'
@@ -415,7 +415,7 @@ class Uml2TestCase(unittest.TestCase):
 
         c.unlink()
 
-        self.assertEquals(0, len(factory.lselect()), factory.lselect())
+        self.assertEqual(0, len(factory.lselect()), factory.lselect())
 
 
 # vim:sw=4:et:ai

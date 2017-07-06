@@ -370,21 +370,21 @@ class TestUndoManager(TestCase):
 
         undo_manager.undo_transaction()
         assert undo_manager.can_undo()
-        self.assertEquals(1, len(undo_manager._undo_stack))
-        self.assertEquals(1, len(undo_manager._redo_stack))
+        self.assertEqual(1, len(undo_manager._undo_stack))
+        self.assertEqual(1, len(undo_manager._redo_stack))
         assert undo_manager.can_redo()
         assert ef.size() == 1
 
         undo_manager.undo_transaction()
         assert not undo_manager.can_undo()
         assert undo_manager.can_redo()
-        self.assertEquals(0, len(undo_manager._undo_stack))
-        self.assertEquals(2, len(undo_manager._redo_stack))
+        self.assertEqual(0, len(undo_manager._undo_stack))
+        self.assertEqual(2, len(undo_manager._redo_stack))
         # assert ef.size() == 0
 
         undo_manager.redo_transaction()
-        self.assertEquals(1, len(undo_manager._undo_stack))
-        self.assertEquals(1, len(undo_manager._redo_stack))
+        self.assertEqual(1, len(undo_manager._undo_stack))
+        self.assertEqual(1, len(undo_manager._redo_stack))
         assert undo_manager.can_undo()
         assert undo_manager.can_redo()
         assert ef.size() == 1
