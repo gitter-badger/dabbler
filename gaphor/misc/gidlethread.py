@@ -33,7 +33,7 @@ QueueFull - raised when the queue reaches it's max size and the oldest item
 from __future__ import absolute_import
 from __future__ import print_function
 import sys
-from gi.repository import GObject
+from gi.repository import GObject, GLib
 import time
 import traceback
 import six
