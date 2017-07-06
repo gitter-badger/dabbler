@@ -34,6 +34,9 @@ import os.path
 
 from logging import getLogger
 from zope import interface, component
+from etk.docking import DockItem, DockGroup, DockLayout
+from etk.docking import add_new_group_left, add_new_group_right, add_new_group_above, add_new_group_below
+from etk.docking import add_new_group_floating, settings
 
 import pkg_resources
 
@@ -62,12 +65,11 @@ ICONS = (
     'gaphor-256x256.png',
 )
 
-# TODO settings removal
-# settings['diagrams'].expand = True
-# settings['diagrams'].auto_remove = False
-# settings['diagrams'].inherit_settings = False
-# settings['EtkDockGroup'].expand = False
-# settings['EtkDockPaned'].expand = False
+settings['diagrams'].expand = True
+settings['diagrams'].auto_remove = False
+settings['diagrams'].inherit_settings = False
+settings['EtkDockGroup'].expand = False
+settings['EtkDockPaned'].expand = False
 
 STATIC_MENU_XML = """
   <ui>
@@ -323,7 +325,6 @@ class MainWindow(object):
             logger.debug('open component %s' % str(comp))
             return comp.open()
 
-        # TODO DockLayout Removal
         filename = pkg_resources.resource_filename('gaphor.ui', 'layout.xml')
         self.layout = DockLayout()
 
@@ -530,7 +531,6 @@ class MainWindow(object):
             tab.set_drawing_style(sloppiness)
         self.properties.set('diagram.sloppiness', sloppiness)
 
-    # TODO DockItem / Group Removal
     def create_item(self, ui_component):  # , widget, title, placement=None):
         """
         Create an item for a ui component. This method can be called from UIComponents.

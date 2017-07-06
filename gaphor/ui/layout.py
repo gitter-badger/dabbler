@@ -31,7 +31,7 @@ from etk.docking import DockFrame, DockPaned, DockGroup, DockItem
 from gaphor.core import _
 from six.moves import map
 
-# SERIALIZABLE = ( DockFrame, DockPaned, DockGroup, DockItem )
+SERIALIZABLE = (DockFrame, DockPaned, DockGroup, DockItem)
 
 
 def serialize(layout):
@@ -50,11 +50,11 @@ def serialize(layout):
 widget_factory = {}
 
 def deserialize(layout, container, layoutstr, itemfactory):
-    '''
+    """
     Return a new layout with it's attached frames. Frames that should be floating
     already have their Gtk.Window attached (check frame.get_parent()). Transient settings
     and such should be done by the invoking application.
-    '''
+    """
     def _des(element, parent_widget=None):
         if element.tag == 'widget':
             name = element.attrib['name']
@@ -96,8 +96,7 @@ def attributes(widget):
 def widget_attributes(widget):
     return { 'name': widget.get_name() or 'empty' }
 
-# TODO Remove
-# @attributes.when_type(DockItem)
+@attributes.when_type(DockItem)
 def dock_item_attributes(widget):
     d = { 'title': widget.props.title,
              'tooltip': widget.props.title_tooltip_text }
@@ -107,8 +106,7 @@ def dock_item_attributes(widget):
         d['stock_id'] = widget.props.stock
     return d
 
-# TODO Remove
-# @attributes.when_type(DockGroup)
+@attributes.when_type(DockGroup)
 def dock_group_attributes(widget):
     d = parent_attributes(widget)
     name = widget.get_name()
@@ -116,14 +114,12 @@ def dock_group_attributes(widget):
         d['name'] = name
     return d
 
-# TODO Remove
-# @attributes.when_type(DockPaned)
+@attributes.when_type(DockPaned)
 def dock_paned_attributes(widget):
     return dict(orientation=(widget.get_orientation() == Gtk.Orientation.HORIZONTAL and 'horizontal' or 'vertical'),
                 **parent_attributes(widget))
 
-# TODO Remove
-# @attributes.when_type(DockFrame)
+@attributes.when_type(DockFrame)
 def dock_frame_attributes(widget):
     a = widget.allocation
     d = dict(width=str(a.width), height=str(a.height))
@@ -136,16 +132,15 @@ def dock_frame_attributes(widget):
     return d
 
 def factory(typename):
-    '''
+    """
     Simple decorator for populating the widget_factory dictionary.
-    '''
+    """
     def _factory(func):
         widget_factory[typename] = func
         return func
 
     return _factory
 
-# TODO Remove
 @factory('dockitem')
 def dock_item_factory(parent, title, tooltip, icon_name=None, stock_id=None, pos=None, vispos=None, current=None, name=None):
     item = DockItem(_(title), _(tooltip), icon_name, stock_id)
@@ -161,7 +156,6 @@ def dock_item_factory(parent, title, tooltip, icon_name=None, stock_id=None, pos
 
     return item
 
-# TODO Remove
 @factory('dockgroup')
 def dock_group_factory(parent, weight=None, name=None):
     group = DockGroup()
@@ -178,7 +172,6 @@ def dock_group_factory(parent, weight=None, name=None):
 
     return group
 
-# TODO Remove
 @factory('dockpaned')
 def dock_paned_factory(parent, orientation, weight=None, name=None):
     paned = DockPaned()
@@ -200,7 +193,6 @@ def dock_paned_factory(parent, orientation, weight=None, name=None):
 
     return paned
 
-# TODO Remove
 @factory('dockframe')
 def dock_frame_factory(parent, width, height, floating=None, x=None, y=None):
     frame = DockFrame()
