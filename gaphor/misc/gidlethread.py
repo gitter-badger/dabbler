@@ -78,7 +78,7 @@ class GIdleThread(object):
         self._idle_id = 0
         self._exc_info = (None, None, None)
 
-    def start(self, priority=GObject.PRIORITY_LOW):
+    def start(self, priority=GLib.PRIORITY_LOW):
         """Start the generator. Default priority is low, so screen updates
         will be allowed to happen.
         """
