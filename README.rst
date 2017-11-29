@@ -1,23 +1,12 @@
-.. image:: https://gitlab.com/MBSE/gaphor/badges/master/build.svg
-    :target: https://gitlab.com/MBSE/gaphor/commits/master
-    
-.. image:: https://gitlab.com/MBSE/gaphor/badges/master/coverage.svg
-    :target: https://gitlab.com/MBSE/gaphor/commits/master
-    
-
-Gaphor - The UML and SysML(soon!) Modeling Tool
+Dabbler - The UML and SysML Modeling Tool
 ===============================================
 
-Gaphor is a free/libre/open source UML modeling tool, written in Python and licensed under the GPLv2.
+Dabbler is a open source UML and SysML modeling tool, written in Python.
 
-Install gaphor simply using pip:
+The project was just renamed from Gaphor, and there is heavy work in progress to fully support Python3 and use the OS native GUI toolkit called Toga.
 
-  $ pip install gaphor
+To install simply type:
 
-You can find the sources and issue tracker at GitLab:
-
-  http://gitlab.com/MBSE/gaphor/
-
-For documentation refer to our project website:
-
-  http://mbse.gitlab.io/gaphor/
+  $ pip install dabbler
+  
+Dabbler is licensed under the GPLv2, and help is welcome and appreciated.
