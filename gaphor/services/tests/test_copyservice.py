@@ -43,11 +43,11 @@ class CopyServiceTestCase(TestCase):
         ci = diagram.create(items.CommentItem, subject=ef.create(uml2.Comment))
 
         service.copy([ci])
-        assert diagram.canvas.get_all_items() == [ ci ]
+        assert diagram.item_container.get_all_items() == [ ci ]
 
         service.paste(diagram)
 
-        assert len(diagram.canvas.get_all_items()) == 2, diagram.canvas.get_all_items()
+        assert len(diagram.item_container.get_all_items()) == 2, diagram.item_container.get_all_items()
     
     def test_copy_named_item(self):
         service = CopyService()
@@ -62,21 +62,21 @@ class CopyServiceTestCase(TestCase):
         from gi.repository import GObject
         self.assertEqual(0, GObject.main_depth())
 
-        diagram.canvas.update_now()
-        i = list(diagram.canvas.get_all_items())
+        diagram.item_container.update_now()
+        i = list(diagram.item_container.get_all_items())
         self.assertEqual(1, len(i), i)
         self.assertEqual('Name', i[0]._name.text)
 
         service.copy([c])
-        assert diagram.canvas.get_all_items() == [ c ]
+        assert diagram.item_container.get_all_items() == [ c ]
 
         service.paste(diagram)
 
-        i = diagram.canvas.get_all_items()
+        i = diagram.item_container.get_all_items()
 
         self.assertEqual(2, len(i), i)
 
-        diagram.canvas.update_now()
+        diagram.item_container.update_now()
 
         self.assertEqual('Name', i[0]._name.text)
         self.assertEqual('Name', i[1]._name.text)
@@ -108,7 +108,7 @@ class CopyServiceTestCase(TestCase):
 
         service.paste(self.diagram)
 
-        all_items = list(self.diagram.canvas.get_all_items())
+        all_items = list(self.diagram.item_container.get_all_items())
 
         self.assertEqual(6, len(all_items))
         self.assertFalse(orphan_references(self.element_factory))
@@ -121,7 +121,7 @@ class CopyServiceTestCase(TestCase):
 
         undo_manager.undo_transaction()
 
-        self.assertEqual(3, len(self.diagram.canvas.get_all_items()))
+        self.assertEqual(3, len(self.diagram.item_container.get_all_items()))
         self.assertFalse(orphan_references(self.element_factory))
 
 

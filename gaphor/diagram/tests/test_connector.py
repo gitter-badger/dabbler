@@ -86,7 +86,7 @@ class ConnectorItemTestCase(TestCase):
 
         self.load(data)
 
-        connectors = self.diagram.canvas.select(lambda e: isinstance(e, ConnectorItem))
+        connectors = self.diagram.item_container.select(lambda e: isinstance(e, ConnectorItem))
         ends = self.kindof(uml2.ConnectorEnd)
         #self.assertTrue(connectors[0].end is not None)
         #self.assertTrue(connectors[0].end is ends[0])

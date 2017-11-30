@@ -23,7 +23,7 @@ To update:
 
   Item:
     matrix
-    canvas is managed from Canvas
+    item_container is managed from ItemContainer
 
     Element:
       handles
@@ -37,7 +37,7 @@ To update:
       orthogonal (boolean)
       horizontal (boolean)
 
-  Canvas:
+  ItemContainer:
     tree:
       add()
       remove()

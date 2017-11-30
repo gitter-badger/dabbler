@@ -64,7 +64,7 @@ class EditorTestCase(TestCase):
 
     def test_objectnode_editor(self):
         node = self.create(items.ObjectNodeItem, uml2.ObjectNode)
-        self.diagram.canvas.update_now()
+        self.diagram.item_container.update_now()
 
         adapter = IEditor(node)
         self.assertTrue(adapter.is_editable(10, 10))
@@ -80,7 +80,7 @@ class EditorTestCase(TestCase):
         klass = self.create(items.ClassItem, uml2.Class)
         klass.subject.name = 'Class1'
 
-        self.diagram.canvas.update()
+        self.diagram.item_container.update()
 
         attr = self.element_factory.create(uml2.Property)
         attr.name = "blah"
@@ -90,7 +90,7 @@ class EditorTestCase(TestCase):
         oper.name = 'method'
         klass.subject.ownedOperation = oper
 
-        self.diagram.canvas.update()
+        self.diagram.item_container.update()
 
         edit = IEditor(klass)
 

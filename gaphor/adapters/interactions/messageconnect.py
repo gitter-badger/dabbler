@@ -155,7 +155,7 @@ class MessageLifelineConnect(AbstractConnect):
 
         self.disconnect_lifelines(line)
 
-        if len(list(self.canvas.get_connections(connected=lifeline))) == 1:
+        if len(list(self.item_container.get_connections(connected=lifeline))) == 1:
             # after disconnection count of connected items will be
             # zero, so allow connections to lifeline's lifetime
             lifetime.connectable = True

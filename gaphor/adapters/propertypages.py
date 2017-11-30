@@ -77,7 +77,7 @@ class EditableTreeModel(Gtk.ListStore):
     Last row is empty and contains no object to edit. It allows to enter
     new values.
 
-    When model is edited, then item is requested to be updated on canvas.
+    When model is edited, then item is requested to be updated on item_container.
 
     Attributes:
     - _item: diagram item owning tree model
@@ -669,7 +669,7 @@ class InterfacePropertyPage(NamedItemPropertyPage):
         button.set_active(item.folded)
         button.connect('toggled', self._on_fold_change)
 
-        connected_items = [c.item for c in item.canvas.get_connections(connected=item)]
+        connected_items = [c.item for c in item.item_container.get_connections(connected=item)]
         allowed = (items.DependencyItem, items.ImplementationItem)
         can_fold = len(connected_items) == 0 \
                    or len(connected_items) == 1 and isinstance(connected_items[0], allowed)
@@ -684,7 +684,7 @@ class InterfacePropertyPage(NamedItemPropertyPage):
     def _on_fold_change(self, button):
         item = self.item
 
-        connected_items = [c.item for c in item.canvas.get_connections(connected=item)]
+        connected_items = [c.item for c in item.item_container.get_connections(connected=item)]
         assert len(connected_items) <= 1
 
         line = None
@@ -703,7 +703,7 @@ class InterfacePropertyPage(NamedItemPropertyPage):
                 item.folded = item.FOLDED_REQUIRED
 
             line._solid = fold
-            constraint = line.canvas.get_connection(line.head).constraint
+            constraint = line.item_container.get_connection(line.head).constraint
             constraint.ratio_x = 0.5
             constraint.ratio_y = 0.5
             line.request_update()
@@ -1464,7 +1464,7 @@ class MessagePropertyPage(NamedItemPropertyPage):
 
             sort_data = self.MESSAGE_SORT
             lifeline = None
-            cinfo = item.canvas.get_connection(item.tail)
+            cinfo = item.item_container.get_connection(item.tail)
             if cinfo:
                 lifeline = cinfo.connected
 
@@ -1495,7 +1495,7 @@ class MessagePropertyPage(NamedItemPropertyPage):
         item = self.item
         subject = item.subject
         lifeline = None
-        cinfo = item.canvas.get_connection(item.tail)
+        cinfo = item.item_container.get_connection(item.tail)
         if cinfo:
             lifeline = cinfo.connected
 

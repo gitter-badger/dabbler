@@ -122,12 +122,12 @@ class DiagramExportManager(object):
         else:
             view.painter = ItemPainter()
 
-    def save_svg(self, filename, canvas):
+    def save_svg(self, filename, item_container):
         
         self.logger.info('Exporting to SVG')
         self.logger.debug('SVG path is %s' % filename)
         
-        view = View(canvas)
+        view = View(item_container)
 
         self.update_painters(view)
 
@@ -149,12 +149,12 @@ class DiagramExportManager(object):
         surface.finish()
 
 
-    def save_png(self, filename, canvas):
+    def save_png(self, filename, item_container):
         
         self.logger.info('Exporting to PNG')
         self.logger.debug('PNG path is %s' % filename)
         
-        view = View(canvas)
+        view = View(item_container)
 
         self.update_painters(view)
 
@@ -174,12 +174,12 @@ class DiagramExportManager(object):
         cr.show_page()
         surface.write_to_png(filename)
 
-    def save_pdf(self, filename, canvas):
+    def save_pdf(self, filename, item_container):
         
         self.logger.info('Exporting to PDF')
         self.logger.debug('PDF path is %s' % filename)
         
-        view = View(canvas)
+        view = View(item_container)
 
         self.update_painters(view)
 
@@ -208,7 +208,7 @@ class DiagramExportManager(object):
         diagram = self.main_window.get_current_diagram()
         filename = self.save_dialog(diagram, title, ext)
         if filename:
-            self.save_svg(filename, diagram.canvas)
+            self.save_svg(filename, diagram.item_container)
 
 
     @action(name='file-export-png', label='Export to PNG',
@@ -219,7 +219,7 @@ class DiagramExportManager(object):
         diagram = self.main_window.get_current_diagram()
         filename = self.save_dialog(diagram, title, ext)
         if filename:
-            self.save_png(filename, diagram.canvas)
+            self.save_png(filename, diagram.item_container)
 
 
     @action(name='file-export-pdf', label='Export to PDF',
@@ -230,7 +230,7 @@ class DiagramExportManager(object):
         diagram = self.main_window.get_current_diagram()
         filename = self.save_dialog(diagram, title, ext)
         if filename:
-            self.save_pdf(filename, diagram.canvas)
+            self.save_pdf(filename, diagram.item_container)
 
 
 # vim:sw=4:et:

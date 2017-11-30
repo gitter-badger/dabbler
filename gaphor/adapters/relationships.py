@@ -53,9 +53,9 @@ from zope import component
 ###                if (end1.type is head_type and end2.type is tail_type) \
 ###                   or (end2.type is head_type and end1.type is tail_type):
 ###                    # check if this entry is not yet in the diagram
-###                    # Return if the association is not (yet) on the canvas
+###                    # Return if the association is not (yet) on the item_container
 ###                    for item in assoc.presentation:
-###                        if item.canvas is line.canvas:
+###                        if item.item_container is line.item_container:
 ###                            break
 ###                    else:
 ###                        return assoc

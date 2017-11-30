@@ -99,7 +99,7 @@ class InterfaceTestCase(TestCase):
         data = self.save()
         self.load(data)
 
-        interfaces = self.diagram.canvas.select(lambda e: isinstance(e, InterfaceItem))
+        interfaces = self.diagram.item_container.select(lambda e: isinstance(e, InterfaceItem))
         self.assertEqual(1, len(interfaces))
         # ... gives provided folded mode on load;
         # correct folded mode is determined by connections, which will be

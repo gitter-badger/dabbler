@@ -34,7 +34,7 @@ class GaphasTest(TestCase):
 
         a = self.create(items.AssociationItem)
 
-        assert 3 == len(self.diagram.canvas.get_all_items())
+        assert 3 == len(self.diagram.item_container.get_all_items())
 
         self.connect(a, a.head, c1)
         self.connect(a, a.tail, c2)
@@ -44,6 +44,6 @@ class GaphasTest(TestCase):
 
         c1.unlink()
 
-        self.diagram.canvas.update_now()
+        self.diagram.item_container.update_now()
 
 # vim:sw=4:et:ai

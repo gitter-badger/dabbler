@@ -22,7 +22,7 @@ import logging
 from gaphor.tests import TestCase
 from gaphor.UML import uml2
 from gaphor.diagram import items
-from gaphas.canvas import Context
+from gaphas.itemcontainer import Context
 
 Event = Context
 
@@ -56,7 +56,7 @@ class DiagramItemConnectorTestCase(TestCase):
         # The act: perform button press event and button release
         view = self.main_window.get_current_diagram_view()
         
-        self.assertSame(self.diagram.canvas, view.canvas)
+        self.assertSame(self.diagram.item_container, view.item_container)
 
         p = view.get_matrix_i2v(a).transform_point(*a.head.pos)
 

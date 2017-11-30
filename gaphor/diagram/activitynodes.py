@@ -285,21 +285,21 @@ class ForkNodeItem(Item, DiagramItem):
 
     combined = reversible_property(lambda s: s._combined, _set_combined)
 
-    def setup_canvas(self):
-        super(ForkNodeItem, self).setup_canvas()
+    def setup_item_container(self):
+        super(ForkNodeItem, self).setup_item_container()
         self.register_handlers()
 
         h1, h2 = self._handles
-        cadd = self.canvas.solver.add_constraint
+        cadd = self.item_container.solver.add_constraint
         c1 = EqualsConstraint(a=h1.pos.x, b=h2.pos.x)
         c2 = LessThanConstraint(smaller=h1.pos.y, bigger=h2.pos.y, delta=30)
         self.__constraints = (cadd(c1), cadd(c2))
-        list(map(self.canvas.solver.add_constraint, self.__constraints))
+        list(map(self.item_container.solver.add_constraint, self.__constraints))
 
 
-    def teardown_canvas(self):
-        super(ForkNodeItem, self).teardown_canvas()
-        list(map(self.canvas.solver.remove_constraint, self.__constraints))
+    def teardown_item_container(self):
+        super(ForkNodeItem, self).teardown_item_container()
+        list(map(self.item_container.solver.remove_constraint, self.__constraints))
         self.unregister_handlers()
 
 

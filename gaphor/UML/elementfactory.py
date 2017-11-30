@@ -156,13 +156,13 @@ class ElementFactory(object):
     def flush(self):
         """Flush all elements (remove them from the factory). 
         
-        Diagram elements are flushed first.  This is so that canvas updates
+        Diagram elements are flushed first.  This is so that item_container updates
         are blocked.  The remaining elements are then flushed.
         """
 
         flush_element = self._flush_element
         for element in self.lselect(lambda e: isinstance(e, Diagram)):
-            element.canvas.block_updates = True
+            element.item_container.block_updates = True
             flush_element(element)
 
         for element in self.lselect():
@@ -220,7 +220,7 @@ class ElementFactoryService(ElementFactory):
         the application will handle a FlushFactoryEvent and will register
         a ElementChangedEventBlocker adapter.
         
-        Diagram elements are flushed first.  This is so that canvas updates
+        Diagram elements are flushed first.  This is so that item_container updates
         are blocked.  The remaining elements are then flushed.  Finally,
         the ElementChangedEventBlocker adapter is unregistered if the factory
         has an application instance."""

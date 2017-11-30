@@ -97,10 +97,10 @@ class ACItem(object):
     def __init__(self, id):
         pass
         #TextElement.__init__(self, id)
-        #self._circle = diacanvas.shape.Ellipse()
+        #self._circle = diaitem_container.shape.Ellipse()
         #self._circle.set_line_width(2.0)
-        #self._circle.set_fill_color(diacanvas.color(255, 255, 255))
-        #self._circle.set_fill(diacanvas.shape.FILL_SOLID)
+        #self._circle.set_fill_color(diaitem_container.color(255, 255, 255))
+        #self._circle.set_fill(diaitem_container.shape.FILL_SOLID)
         #self.show_border = False
 
         # set new value notification function to change activity edge

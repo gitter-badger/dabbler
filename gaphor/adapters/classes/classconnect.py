@@ -67,7 +67,7 @@ class DependencyConnect(RelationshipConnect):
         line = self.line
 
         if line.auto_dependency:
-            canvas = line.canvas
+            item_container = line.item_container
             opposite = line.opposite(handle)
 
             if handle is line.head:
@@ -144,7 +144,7 @@ class AssociationConnect(UnaryRelationshipConnect):
 
             # Create new association
             relation = modelfactory.create_association(self.element_factory, head_type, tail_type)
-            relation.package = element.canvas.diagram.namespace
+            relation.package = element.item_container.diagram.namespace
 
             line.head_end.subject = relation.memberEnd[0]
             line.tail_end.subject = relation.memberEnd[1]

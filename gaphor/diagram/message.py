@@ -299,9 +299,9 @@ class MessageItem(NamedLine):
         Check if message is connecting to lifelines on communication
         diagram.
         """
-        canvas = self.canvas
-        c1 = canvas.get_connection(self.head)
-        c2 = canvas.get_connection(self.tail)
+        item_container = self.item_container
+        c1 = item_container.get_connection(self.head)
+        c2 = item_container.get_connection(self.tail)
         return c1 and not c1.connected.lifetime.visible \
                 or c2 and not c2.connected.lifetime.visible
 

@@ -88,11 +88,11 @@ class AssociationItem(NamedLine):
 
     show_direction = reversible_property(lambda s: s._show_direction, set_show_direction)
 
-    def setup_canvas(self):
-        super(AssociationItem, self).setup_canvas()
+    def setup_item_container(self):
+        super(AssociationItem, self).setup_item_container()
 
-    def teardown_canvas(self):
-        super(AssociationItem, self).teardown_canvas()
+    def teardown_item_container(self):
+        super(AssociationItem, self).teardown_item_container()
 
     def save(self, save_func):
         NamedLine.save(self, save_func)
@@ -550,14 +550,14 @@ class AssociationEnd(uml2.Presentation):
 
 
     def point(self, pos):
-        """Given a point (x, y) return the distance to the canvas item.
+        """Given a point (x, y) return the distance to the item_container item.
         """
         drp = distance_rectangle_point
         d1 = drp(self._name_bounds, pos)
         d2 = drp(self._mult_bounds, pos)
 #        try:
 #            d3 = geometry.distance_point_point(self._point1, pos)
-#            d4, dummy = distance_line_point(self._point1, self._point2, pos, 1.0, 0) #diacanvas.shape.CAP_ROUND)
+#            d4, dummy = distance_line_point(self._point1, self._point2, pos, 1.0, 0) #diaitem_container.shape.CAP_ROUND)
 #            if d3 < 15 and d4 < 5:
 #                d3 = 0.0
 #        except Exception, e:

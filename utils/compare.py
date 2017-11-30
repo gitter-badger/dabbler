@@ -71,8 +71,8 @@ class Compare(object):
         else:
             msg = '+'
 
-        if isinstance(element, gaphor.storage.parser.canvas):
-            msg += ' <canvas>:'
+        if isinstance(element, gaphor.storage.parser.item_container):
+            msg += ' <item_container>:'
         else:
             if self.show_id:
                 msg += ' %s' % element.id
@@ -82,7 +82,7 @@ class Compare(object):
             if self.show_id or n:
                 msg += ':'
 
-        msg += ' %s' % (isinstance(element, gaphor.storage.parser.canvas) and 'Canvas' or element.type)
+        msg += ' %s' % (isinstance(element, gaphor.storage.parser.item_container) and 'ItemContainer' or element.type)
 
         if name:
             msg += '.%s' % name

@@ -94,7 +94,7 @@ class InitialPseudostateTransitionConnect(VertexConnect):
         subject = element.subject
 
         # Check if no other items are connected
-        connections = self.canvas.get_connections(connected=element)
+        connections = self.item_container.get_connections(connected=element)
         connected_items = [c for c in connections if isinstance(c.item, items.TransitionItem) and c.item is not line]
         if handle is line.head and not any(connected_items):
             return super(InitialPseudostateTransitionConnect, self).allow(handle, port)

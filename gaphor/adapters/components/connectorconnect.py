@@ -60,11 +60,11 @@ class ConnectorConnectBase(AbstractConnect):
          both
             If true, then filter out one-side connections.
         """
-        canvas = iface.canvas
-        connected = canvas.get_connections(connected=iface)
+        item_container = iface.item_container
+        connected = item_container.get_connections(connected=iface)
         if both:
             connected = [c for c in connected
-                    if canvas.get_connection(c.item.opposite(c.handle))]
+                    if item_container.get_connection(c.item.opposite(c.handle))]
         return connected
 
 
@@ -73,9 +73,9 @@ class ConnectorConnectBase(AbstractConnect):
         """
         Get component connected by connector.
         """
-        canvas = connector.canvas
-        c1 = canvas.get_connection(connector.head)
-        c2 = canvas.get_connection(connector.tail)
+        item_container = connector.item_container
+        c1 = item_container.get_connection(connector.head)
+        c2 = item_container.get_connection(connector.tail)
         component = None
         if c1 and isinstance(c1.connected, items.ComponentItem):
             component = c1.connected
@@ -160,7 +160,7 @@ class ConnectorConnectBase(AbstractConnect):
         super(ConnectorConnectBase, self).connect(handle, port)
 
         line = self.line
-        canvas = line.canvas
+        item_container = line.item_container
 
         c1 = self.get_connected(line.head)
         c2 = self.get_connected(line.tail)
@@ -255,7 +255,7 @@ class InterfaceConnectorConnect(ConnectorConnectBase):
         glue_ok = glue_ok and iface.folded != iface.FOLDED_NONE
         if glue_ok:
             # find connected items, which are not connectors
-            canvas = self.element.canvas
+            item_container = self.element.item_container
             connections = self.get_connecting(self.element)
             lines = [c.item for c in connections if not isinstance(c.item, items.ConnectorItem)]
             glue_ok = len(lines) == 0

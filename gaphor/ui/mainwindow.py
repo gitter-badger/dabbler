@@ -751,7 +751,7 @@ class Namespace(object):
                               'that are not shown in other diagrams.'
                               % (diagram.name or '<None>'))
         if m.run() == Gtk.ResponseType.YES:
-            for i in reversed(diagram.canvas.get_all_items()):
+            for i in reversed(diagram.item_container.get_all_items()):
                 s = i.subject
                 if s and len(s.presentation) == 1:
                     s.unlink()

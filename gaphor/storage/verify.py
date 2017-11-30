@@ -67,15 +67,15 @@ def orphan_references(factory):
             verify_reference(name, value)
         elif isinstance(value, collection):
             verify_collection(name, value)
-        elif isinstance(value, gaphas.Canvas):
-            value.save(verify_canvasitem)
+        elif isinstance(value, gaphas.ItemContainer):
+            value.save(verify_item_containeritem)
 
-    def verify_canvasitem(name, value, reference=False):
+    def verify_item_containeritem(name, value, reference=False):
         """
         Verify attributes and references in a gaphor.diagram.* object.
         The extra attribute reference can be used to force UML 
         """
-        # log.debug('saving canvasitem: %s|%s %s' % (name, value, type(value)))
+        # log.debug('saving item_containeritem: %s|%s %s' % (name, value, type(value)))
         if isinstance(value, collection) or \
                 (isinstance(value, (list, tuple)) and reference == True):
             verify_collection(name, value)
@@ -83,11 +83,11 @@ def orphan_references(factory):
             verify_reference(name, value)
         elif isinstance(value, gaphas.Item):
             elements.add(value.id)
-            value.save(verify_canvasitem)
+            value.save(verify_item_containeritem)
 
             # save subitems
-            for child in value.canvas.get_children(value):
-                verify_canvasitem(None, child)
+            for child in value.item_container.get_children(value):
+                verify_item_containeritem(None, child)
 
         elif isinstance(value, uml2.Element):
             verify_reference(name, value)

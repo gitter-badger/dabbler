@@ -472,7 +472,7 @@ class FlowItemDesisionAndForkNodes:
 
         Flow `flow4` will force the node to become a combined node.
         """
-        canvas = self.diagram.canvas
+        item_container = self.diagram.item_container
 
         flow1 = self.create(items.FlowItem)
         flow2 = self.create(items.FlowItem)

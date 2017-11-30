@@ -215,7 +215,7 @@ class StereotypesAttributesTestCase(TestCase):
         data = self.save()
         self.load(data)
 
-        item = self.diagram.canvas.select(lambda e: isinstance(e, ComponentItem))[0]
+        item = self.diagram.item_container.select(lambda e: isinstance(e, ComponentItem))[0]
         self.assertTrue(item.show_stereotypes_attrs)
         self.assertEqual(2, len(item._compartments))
         # first stereotype has no attributes changed, so compartment
@@ -249,7 +249,7 @@ class StereotypesAttributesTestCase(TestCase):
         data = self.save()
         self.load(data)
 
-        item = self.diagram.canvas.select(lambda e: isinstance(e, ComponentItem))[0]
+        item = self.diagram.item_container.select(lambda e: isinstance(e, ComponentItem))[0]
         el = item.subject
         self.assertEqual(2, len(el.appliedStereotype))
 

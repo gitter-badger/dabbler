@@ -46,13 +46,13 @@ class ActionIssueTestCase(TestCase):
         diagrams = ef.lselect(lambda e: e.isKindOf(uml2.Diagram))
         self.assertEquals(1, len(diagrams))
 
-        canvas = diagrams[0].canvas
-        assert 9 == len(canvas.get_all_items())
+        item_container = diagrams[0].item_container
+        assert 9 == len(item_container.get_all_items())
         # Part, Part, Act, Act, Part, Act, Flow, Flow, Flow
 
         for e in actions + flows:
             self.assertEquals(1, len(e.presentation), e)
-        for i in canvas.select(lambda e: isinstance(e, (FlowItem, ActionItem))):
+        for i in item_container.select(lambda e: isinstance(e, (FlowItem, ActionItem))):
             self.assertTrue(i.subject, i)
 
         # Loaded as:
@@ -66,34 +66,34 @@ class ActionIssueTestCase(TestCase):
         self.assertSame(actions[1].outgoing[1], flows[1])
         self.assertFalse(actions[1].incoming)
 
-        cinfo, = canvas.get_connections(handle=flows[0].presentation[0].head)
+        cinfo, = item_container.get_connections(handle=flows[0].presentation[0].head)
         self.assertSame(cinfo.connected, actions[1].presentation[0])
-        cinfo, = canvas.get_connections(handle=flows[1].presentation[0].head)
+        cinfo, = item_container.get_connections(handle=flows[1].presentation[0].head)
         self.assertSame(cinfo.connected, actions[1].presentation[0])
 
         # Intermediate element:
         self.assertSame(actions[2].incoming[0], flows[1])
         self.assertSame(actions[2].outgoing[0], flows[2])
 
-        cinfo, = canvas.get_connections(handle=flows[1].presentation[0].tail)
+        cinfo, = item_container.get_connections(handle=flows[1].presentation[0].tail)
         self.assertSame(cinfo.connected, actions[2].presentation[0])
-        cinfo, = canvas.get_connections(handle=flows[2].presentation[0].head)
+        cinfo, = item_container.get_connections(handle=flows[2].presentation[0].head)
         self.assertSame(cinfo.connected, actions[2].presentation[0])
 
         # Final element:
         self.assertSame(actions[0].incoming[0], flows[0])
         self.assertSame(actions[0].incoming[1], flows[2])
 
-        cinfo, = canvas.get_connections(handle=flows[0].presentation[0].tail)
+        cinfo, = item_container.get_connections(handle=flows[0].presentation[0].tail)
         self.assertSame(cinfo.connected, actions[0].presentation[0])
-        cinfo, = canvas.get_connections(handle=flows[2].presentation[0].tail)
+        cinfo, = item_container.get_connections(handle=flows[2].presentation[0].tail)
         self.assertSame(cinfo.connected, actions[0].presentation[0])
 
         # Test the parent-child connectivity
         for a in actions:
             p, = a.inPartition
             self.assertTrue(p)
-            self.assertTrue(canvas.get_parent(a.presentation[0]))
-            self.assertSame(canvas.get_parent(a.presentation[0]), p.presentation[0])
+            self.assertTrue(item_container.get_parent(a.presentation[0]))
+            self.assertSame(item_container.get_parent(a.presentation[0]), p.presentation[0])
 
 # vim:sw=4:et:ai

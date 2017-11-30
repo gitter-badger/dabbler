@@ -30,7 +30,7 @@ class SimpleItemTestCase(TestCase):
 
     def setUp(self):
         super(SimpleItemTestCase, self).setUp()
-        self.view = View(self.diagram.canvas)
+        self.view = View(self.diagram.item_container)
 
     def test_line(self):
         """

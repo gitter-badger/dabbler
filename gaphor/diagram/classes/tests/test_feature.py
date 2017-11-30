@@ -51,7 +51,7 @@ class FeatureTestCase(TestCase):
 
         attr.defaultValue = 'myDefault'
 
-        self.diagram.canvas.update()
+        self.diagram.item_container.update()
         self.assertTrue(size < item.get_size())
 
 # vim:sw=4:et:ai

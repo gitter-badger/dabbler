@@ -100,7 +100,7 @@ class CommentLineTestCase(TestCase):
         self.assertTrue(ac.subject in comment.subject.annotatedElement)
 
         ac2 = self.create(items.ActorItem, uml2.Actor)
-        #ac.canvas.disconnect_item(line, line.tail)
+        #ac.item_container.disconnect_item(line, line.tail)
         self.disconnect(line, line.tail)
         self.connect(line, line.tail, ac2)
         self.assertTrue(self.get_connected(line.tail) is ac2)
@@ -136,14 +136,14 @@ class CommentLineTestCase(TestCase):
         self.assertTrue(clazz.subject in comment.subject.annotatedElement)
         self.assertTrue(comment.subject in clazz.subject.ownedComment)
 
-        self.assertTrue(line.canvas)
+        self.assertTrue(line.item_container)
 
         # FixMe: This should invoke the disconnnect handler of the line's
         #  handles.
 
         line.unlink()
 
-        self.assertFalse(line.canvas)
+        self.assertFalse(line.item_container)
         self.assertFalse(clazz.subject in comment.subject.annotatedElement)
         self.assertFalse(comment.subject in clazz.subject.ownedComment)
         self.assertTrue(len(comment.subject.annotatedElement) == 0, comment.subject.annotatedElement)
@@ -162,7 +162,7 @@ class CommentLineTestCase(TestCase):
         self.assertTrue(clazz.subject in comment.subject.annotatedElement)
         self.assertTrue(comment.subject in clazz.subject.ownedComment)
 
-        self.assertTrue(line.canvas)
+        self.assertTrue(line.item_container)
 
         clazz_subject = clazz.subject
 
@@ -171,8 +171,8 @@ class CommentLineTestCase(TestCase):
 
         clazz.unlink()
 
-        self.assertFalse(clazz.canvas)
-        self.assertTrue(line.canvas)
+        self.assertFalse(clazz.item_container)
+        self.assertTrue(line.item_container)
         self.assertFalse(comment.subject.annotatedElement)
         self.assertTrue(len(clazz_subject.ownedComment) == 0)
 

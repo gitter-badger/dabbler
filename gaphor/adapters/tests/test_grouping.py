@@ -286,12 +286,12 @@ class PartitionGroupTestCase(TestCase):
 
         partition = p2.subject
         assert len(partition.node) == 2, partition.node
-        assert 2 == len(p2.canvas.get_children(p2)), p2.canvas.get_children(p2)
+        assert 2 == len(p2.item_container.get_children(p2)), p2.item_container.get_children(p2)
 
         self.ungroup(p1, p2)
 
         self.assertEqual(0, len(partition.node))
-        self.assertEqual(0, len(p2.canvas.get_children(p2)))
+        self.assertEqual(0, len(p2.item_container.get_children(p2)))
         self.assertEqual(0, len(partition.node))
 
 

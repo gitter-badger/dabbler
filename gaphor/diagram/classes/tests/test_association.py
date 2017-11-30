@@ -72,8 +72,8 @@ class AssociationItemTestCase(TestCase):
 
     def test_association_end_updates(self):
         """Test association end navigability connected to a class"""
-        from gaphas.canvas import Canvas
-        canvas = Canvas()
+        from gaphas.itemcontainer import ItemContainer
+        item_container = ItemContainer()
         c1 = self.create(ClassItem, uml2.Class)
         c2 = self.create(ClassItem, uml2.Class)
         a = self.create(AssociationItem)
@@ -97,7 +97,7 @@ class AssociationItemTestCase(TestCase):
         print('*' * 60)
         a.subject.memberEnd[0].name = 'blah'
         print('*' * 60)
-        self.diagram.canvas.update()
+        self.diagram.item_container.update()
 
         assert a.head_end._name == '+ blah', a.head_end.get_name()
 

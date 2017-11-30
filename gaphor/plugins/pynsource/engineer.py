@@ -148,7 +148,7 @@ class Engineer(object):
 
         If port is not provided, then first port is used.
         """
-        canvas = line.canvas
+        item_container = line.item_container
 
         if port is None and len(item.ports()) > 0:
             port = item.ports()[0]

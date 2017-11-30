@@ -89,7 +89,7 @@ class TestCase(TestCaseExtras, unittest.TestCase):
         if subject_cls is not None:
             subject = self.element_factory.create(subject_cls)
         item = self.diagram.create(item_cls, subject=subject)
-        self.diagram.canvas.update()
+        self.diagram.item_container.update()
         return item
 
     def allow(self, line, handle, item, port=None):
@@ -110,8 +110,8 @@ class TestCase(TestCaseExtras, unittest.TestCase):
 
         If port is not provided, then first port is used.
         """
-        canvas = line.canvas
-        assert line.canvas is item.canvas
+        item_container = line.item_container
+        assert line.item_container is item.item_container
 
         if port is None and len(item.ports()) > 0:
             port = item.ports()[0]
@@ -121,7 +121,7 @@ class TestCase(TestCaseExtras, unittest.TestCase):
 
         connector.connect(sink)
 
-        cinfo = canvas.get_connection(handle)
+        cinfo = item_container.get_connection(handle)
         self.assertSame(cinfo.connected, item)
         self.assertSame(cinfo.port, port)
 
@@ -129,17 +129,17 @@ class TestCase(TestCaseExtras, unittest.TestCase):
         """
         Disconnect line's handle.
         """
-        canvas = self.diagram.canvas
+        item_container = self.diagram.item_container
         # disconnection on adapter level is performed due to callback, so
         # no adapter look up here
-        canvas.disconnect_item(line, handle)
-        assert not canvas.get_connection(handle)
+        item_container.disconnect_item(line, handle)
+        assert not item_container.get_connection(handle)
 
     def get_connected(self, handle):
         """
         Get item connected to line via handle.
         """
-        cinfo = self.diagram.canvas.get_connection(handle)
+        cinfo = self.diagram.item_container.get_connection(handle)
         if cinfo:
             return cinfo.connected
         return None
@@ -148,7 +148,7 @@ class TestCase(TestCaseExtras, unittest.TestCase):
         """
         Get connection information.
         """
-        return self.diagram.canvas.get_connection(handle)
+        return self.diagram.item_container.get_connection(handle)
 
     def can_group(self, parent, item):
         """
@@ -162,7 +162,7 @@ class TestCase(TestCaseExtras, unittest.TestCase):
         """
         Group item within a parent.
         """
-        self.diagram.canvas.reparent(item, parent)
+        self.diagram.item_container.reparent(item, parent)
         query = (parent, item)
         adapter = component.queryMultiAdapter(query, IGroup)
         adapter.group()
@@ -174,7 +174,7 @@ class TestCase(TestCaseExtras, unittest.TestCase):
         query = (parent, item)
         adapter = component.queryMultiAdapter(query, IGroup)
         adapter.ungroup()
-        self.diagram.canvas.reparent(item, None)
+        self.diagram.item_container.reparent(item, None)
 
     def kindof(self, cls):
         """

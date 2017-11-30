@@ -56,10 +56,10 @@ class PartitionItem(NamedItem):
         super(PartitionItem, self).pre_update(context)
 
         # get subpartitions
-        children = list(k for k in self.canvas.get_children(self)
+        children = list(k for k in self.item_container.get_children(self)
                 if isinstance(k, PartitionItem))
 
-        self._toplevel = self.canvas.get_parent(self) is None
+        self._toplevel = self.item_container.get_parent(self) is None
         self._subpart = len(children) > 0
         self._bottom = not self._toplevel and not self._subpart
         
@@ -91,7 +91,7 @@ class PartitionItem(NamedItem):
             self.width = wsum
 
             dp = 0
-            for sl in self.canvas.get_children(self):
+            for sl in self.item_container.get_children(self):
                 x, y = sl.matrix[4], sl.matrix[5]
 
                 x = dp - x
@@ -135,7 +135,7 @@ class PartitionItem(NamedItem):
         if self._subpart:
             # draw inside lines for all children but last one
             dp = 0
-            for sl in self.canvas.get_children(self)[:-1]:
+            for sl in self.item_container.get_children(self)[:-1]:
                 dp += sl.width
                 cr.move_to(dp, h)
                 cr.line_to(dp, self.height)

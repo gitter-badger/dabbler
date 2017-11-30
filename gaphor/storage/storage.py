@@ -70,7 +70,7 @@ def save_generator(writer, factory):
     def save_reference(name, value):
         """
         Save a value as a reference to another element in the model.
-        This applies to both UML as well as canvas items.
+        This applies to both UML as well as item_container items.
         """
         # Save a reference to the object:
         if value.id:
@@ -116,26 +116,26 @@ def save_generator(writer, factory):
         Save attributes and references from items in the gaphor.UML module.
         A value may be a primitive (string, int), a gaphor.UML.collection
         (which contains a list of references to other UML elements) or a
-        gaphas.Canvas (which contains canvas items).
+        gaphas.ItemContainer (which contains item_container items).
         """
         # log.debug('saving element: %s|%s %s' % (name, value, type(value)))
         if isinstance(value, (uml2.Element, gaphas.Item)):
             save_reference(name, value)
         elif isinstance(value, collection):
             save_collection(name, value)
-        elif isinstance(value, gaphas.Canvas):
-            writer.startElement('canvas', {})
-            value.save(save_canvasitem)
-            writer.endElement('canvas')
+        elif isinstance(value, gaphas.ItemContainer):
+            writer.startElement('item_container', {})
+            value.save(save_item_containeritem)
+            writer.endElement('item_container')
         else:
             save_value(name, value)
 
-    def save_canvasitem(name, value, reference=False):
+    def save_item_containeritem(name, value, reference=False):
         """
         Save attributes and references in a gaphor.diagram.* object.
         The extra attribute reference can be used to force UML 
         """
-        # log.debug('saving canvasitem: %s|%s %s' % (name, value, type(value)))
+        # log.debug('saving item_containeritem: %s|%s %s' % (name, value, type(value)))
         if isinstance(value, collection) or \
                 (isinstance(value, (list, tuple)) and reference):
             save_collection(name, value)
@@ -144,11 +144,11 @@ def save_generator(writer, factory):
         elif isinstance(value, gaphas.Item):
             writer.startElement('item', {'id': value.id,
                                          'type': value.__class__.__name__})
-            value.save(save_canvasitem)
+            value.save(save_item_containeritem)
 
             # save subitems
-            for child in value.canvas.get_children(value):
-                save_canvasitem(None, child)
+            for child in value.item_container.get_children(value):
+                save_item_containeritem(None, child)
 
             writer.endElement('item')
 
@@ -193,7 +193,7 @@ def load_elements_generator(elements, factory, gaphor_version=None):
     Load a file and create a model if possible.
     Exceptions: IOError, ValueError.
     """
-    # TODO: restructure loading code, first load model, then add canvas items
+    # TODO: restructure loading code, first load model, then add item_container items
     self.logger.debug(_('Loading %d elements...') % len(elements))
 
     # The elements are iterated three times:
@@ -216,19 +216,19 @@ def load_elements_generator(elements, factory, gaphor_version=None):
 
     # log.debug("Still have %d elements" % len(elements))
 
-    # First create elements and canvas items in the factory
+    # First create elements and item_container items in the factory
     # The elements are stored as attribute 'element' on the parser objects:
 
-    def create_canvasitems(canvas, canvasitems, parent=None):
+    def create_item_container_items(item_container, item_containeritems, parent=None):
         """
-        Canvas is a read gaphas.Canvas, items is a list of parser.canvasitem's
+        ItemContainer is a read gaphas.ItemContainer, items is a list of parser.item_containeritem's
         """
-        for item in canvasitems:
+        for item in item_containeritems:
             cls = getattr(items, item.type)
             item.element = diagram.create_as(cls, item.id)
-            canvas.add(item.element, parent=parent)
-            assert canvas.get_parent(item.element) is parent
-            create_canvasitems(canvas, item.canvasitems, parent=item.element)
+            item_container.add(item.element, parent=parent)
+            assert item_container.get_parent(item.element) is parent
+            create_item_container_items(item_container, item.item_container_items, parent=item.element)
 
     for id, elem in elements.items():
         st = update_status_queue()
@@ -238,10 +238,10 @@ def load_elements_generator(elements, factory, gaphor_version=None):
             cls = getattr(uml2, elem.type)
             # log.debug('Creating UML element for %s (%s)' % (elem, elem.id))
             elem.element = factory.create_as(cls, id)
-            if elem.canvas:
-                elem.element.canvas.block_updates = True
-                create_canvasitems(elem.element.canvas, elem.canvas.canvasitems)
-        elif not isinstance(elem, parser.canvasitem):
+            if elem.item_container:
+                elem.element.item_container.block_updates = True
+                create_item_containeritems(elem.element.item_container, elem.item_container.item_containeritems)
+        elif not isinstance(elem, parser.item_containeritem):
             raise ValueError('Item with id "%s" and type %s can not be instantiated' % (id, type(elem)))
 
     # load attributes and create references:
@@ -306,7 +306,7 @@ def load_elements_generator(elements, factory, gaphor_version=None):
 
     for d in factory.select(lambda e: isinstance(e, uml2.Diagram)):
         # update_now() is implicitly called when lock is released
-        d.canvas.block_updates = False
+        d.item_container.block_updates = False
 
     # do a postload:
     for id, elem in elements.items():
@@ -620,7 +620,7 @@ def convert_tagged_value(element, elements, factory):
         tagged = 'upgrade to stereotype attributes' \
                  ' following tagged values:\n%s' % '\n'.join(t.values['value'] for t in tv)
 
-        item = parser.canvasitem(str(uuid.uuid1()), 'CommentItem')
+        item = parser.item_containeritem(str(uuid.uuid1()), 'CommentItem')
         comment = parser.element(str(uuid.uuid1()), 'Comment')
 
         item.references['subject'] = comment.id
@@ -634,9 +634,9 @@ def convert_tagged_value(element, elements, factory):
 
         # Where to place the comment? How to find the Diagram?
         for d in diagrams:
-            for ci in d.canvas.canvasitems:
+            for ci in d.item_container.item_containeritems:
                 if ci.id == et.id:
-                    d.canvas.canvasitems.append(item)
+                    d.item_container.item_containeritems.append(item)
                     break
 
 
@@ -716,7 +716,7 @@ def version_0_9_0(elements, factory, gaphor_version):
     if version_lower_than(gaphor_version, (0, 9, 0)):
         for elem in elements.values():
             try:
-                if type(elem) is parser.canvasitem:
+                if type(elem) is parser.item_containeritem:
                     # Rename affine to matrix
                     if elem.values.get('affine'):
                         elem.values['matrix'] = elem.values['affine']

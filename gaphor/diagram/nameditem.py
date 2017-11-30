@@ -81,23 +81,23 @@ class NamedItem(ElementItem):
         parent's namespace.
         """
         subject = self.subject
-        canvas = self.canvas
+        item_container = self.item_container
 
-        if not subject or not canvas:
+        if not subject or not item_container:
             return False
 
         if not self._name.is_visible():
             return False
 
         namespace = subject.namespace
-        parent = canvas.get_parent(self)
+        parent = item_container.get_parent(self)
 
         # if there is a parent (i.e. interaction)
         if parent and parent.subject \
                 and parent.subject.namespace is not namespace:
             return False
 
-        return self._from.text and namespace is not canvas.diagram.namespace
+        return self._from.text and namespace is not item_container.diagram.namespace
 
 
     def on_named_element_name(self, event):

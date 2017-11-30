@@ -52,7 +52,7 @@ class StateTestCase(TestCase):
         data = self.save()
         self.load(data)
 
-        states = self.diagram.canvas.select(lambda e: isinstance(e, StateItem))
+        states = self.diagram.item_container.select(lambda e: isinstance(e, StateItem))
         self.assertEqual(2, len(states))
         s1, s2 = states
         if s1.subject.name == 's2':

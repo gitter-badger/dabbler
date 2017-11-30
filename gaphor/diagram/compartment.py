@@ -388,8 +388,8 @@ class CompartmentItem(NamedItem):
         if style != self._drawing_style:
             self._drawing_style = style
             self.request_update()
-#            if self.canvas:
-#                request_resolve = self.canvas.solver.request_resolve
+#            if self.item_container:
+#                request_resolve = self.item_container.solver.request_resolve
 #                for h in self._handles: 
 #                    request_resolve(h.x)
 #                    request_resolve(h.y)

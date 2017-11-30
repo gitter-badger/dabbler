@@ -18,7 +18,7 @@
 # You should have received a copy of the GNU General Public License along with
 # Gaphor.  If not, see <http://www.gnu.org/licenses/>.
 """
-Basic functionality for canvas line based items on a diagram.
+Basic functionality for item container line based items on a diagram.
 """
 
 from __future__ import absolute_import
@@ -47,13 +47,13 @@ class DiagramLine(gaphas.Line, DiagramItem):
     tail = property(lambda self: self._handles[-1])
 
 
-    def setup_canvas(self):
-        gaphas.Line.setup_canvas(self)
+    def setup_item_container(self):
+        gaphas.Line.setup_item_container(self)
         self.register_handlers()
 
 
-    def teardown_canvas(self):
-        gaphas.Line.teardown_canvas(self)
+    def teardown_item_container(self):
+        gaphas.Line.teardown_item_container(self)
         self.unregister_handlers()
 
 
@@ -91,11 +91,11 @@ class DiagramLine(gaphas.Line, DiagramItem):
             points.append(tuple(map(float, h.pos)))
         save_func('points', points)
 
-        canvas = self.canvas
-        c = canvas.get_connection(self.head)
+        item_container = self.item_container
+        c = item_container.get_connection(self.head)
         if c:
             save_func('head-connection', c.connected, reference=True)
-        c = canvas.get_connection(self.tail)
+        c = item_container.get_connection(self.tail)
         if c:
             save_func('tail-connection', c.connected, reference=True)
 
@@ -137,7 +137,7 @@ class DiagramLine(gaphas.Line, DiagramItem):
         """
         from gaphas.aspect import ConnectionSink
 
-        hpos = self.canvas.get_matrix_i2i(self, item).transform_point(*handle.pos)
+        hpos = self.item_container.get_matrix_i2i(self, item).transform_point(*handle.pos)
         port = None
         dist = 10e6
         for p in item.ports():
@@ -174,8 +174,8 @@ class DiagramLine(gaphas.Line, DiagramItem):
         # First update matrix and solve constraints (NE and SW handle are
         # lazy and are resolved by the constraint solver rather than set
         # directly.
-        self.canvas.update_matrix(self)
-        self.canvas.solver.solve()
+        self.item_container.update_matrix(self)
+        self.item_container.solver.solve()
 
         if hasattr(self, '_load_head_connection'):
             self._postload_connect(self.head, self._load_head_connection)

@@ -117,7 +117,7 @@ for model in args:
 
         message('rendering: %s -> %s...' % (pname, outfilename))
 
-        view = View(diagram.canvas)
+        view = View(diagram.item_container)
         view.painter = ItemPainter()
 
         tmpsurface = cairo.ImageSurface(cairo.FORMAT_ARGB32, 0, 0)

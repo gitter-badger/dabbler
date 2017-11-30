@@ -156,10 +156,10 @@ class DiagramItem(six.with_metaclass(DiagramItemMeta, uml2.Presentation, Stereot
     disconnecting signals.
 
     This class is not very useful on its own. It contains some glue-code for
-    diacanvas.DiaCanvasItem and gaphor.UML.uml2.Element.
+    diaitem_container.DiaCanvasItem and gaphor.UML.uml2.Element.
 
     Example:
-        class ElementItem(diacanvas.CanvasElement, DiagramItem):
+        class ElementItem(diaitem_container.CanvasElement, DiagramItem):
             connect = DiagramItem.connect
             disconnect = DiagramItem.disconnect
             ...
@@ -238,10 +238,10 @@ class DiagramItem(six.with_metaclass(DiagramItemMeta, uml2.Presentation, Stereot
 
     def unlink(self):
         """
-        Remove the item from the canvas and set subject to None.
+        Remove the item from the item_container and set subject to None.
         """
-        if self.canvas:
-            self.canvas.remove(self)
+        if self.item_container:
+            self.item_container.remove(self)
         super(DiagramItem, self).unlink()
 
     def request_update(self):

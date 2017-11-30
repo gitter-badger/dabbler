@@ -50,9 +50,9 @@ class CommentLineItem(DiagramLine):
 
 
     def unlink(self):
-        canvas = self.canvas
-        c1 = canvas.get_connection(self.head)
-        c2 = canvas.get_connection(self.tail)
+        item_container = self.item_container
+        c1 = item_container.get_connection(self.head)
+        c2 = item_container.get_connection(self.tail)
         if c1 and c2:
             query = (c1.connected, self)
             adapter = component.queryMultiAdapter(query, IConnect)

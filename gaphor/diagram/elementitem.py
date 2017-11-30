@@ -60,12 +60,12 @@ class ElementItem(gaphas.Element, DiagramItem):
         else:
             DiagramItem.load(self, name, value)
 
-    def setup_canvas(self):
-        gaphas.Element.setup_canvas(self)
+    def setup_item_container(self):
+        gaphas.Element.setup_item_container(self)
         self.register_handlers()
 
-    def teardown_canvas(self):
-        gaphas.Element.teardown_canvas(self)
+    def teardown_item_container(self):
+        gaphas.Element.teardown_item_container(self)
         self.unregister_handlers()
 
     def pre_update(self, context):

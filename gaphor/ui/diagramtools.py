@@ -18,7 +18,7 @@
 # You should have received a copy of the GNU General Public License along with
 # Gaphor.  If not, see <http://www.gnu.org/licenses/>.
 """
-Tools for handling items on the canvas.
+Tools for handling items on the item_container.
 
 Although Gaphas has quite a few useful tools, some tools need to be extended:
  - PlacementTool: should perform undo
@@ -69,15 +69,15 @@ class DiagramItemConnector(Connector.default):
         """
         handle = self.handle
         item = self.item
-        cinfo = item.canvas.get_connection(handle)
+        cinfo = item.item_container.get_connection(handle)
 
         try:
             callback = DisconnectHandle(self.item, self.handle)
             if cinfo and cinfo.connected is sink.item:
                 # reconnect only constraint - leave model intact
                 self.logger.debug('performing reconnect constraint')
-                constraint = sink.port.constraint(item.canvas, item, handle, sink.item)
-                item.canvas.reconnect_item(item, handle, constraint=constraint)
+                constraint = sink.port.constraint(item.item_container, item, handle, sink.item)
+                item.item_container.reconnect_item(item, handle, constraint=constraint)
             elif cinfo:
                 # first disconnect but disable disconnection handle as
                 # reconnection is going to happen
@@ -132,8 +132,8 @@ class DisconnectHandle(object):
     def __call__(self):
         handle = self.handle
         item = self.item
-        canvas = self.item.canvas
-        cinfo = canvas.get_connection(handle)
+        item_container = self.item.item_container
+        cinfo = item_container.get_connection(handle)
 
         if self.disable:
             self.logger.debug('Not disconnecting %s.%s (disabled)' % (item, handle))
@@ -235,7 +235,7 @@ class TextEditTool(Tool):
 
 class PlacementTool(_PlacementTool):
     """
-    PlacementTool is used to place items on the canvas.
+    PlacementTool is used to place items on the item_container.
     """
 
     def __init__(self, view, item_factory, after_handler=None, handle_index=-1):
@@ -268,7 +268,7 @@ class PlacementTool(_PlacementTool):
                 # mechanisms
 
                 # First make sure all matrices are updated:
-                view.canvas.update_matrix(self.new_item)
+                view.item_container.update_matrix(self.new_item)
                 view.update_matrix(self.new_item)
 
                 vpos = event.x, event.y
@@ -350,7 +350,7 @@ class GroupPlacementTool(PlacementTool):
             if parent and item and adapter:
                 adapter.group()
 
-                canvas = view.canvas
+                item_container = view.item_container
                 parent.request_update(matrix=False)
         finally:
             self._parent = None
@@ -370,7 +370,7 @@ class DropZoneInMotion(GuidedItemInMotion):
         view = self.view
         x, y = pos
 
-        current_parent = view.canvas.get_parent(item)
+        current_parent = view.item_container.get_parent(item)
         over_item = view.get_item_at_point((x, y), selected=False)
 
         if not over_item:
@@ -400,8 +400,8 @@ class DropZoneInMotion(GuidedItemInMotion):
         super(DropZoneInMotion, self).stop_move()
         item = self.item
         view = self.view
-        canvas = view.canvas
-        old_parent = view.canvas.get_parent(item)
+        item_container = view.item_container
+        old_parent = view.item_container.get_parent(item)
         new_parent = view.dropzone_item
         try:
 
@@ -415,8 +415,8 @@ class DropZoneInMotion(GuidedItemInMotion):
                 if adapter:
                     adapter.ungroup()
 
-                canvas.reparent(item, None)
-                m = canvas.get_matrix_i2c(old_parent)
+                item_container.reparent(item, None)
+                m = item_container.get_matrix_i2c(old_parent)
                 item.matrix *= m
                 old_parent.request_update()
 
@@ -425,8 +425,8 @@ class DropZoneInMotion(GuidedItemInMotion):
                 if adapter and adapter.can_contain():
                     adapter.group()
 
-                canvas.reparent(item, new_parent)
-                m = canvas.get_matrix_c2i(new_parent)
+                item_container.reparent(item, new_parent)
+                m = item_container.get_matrix_c2i(new_parent)
                 item.matrix *= m
                 new_parent.request_update()
         finally:

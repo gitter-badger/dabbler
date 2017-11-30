@@ -94,11 +94,11 @@ def layout_diagram(diag):
     other_relations = []
 
     # Make sure all items are updated
-    diag.canvas.update_now()
+    diag.item_container.update_now()
 
     # First extract data from the diagram (which ones are the nodes, and
     # the relationships).
-    for item in diag.canvas.get_root_items():
+    for item in diag.item_container.get_root_items():
         if isinstance(item, (items.GeneralizationItem,
                              items.ImplementationItem)):
             # Primary relationships, should be drawn top-down
@@ -185,7 +185,7 @@ def simple_layout_lines(diag):
     between nodes on the diagram.
     """
     lines = {}
-    for item in diag.canvas.get_root_items():
+    for item in diag.item_container.get_root_items():
         if isinstance(item, items.DiagramLine):
             # Secondary (associations, dependencies) may be drawn top-down
             # or left-right
@@ -260,6 +260,6 @@ def find_center(item):
     """
     x = item.width / 2.0
     y = item.height / 2.0
-    return item.canvas.get_matrix_i2c(item).transform_point(x, y)
+    return item.item_container.get_matrix_i2c(item).transform_point(x, y)
 
 # vim:sw=4:et

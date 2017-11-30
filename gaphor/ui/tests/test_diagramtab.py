@@ -34,7 +34,7 @@ class DiagramTabTestCase(unittest.TestCase):
         self.diagram = element_factory.create(uml2.Diagram)
         self.tab = main_window.show_diagram(self.diagram)
         self.assertEqual(self.tab.diagram, self.diagram)
-        self.assertEqual(self.tab.view.canvas, self.diagram.canvas)
+        self.assertEqual(self.tab.view.item_container, self.diagram.item_container)
         self.assertEqual(len(element_factory.lselect()), 1)
 
     def tearDown(self):
@@ -54,8 +54,8 @@ class DiagramTabTestCase(unittest.TestCase):
         from gaphas import Element
         from gaphas.examples import Box
         box = Box()
-        diagram.canvas.add(box)
-        diagram.canvas.update_now()
+        diagram.item_container.add(box)
+        diagram.item_container.update_now()
         tab.view.request_update([box])
         
         from gaphor.diagram.comment import CommentItem

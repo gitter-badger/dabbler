@@ -89,7 +89,7 @@ class InteractionLifelineGroup(AbstractGroup):
     """
     def group(self):
         self.parent.subject.lifeline = self.item.subject
-        self.parent.canvas.reparent(self.item, self.parent)
+        self.parent.item_container.reparent(self.item, self.parent)
 
 
     def ungroup(self):
@@ -233,7 +233,7 @@ class ActivityPartitionsGroup(AbstractGroup):
         sp.name = 'Swimlane'
         if p:
             p.subpartition = sp
-        for k in self.item.canvas.get_children(self.item):
+        for k in self.item.item_container.get_children(self.item):
             sp.subpartition = k.subject
 
 
@@ -248,11 +248,11 @@ class ActivityPartitionsGroup(AbstractGroup):
         assert len(sp.node) == 0
 
         # ungroup activity nodes
-        canvas = self.item.canvas
-        nodes = [n for n in canvas.get_children(self.item) if 
+        item_container = self.item.item_container
+        nodes = [n for n in item_container.get_children(self.item) if 
             isinstance(n, (items.ActivityNodeItem, items.ActionItem, items.ObjectNodeItem, items.ForkNodeItem))]
         for n in nodes:
-            canvas.reparent(n, None)
+            item_container.reparent(n, None)
 
         sp.unlink()
 

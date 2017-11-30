@@ -37,13 +37,13 @@ class SanitizerServiceTest(TestCase):
         klass = klassitem.subject
 
         assert klassitem.subject.presentation[0] is klassitem
-        assert klassitem.canvas
+        assert klassitem.item_container
 
         # Delete presentation here:
 
         klassitem.unlink()
 
-        assert not klassitem.canvas
+        assert not klassitem.item_container
         assert klass not in self.element_factory.lselect()
 
     def test_stereotype_attribute_delete(self):

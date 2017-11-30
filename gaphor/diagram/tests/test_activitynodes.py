@@ -45,7 +45,7 @@ class ActivityNodesTestCase(TestCase):
         data = self.save()
         self.load(data)
 
-        item = self.diagram.canvas.select(lambda e: isinstance(e, items.DecisionNodeItem))[0]
+        item = self.diagram.item_container.select(lambda e: isinstance(e, items.DecisionNodeItem))[0]
         self.assertTrue(item.combined is None, item.combined)
 
         merge_node = factory.create(uml2.MergeNode)
@@ -53,7 +53,7 @@ class ActivityNodesTestCase(TestCase):
         data = self.save()
         self.load(data)
 
-        item = self.diagram.canvas.select(lambda e: isinstance(e, items.DecisionNodeItem))[0]
+        item = self.diagram.item_container.select(lambda e: isinstance(e, items.DecisionNodeItem))[0]
         self.assertTrue(item.combined is not None, item.combined)
         self.assertTrue(isinstance(item.combined, uml2.MergeNode))
 
@@ -67,7 +67,7 @@ class ActivityNodesTestCase(TestCase):
         data = self.save()
         self.load(data)
 
-        item = self.diagram.canvas.select(lambda e: isinstance(e, items.ForkNodeItem))[0]
+        item = self.diagram.item_container.select(lambda e: isinstance(e, items.ForkNodeItem))[0]
         self.assertTrue(item.combined is None, item.combined)
 
         merge_node = factory.create(uml2.JoinNode)
@@ -75,7 +75,7 @@ class ActivityNodesTestCase(TestCase):
         data = self.save()
         self.load(data)
 
-        item = self.diagram.canvas.select(lambda e: isinstance(e, items.ForkNodeItem))[0]
+        item = self.diagram.item_container.select(lambda e: isinstance(e, items.ForkNodeItem))[0]
         self.assertTrue(item.combined is not None, item.combined)
         self.assertTrue(isinstance(item.combined, uml2.JoinNode))
 

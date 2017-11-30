@@ -93,7 +93,7 @@ class StorageTestCase(TestCase):
 
         assert '<Diagram ' in out.data
         assert '<Comment ' in out.data
-        assert '<canvas>' in out.data
+        assert '<item_container>' in out.data
         assert ' type="CommentItem" ' in out.data, out.data
 
     def test_load_uml(self):
@@ -148,11 +148,11 @@ class StorageTestCase(TestCase):
         assert len(iface.presentation) == 1
         assert tuple(iface.presentation[0].matrix) == (1, 0, 0, 1, 10, 10), tuple(iface.presentation[0].matrix)
 
-        # Check load/save of other canvas items.
-        assert len(d.canvas.get_all_items()) == 3
-        for item in d.canvas.get_all_items():
+        # Check load/save of other item_container items.
+        assert len(d.item_container.get_all_items()) == 3
+        for item in d.item_container.get_all_items():
             assert item.subject, 'No subject for %s' % item
-        d1 = d.canvas.select(lambda e: isinstance(e, items.ClassItem))[0]
+        d1 = d.item_container.select(lambda e: isinstance(e, items.ClassItem))[0]
         assert d1
         # print d1, d1.subject
 
@@ -203,15 +203,15 @@ class StorageTestCase(TestCase):
         assert len(self.element_factory.lselect(lambda e: e.isKindOf(uml2.Class))) == 1
         assert len(self.element_factory.lselect(lambda e: e.isKindOf(uml2.Association))) == 0
 
-        # Check load/save of other canvas items.
-        assert len(d.canvas.get_all_items()) == 3
-        for item in d.canvas.get_all_items():
+        # Check load/save of other item_container items.
+        assert len(d.item_container.get_all_items()) == 3
+        for item in d.item_container.get_all_items():
             if isinstance(item, items.AssociationItem):
                 aa = item
         assert aa
         assert list(map(float, aa.handles()[0].pos)) == [0, 0], aa.handles()[0].pos
         assert list(map(float, aa.handles()[1].pos)) == [40, 40], aa.handles()[1].pos
-        d1 = d.canvas.select(lambda e: isinstance(e, items.ClassItem))[0]
+        d1 = d.item_container.select(lambda e: isinstance(e, items.ClassItem))[0]
         assert d1
         # print d1, d1.subject
 
@@ -223,8 +223,8 @@ class StorageTestCase(TestCase):
         c1 = self.create(items.ClassItem, uml2.Class)
         c2 = self.create(items.ClassItem, uml2.Class)
         c2.matrix.translate(200, 200)
-        self.diagram.canvas.update_matrix(c2)
-        assert tuple(self.diagram.canvas.get_matrix_i2c(c2)) == (1, 0, 0, 1, 200, 200)
+        self.diagram.item_container.update_matrix(c2)
+        assert tuple(self.diagram.item_container.get_matrix_i2c(c2)) == (1, 0, 0, 1, 200, 200)
 
         a = self.create(items.AssociationItem)
 
@@ -234,7 +234,7 @@ class StorageTestCase(TestCase):
         self.connect(a, a.tail, c2)
         tail_pos = a.tail.pos
 
-        self.diagram.canvas.update_now()
+        self.diagram.item_container.update_now()
 
         assert a.head.pos.y == 0, a.head.pos
         assert a.tail.pos.x == 10, a.tail.pos
@@ -257,12 +257,12 @@ class StorageTestCase(TestCase):
         diagrams = list(self.kindof(uml2.Diagram))
         self.assertEqual(1, len(diagrams))
         d = diagrams[0]
-        a = d.canvas.select(lambda e: isinstance(e, items.AssociationItem))[0]
+        a = d.item_container.select(lambda e: isinstance(e, items.AssociationItem))[0]
         self.assertTrue(a.subject is not None)
         self.assertEqual(old_a_subject_id, a.subject.id)
-        cinfo_head = a.canvas.get_connection(a.head)
+        cinfo_head = a.item_container.get_connection(a.head)
         self.assertTrue(cinfo_head.connected is not None)
-        cinfo_tail = a.canvas.get_connection(a.tail)
+        cinfo_tail = a.item_container.get_connection(a.tail)
         self.assertTrue(cinfo_tail.connected is not None)
         self.assertTrue(cinfo_head.connected is not cinfo_tail.connected)
         # assert a.head_end._name
@@ -310,7 +310,7 @@ class FileUpgradeTestCase(TestCase):
         diagrams = list(self.kindof(uml2.Diagram))
         self.assertEqual(1, len(diagrams))
         diagram = diagrams[0]
-        assocs = diagram.canvas.select(lambda e: isinstance(e, items.AssociationItem))
+        assocs = diagram.item_container.select(lambda e: isinstance(e, items.AssociationItem))
         assert len(assocs) == 8
         a1, a2 = [a for a in assocs if a.subject.name == 'nav']
 
@@ -364,7 +364,7 @@ class FileUpgradeTestCase(TestCase):
         diagrams = list(self.kindof(uml2.Diagram))
         self.assertEqual(1, len(diagrams))
         diagram = diagrams[0]
-        classes = diagram.canvas.select(lambda e: isinstance(e, items.ClassItem))
+        classes = diagram.item_container.select(lambda e: isinstance(e, items.ClassItem))
         profiles = self.element_factory.lselect(lambda e: isinstance(e, uml2.Profile))
         stereotypes = self.element_factory.lselect(lambda e: isinstance(e, uml2.Stereotype))
 
@@ -403,7 +403,7 @@ class FileUpgradeTestCase(TestCase):
         self.assertEqual(1, len(diagrams))
         diagram = diagrams[0]
 
-        lifelines = diagram.canvas.select(lambda e: isinstance(e, items.LifelineItem))
+        lifelines = diagram.item_container.select(lambda e: isinstance(e, items.LifelineItem))
         occurrences = self.kindof(uml2.MessageOccurrenceSpecification)
         messages = self.kindof(uml2.Message)
 

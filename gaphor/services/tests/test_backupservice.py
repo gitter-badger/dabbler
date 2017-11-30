@@ -89,8 +89,8 @@ class BackupServiceTestCase:
     def test_line_align(self):
         self.save_and_load('test-diagrams/line-align.gaphor')
 
-#    def test_gaphas_canvas(self):
-#        self.save_and_load('../gaphas/gaphor-canvas.gaphor')
+#    def test_gaphas_item_container(self):
+#        self.save_and_load('../gaphas/gaphor-item_container.gaphor')
 
     def test_stereotype(self):
         self.save_and_load('test-diagrams/stereotype.gaphor')

@@ -134,10 +134,10 @@ class CheckModelWindow(object):
             main_window = self.main_window
             presentation = element.presentation[0]
             try:
-                diagram = presentation.canvas.diagram
+                diagram = presentation.item_container.diagram
             except AttributeError:
                 presentation = element.namespace.presentation[0]
-                diagram = presentation.canvas.diagram
+                diagram = presentation.item_container.diagram
             diagram_tab = main_window.show_diagram(diagram)
             diagram_tab.view.focused_item = presentation
 

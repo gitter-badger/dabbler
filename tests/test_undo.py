@@ -34,10 +34,10 @@ class UndoTest(TestCase):
         undo_manager = self.get_service('undo_manager')
 
         ci1 = self.create(items.ClassItem, uml2.Class)
-        self.assertEquals(6, len(self.diagram.canvas.solver.constraints))
+        self.assertEquals(6, len(self.diagram.item_container.solver.constraints))
 
         ci2 = self.create(items.ClassItem, uml2.Class)
-        self.assertEquals(12, len(self.diagram.canvas.solver.constraints))
+        self.assertEquals(12, len(self.diagram.item_container.solver.constraints))
 
         a = self.create(items.AssociationItem)
 
@@ -46,7 +46,7 @@ class UndoTest(TestCase):
 
         # Diagram, Association, 2x Class, Property, LiteralSpecification
         self.assertEquals(8, len(factory.lselect()))
-        self.assertEquals(14, len(self.diagram.canvas.solver.constraints))
+        self.assertEquals(14, len(self.diagram.item_container.solver.constraints))
 
         @transactional
         def delete_class():
@@ -66,11 +66,11 @@ class UndoTest(TestCase):
             # Diagram, Class
             # self.assertEquals(2, len(factory.lselect()), factory.lselect())
 
-            self.assertEquals(7, len(self.diagram.canvas.solver.constraints))
+            self.assertEquals(7, len(self.diagram.item_container.solver.constraints))
 
             undo_manager.undo_transaction()
 
-            self.assertEquals(14, len(self.diagram.canvas.solver.constraints))
+            self.assertEquals(14, len(self.diagram.item_container.solver.constraints))
 
             self.assertEquals(ci1, self.get_connected(a.head))
             self.assertEquals(ci2, self.get_connected(a.tail))

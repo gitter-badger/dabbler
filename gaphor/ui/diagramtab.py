@@ -106,8 +106,8 @@ class DiagramTab(object):
     def get_view(self):
         return self.view
 
-    def get_canvas(self):
-        return self.diagram.canvas
+    def get_item_container(self):
+        return self.diagram.item_container
 
     def construct(self):
         """
@@ -117,7 +117,7 @@ class DiagramTab(object):
         """
         assert self.diagram
 
-        view = GtkView(canvas=self.diagram.canvas)
+        view = GtkView(item_container=self.diagram.item_container)
         view.drag_dest_set(Gtk.DestDefaults.MOTION, DiagramTab.VIEW_DND_TARGETS,
                            Gdk.DragAction.MOVE | Gdk.DragAction.COPY | Gdk.DragAction.LINK)
 
@@ -205,8 +205,8 @@ class DiagramTab(object):
             if isinstance(i, DiagramItem):
                 i.unlink()
             else:
-                if i.canvas:
-                    i.canvas.remove(i)
+                if i.item_container:
+                    i.item_container.remove(i)
 
 
     def set_drawing_style(self, sloppiness=0.0):
@@ -311,7 +311,7 @@ class DiagramTab(object):
 
     def _on_drag_data_received(self, view, context, x, y, data, info, time):
         """
-        Handle data dropped on the canvas.
+        Handle data dropped on the item_container.
         """
         print('DND data received', view)
         if data and data.format == 8 and info == DiagramTab.VIEW_TARGET_TOOLBOX_ACTION:

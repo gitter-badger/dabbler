@@ -70,20 +70,20 @@ class AbstractConnect(object):
     def __init__(self, element, line):
         self.element = element
         self.line = line
-        self.canvas = self.element.canvas
-        assert self.canvas == self.element.canvas == self.line.canvas
+        self.item_container = self.element.item_container
+        assert self.item_container == self.element.item_container == self.line.item_container
 
     def get_connection(self, handle):
         """
         Get connection information
         """
-        return self.canvas.get_connection(handle)
+        return self.item_container.get_connection(handle)
 
     def get_connected(self, handle):
         """
         Get item connected to a handle.
         """
-        cinfo = self.canvas.get_connection(handle)
+        cinfo = self.item_container.get_connection(handle)
         if cinfo is not None:
             return cinfo.connected
 
@@ -91,7 +91,7 @@ class AbstractConnect(object):
         """
         Get port of item connected to connecting item via specified handle.
         """
-        cinfo = self.canvas.get_connection(handle)
+        cinfo = self.item_container.get_connection(handle)
         if cinfo is not None:
             return cinfo.port
 
@@ -107,8 +107,8 @@ class AbstractConnect(object):
         """
         iface = self.element
         if isinstance(iface, items.InterfaceItem) and iface.folded:
-            canvas = self.canvas
-            count = any(canvas.get_connections(connected=iface))
+            item_container = self.item_container
+            count = any(item_container.get_connections(connected=iface))
             return not count and isinstance(self.line, (items.DependencyItem, items.ImplementationItem))
         return True
 
@@ -279,7 +279,7 @@ class UnaryRelationshipConnect(AbstractConnect):
 
     This class introduces a new method: relationship() which is used to
     find an existing relationship in the model that does not yet exist
-    on the canvas.
+    on the item_container.
     """
 
     element_factory = inject('element_factory')
@@ -319,11 +319,11 @@ class UnaryRelationshipConnect(AbstractConnect):
                 if not gen_head is head_subject:
                     continue
 
-            # Check for this entry on line.canvas
+            # Check for this entry on line.item_container
             for item in gen.presentation:
                 # Allow line to be returned. Avoids strange
                 # behaviour during loading
-                if item.canvas is line.canvas and item is not line:
+                if item.item_container is line.item_container and item is not line:
                     break
             else:
                 return gen
@@ -369,12 +369,12 @@ class UnaryRelationshipConnect(AbstractConnect):
         establish or destroy relationships at model level.
         """
         line = self.line
-        canvas = self.canvas
-        solver = canvas.solver
+        item_container = self.item_container
+        solver = item_container.solver
 
         # First make sure coordinates match
         solver.solve()
-        for cinfo in connections or canvas.get_connections(connected=line):
+        for cinfo in connections or item_container.get_connections(connected=line):
             adapter = component.queryMultiAdapter((line, cinfo.connected), IConnect)
             assert adapter
             adapter.connect(cinfo.handle, cinfo.port)
@@ -388,12 +388,12 @@ class UnaryRelationshipConnect(AbstractConnect):
         list can be used to connect items again with connect_connected_items()).
         """
         line = self.line
-        canvas = self.canvas
-        solver = canvas.solver
+        item_container = self.item_container
+        solver = item_container.solver
 
         # First make sure coordinates match
         solver.solve()
-        connections = list(canvas.get_connections(connected=line))
+        connections = list(item_container.get_connections(connected=line))
         for cinfo in connections:
             adapter = component.queryMultiAdapter((cinfo.item, cinfo.connected), IConnect)
             assert adapter

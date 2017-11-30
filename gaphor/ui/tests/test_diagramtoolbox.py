@@ -80,7 +80,7 @@ class DiagramToolboxTestCase(TestCase):
         assert self.tab.view.tool
         # Ensure the factory is working
         self.tab.view.tool._factory()
-        self.diagram.canvas.update()
+        self.diagram.item_container.update()
 
     def test_placement_pointer(self):
         self.tab.toolbox.action_group.get_action('toolbox-pointer').activate()

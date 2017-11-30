@@ -42,7 +42,7 @@ class ClassTestCase(TestCase):
         self.assertEqual(0, len(klass._compartments[1]))
         self.assertEqual((10, 10), klass._compartments[0].get_size())
         
-        diagram.canvas.update()
+        diagram.item_container.update()
 
         self.assertEqual((10, 10), klass._compartments[0].get_size())
         self.assertEqual(50, float(klass.min_height)) # min_height
@@ -52,7 +52,7 @@ class ClassTestCase(TestCase):
         attr.name = 4 * 'x' # about 44 pixels
         klass.subject.ownedAttribute = attr
 
-        diagram.canvas.update()
+        diagram.item_container.update()
         self.assertEqual(1, len(klass._compartments[0]))
         self.assertEqual((44.0, 20.0), klass._compartments[0].get_size())
 
@@ -64,7 +64,7 @@ class ClassTestCase(TestCase):
         oper.name = 6 * 'x' # about 66 pixels
         klass.subject.ownedOperation = oper
 
-        diagram.canvas.update()
+        diagram.item_container.update()
         self.assertEqual(2, len(klass._compartments[1]))
         self.assertEqual((63.0, 34.0), klass._compartments[1].get_size())
 
@@ -74,7 +74,7 @@ class ClassTestCase(TestCase):
         element_factory = self.element_factory
         diagram = element_factory.create(uml2.Diagram)
         klass = diagram.create(ClassItem, subject=element_factory.create(uml2.Class))
-        diagram.canvas.update()
+        diagram.item_container.update()
 
         attr = element_factory.create(uml2.Property)
         attr.name = "blah1"
@@ -88,12 +88,12 @@ class ClassTestCase(TestCase):
         attr.name = "blah3"
         klass.subject.ownedAttribute = attr
 
-        diagram.canvas.update()
+        diagram.item_container.update()
         self.assertEqual(3, len(klass._compartments[0]))
 
         attr2.unlink()
 
-        diagram.canvas.update()
+        diagram.item_container.update()
         self.assertEqual(2, len(klass._compartments[0]))
 
 
@@ -106,7 +106,7 @@ class ClassTestCase(TestCase):
         klass = diagram.create(ClassItem, subject=element_factory.create(uml2.Class))
         klass.subject.name = 'Class1'
 
-        diagram.canvas.update()
+        diagram.item_container.update()
 
         attr = element_factory.create(uml2.Property)
         attr.name = "blah"
@@ -116,7 +116,7 @@ class ClassTestCase(TestCase):
         oper.name = 'method'
         klass.subject.ownedOperation = oper
 
-        diagram.canvas.update()
+        diagram.item_container.update()
 
         assert len(klass.compartments[0]) == 1
         assert len(klass.compartments[1]) == 1
@@ -142,7 +142,7 @@ class ClassTestCase(TestCase):
         klass = diagram.create(ClassItem, subject=element_factory.create(uml2.Class))
         klass.subject.name = 'Class1'
 
-        diagram.canvas.update()
+        diagram.item_container.update()
 
         attr = element_factory.create(uml2.Property)
         attr.name = 'blah'
@@ -157,7 +157,7 @@ class ClassTestCase(TestCase):
         attr.name = 'x' * 25
         log.debug('name: %s' % attr.name)
 
-        diagram.canvas.update()
+        diagram.item_container.update()
 
         width = klass.width
         self.assertEqual(170.0, width)

@@ -26,24 +26,24 @@ This module contains only one interesting function:
 
 which returns a dictionary of ID -> <parsed_object> pairs.
 
-A parsed_object is one of element, canvas or canvasitem.
+A parsed_object is one of element, item_container or item_containeritem.
 
 A parsed_object contains values and references. values is a dictionary of
 name -> value pairs. A value contains a string with the value read from the
 model file. references contains a list of name -> reference_list pairs, where
 reference_list is a list of ID's.
 
-element objects can contain a canvas object (which is the case for elements
+element objects can contain a item_container object (which is the case for elements
 of type Diagram). Each element has a type, which corresponds to a class name
 in the gaphor.UML module. Elements also have a unique ID, by which they are
 referered to in the dictionary returned by parse().
 
-canvas does not have an ID, but contains a list of canvasitems (which is a
-list of real canvasitem objects, not references).
+item_container does not have an ID, but contains a list of item_containeritems (which is a
+list of real item_containeritem objects, not references).
 
-canvasitem objects can also contain a list of canvasitems (canvasitems can be
+item_containeritem objects can also contain a list of item_containeritems (item_containeritems can be
 nested). They also have a unique ID by which they have been added to the
-dictionary returned by parse(). Each canvasitem has a type, which maps to a
+dictionary returned by parse(). Each item_containeritem has a type, which maps to a
 class name in the gaphor.diagram module.
 
 The generator parse_generator(filename, loader) may be used if the loading
@@ -63,7 +63,7 @@ from gaphor.misc.odict import odict
 __all__ = [ 'parse', 'ParserException' ]
 
 class base(object):
-    """Simple base class for element, canvas and canvasitem.
+    """Simple base class for element, item_container and item_containeritem.
     """
 
     def __init__(self):
@@ -91,21 +91,21 @@ class element(base):
         base.__init__(self)
         self.id = id
         self.type = type
-        self.canvas = None
+        self.item_container = None
 
-class canvas(base):
+class item_container(base):
 
     def __init__(self):
         base.__init__(self)
-        self.canvasitems = []
+        self.item_containeritems = []
 
-class canvasitem(base):
+class item_containeritem(base):
 
     def __init__(self, id, type):
         base.__init__(self)
         self.id = id
         self.type = type
-        self.canvasitems = []
+        self.item_containeritems = []
 
 
 XMLNS='http://gaphor.sourceforge.net/model'
@@ -117,8 +117,8 @@ class ParserException(Exception):
 [ ROOT,         # Expect 'gaphor' element
   GAPHOR,       # Expect UML classes (tag name is the UML class name)
   ELEMENT,      # Expect properties of UML object
-  DIAGRAM,      # Expect properties of Diagram object + canvas
-  CANVAS,       # Expect canvas properties + <item> tags
+  DIAGRAM,      # Expect properties of Diagram object + item_container
+  CANVAS,       # Expect item_container properties + <item> tags
   ITEM,         # Expect item attributes and nested items
   ATTR,         # Reading contents of an attribute (such as a <val> or <ref>)
   VAL,          # Redaing contents of a <val> tag
@@ -127,8 +127,8 @@ class ParserException(Exception):
 ] = range(10)
 
 class GaphorLoader(handler.ContentHandler):
-    """Create a list of elements. an element may contain a canvas and a
-    canvas may contain canvas items. Each element can have values and
+    """Create a list of elements. an element may contain a item_container and a
+    item_container may contain item_container items. Each element can have values and
     references to other elements.
     """
 
@@ -169,7 +169,7 @@ class GaphorLoader(handler.ContentHandler):
         """
         self.version = None
         self.gaphor_version = None
-        self.elements = odict() # map id: element/canvasitem
+        self.elements = odict() # map id: element/item_containeritem
         self.__stack = []
         self.text = ''
 
@@ -190,19 +190,19 @@ class GaphorLoader(handler.ContentHandler):
             self.elements[id] = e
             self.push(e, name == 'Diagram' and DIAGRAM or ELEMENT)
 
-        # Special treatment for the <canvas> tag in a Diagram:
-        elif state == DIAGRAM and name == 'canvas':
-            c = canvas()
-            self.peek().canvas = c
+        # Special treatment for the <item_container> tag in a Diagram:
+        elif state == DIAGRAM and name == 'item_container':
+            c = item_container()
+            self.peek().item_container = c
             self.push(c, CANVAS)
 
-        # Items in a canvas are referenced by the <item> tag:
+        # Items in a item_container are referenced by the <item> tag:
         elif state in (CANVAS, ITEM) and name == 'item':
             id = attrs['id']
-            c = canvasitem(id, attrs['type'])
+            c = item_containeritem(id, attrs['type'])
             assert id not in list(self.elements.keys()), '%s already defined' % id
             self.elements[id] = c
-            self.peek().canvasitems.append(c)
+            self.peek().item_containeritems.append(c)
             self.push(c, ITEM)
 
         # Store the attribute name on the stack, so we can use it later
@@ -255,7 +255,7 @@ class GaphorLoader(handler.ContentHandler):
         if self.state() == VAL:
             # Two levels up: the attribute name
             n = self.peek(2)
-            # Three levels up: the element instance (element or canvasitem)
+            # Three levels up: the element instance (element or item_containeritem)
             self.peek(3).values[n] = self.text
         self.pop()
 
@@ -276,7 +276,7 @@ class GaphorLoader(handler.ContentHandler):
 
 
 def parse(filename):
-    """Parse a file and return a dictionary ID:element/canvasitem.
+    """Parse a file and return a dictionary ID:element/item_containeritem.
     """
     loader = GaphorLoader()
 

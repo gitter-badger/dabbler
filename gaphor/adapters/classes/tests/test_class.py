@@ -165,7 +165,7 @@ class DependencyTestCase(TestCase):
         dep2 = diagram2.create(items.DependencyItem)
 
         self.connect(dep2, dep2.head, actoritem3)
-        cinfo = diagram2.canvas.get_connection(dep2.head)
+        cinfo = diagram2.item_container.get_connection(dep2.head)
         self.assertNotSame(None, cinfo)
         self.assertSame(cinfo.connected, actoritem3)
         self.connect(dep2, dep2.tail, actoritem4)
@@ -255,7 +255,7 @@ class GeneralizationTestCase(TestCase):
         gen2 = diagram2.create(items.GeneralizationItem)
 
         self.connect(gen2, gen2.head, c3)
-        cinfo = diagram2.canvas.get_connection(gen2.head)
+        cinfo = diagram2.item_container.get_connection(gen2.head)
         self.assertNotSame(None, cinfo)
         self.assertSame(cinfo.connected, c3)
 

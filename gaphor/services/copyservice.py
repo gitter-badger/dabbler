@@ -48,7 +48,7 @@ class CopyService(object):
     - How many data should be saved? (e.g. we copy a diagram item, remove it
       (the underlaying UML element is removed) and the paste the copied item.
       The diagram should act as if we have placed a copy of the removed item
-      on the canvas and make the uml element visible again.
+      on the item_container and make the uml element visible again.
     """
 
     component_registry = inject('component_registry')
@@ -125,11 +125,11 @@ class CopyService(object):
         """
         Paste items in the copy-buffer to the diagram
         """
-        canvas = diagram.canvas
-        if not canvas:
+        item_container = diagram.item_container
+        if not item_container:
             return
 
-        copy_items = [c for c in self.copy_buffer if c.canvas]
+        copy_items = [c for c in self.copy_buffer if c.item_container]
 
         # Mapping original id -> new item
         self._new_items = {}
@@ -141,21 +141,21 @@ class CopyService(object):
         # Copy attributes and references. References should be
         #  1. in the ElementFactory (hence they are model elements)
         #  2. refered to in new_items
-        #  3. canvas property is overridden
+        #  3. item_container property is overridden
         for ci in copy_items:
             self._item = self._new_items[ci.id]
             ci.save(self.copy_func)
 
         # move pasted items a bit, so user can see result of his action :)
         # update items' matrix immediately
-        # TODO: if it is new canvas, then let's not move, how to do it?
+        # TODO: if it is new item_container, then let's not move, how to do it?
         for item in self._new_items.values():
             item.matrix.translate(10, 10)
-            canvas.update_matrix(item)
+            item_container.update_matrix(item)
 
         # solve internal constraints of items immediately as item.postload
         # reconnects items and all handles has to be in place
-        canvas.solver.solve()
+        item_container.solver.solve()
         for item in self._new_items.values():
             item.postload()
 
