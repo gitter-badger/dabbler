@@ -1,7 +1,7 @@
-Saving and loading Gaphor diagrams
+Saving and loading Dabbler diagrams
 ==================================
 
-Everything interesting is an ancestor of the Gaphor root tag.
+Everything interesting is an ancestor of the Dabbler root tag.
 
 The idea is to keep the file format as simple and extensible as possible: UML elements (including Diagram) are at
 toplevel, no nesting. A UML element can have two tags: ``Reference`` and ``Value``. Reference is used to
@@ -15,7 +15,7 @@ All elements inside a canvas have a tag ``Item``.
 .. code-block:: xml
 
    <?xml version="1.0" ?>
-   <Gaphor version="1.0" gaphor_version="0.3">
+   <Dabbler version="1.0" dabbler_version="0.3">
      <Package id="1">
        <ownedElement>
          <reflist>
@@ -54,4 +54,4 @@ All elements inside a canvas have a tag ``Item``.
        </namespace>
      </UseCase>
      <Comment id="5"/>
-   </Gaphor>
+   </Dabbler>

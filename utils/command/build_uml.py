@@ -3,22 +3,22 @@
 # Copyright (C) 2007-2017 Arjan Molenaar <gaphor@gmail.com>
 #                         Dan Yeaw <dan@yeaw.me>
 #
-# This file is part of Gaphor.
+# This file is part of Dabbler.
 #
-# Gaphor is free software: you can redistribute it and/or modify it under the
+# Dabbler is free software: you can redistribute it and/or modify it under the
 # terms of the GNU General Public License as published by the Free Software
 # Foundation, either version 2 of the License, or (at your option) any later
 # version.
 #
-# Gaphor is distributed in the hope that it will be useful, but WITHOUT ANY
+# Dabbler is distributed in the hope that it will be useful, but WITHOUT ANY
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
 # A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License along with
-# Gaphor.  If not, see <http://www.gnu.org/licenses/>.
+# Dabbler.  If not, see <http://www.gnu.org/licenses/>.
 """
-This file provides the code generator which transforms gaphor/UML/uml2.gaphor
-into gaphor/UML/uml2.py.
+This file provides the code generator which transforms dabbler/UML/uml2.dabbler
+into dabbler/UML/uml2.py.
 
 Also a distutils tool, build_uml, is provided.
 """
@@ -32,7 +32,7 @@ from distutils.util import byte_compile
 
 
 class build_uml(Command):
-    description = "Generate gaphor/UML/uml2.py."
+    description = "Generate dabbler/UML/uml2.py."
 
     user_options = [
         ('build-lib=', 'b', "build directory (where to install from)"),
@@ -57,12 +57,12 @@ class build_uml(Command):
 
     def generate_uml2(self):
         """
-        Generate gaphor/UML/uml2.py in the build directory.
+        Generate dabbler/UML/uml2.py in the build directory.
         """
         gen = os.path.join('utils', 'command', 'gen_uml.py')
-        overrides = os.path.join('gaphor', 'UML', 'uml2.override')
-        model = os.path.join('gaphor', 'UML', 'uml2.gaphor')
-        py_model = os.path.join('gaphor', 'UML', 'uml2.py')
+        overrides = os.path.join('dabbler', 'UML', 'uml2.override')
+        model = os.path.join('dabbler', 'UML', 'uml2.dabbler')
+        py_model = os.path.join('dabbler', 'UML', 'uml2.py')
         outfile = py_model  # os.path.join(self.build_lib, py_model)
         self.mkpath(os.path.dirname(outfile))
         if self.force or newer(model, outfile) \

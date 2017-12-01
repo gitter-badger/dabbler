@@ -49,7 +49,7 @@ To update:
     remove_constraint()
     Variable state
 
-In Gaphor, connecting two diagram items is considered an atomic task,
+In Dabbler, connecting two diagram items is considered an atomic task,
 performed by a IConnect adapter. This operation results in a set of primitive
 tasks (properties set and a constraint created).
 
@@ -72,7 +72,7 @@ Okay, so the second case is tougher...
  
 So what we did:
 Add a StateManager to gaphas. All changes are sent to the statemanager.
-Gaphor should implement its own state manager.
+Dabbler should implement its own state manager.
 
   * all state changes can easily be recorded
   * fix it in one place
@@ -82,18 +82,18 @@ Gaphor should implement its own state manager.
 Transactions
 ------------
 
-Gaphor's Undo manager works transactionally. Typically, methods can be 
+Dabbler's Undo manager works transactionally. Typically, methods can be
 decorated with @transactional and undo data is stored in the current
 transaction. A new tx is created when none exists.
 
-Although undo functionality is at the core of Gaphor (diagram items and
+Although undo functionality is at the core of Dabbler (diagram items and
 model elements have been adapted to provide proper undo information), the 
 UndoManager itself is just a service.
 
 Transaction support though is a real core functionality. By letting elements
 and items emit event notifications on important changed other (yet to be
 defined) services can take benefit of those events. The UML module already
-works this way. Gaphas (the Gaphor canvas) also emits state changes. 
+works this way. Gaphas (the Dabbler canvas) also emits state changes.
 
 When state changes happen in model elements and diagram items an event is
 emitted. Those events are handled by special handlers that produce

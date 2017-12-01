@@ -1,7 +1,7 @@
 Connection protocol
 ===================
 
-In Gaphor, if a connection is made on a diagram between an element and a
+In Dabbler, if a connection is made on a diagram between an element and a
 relationship, the connection is also made at semantic level (the model). 
 From a GUI point of view it all starts with a button release event.
 

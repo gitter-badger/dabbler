@@ -3,24 +3,24 @@
 # Copyright (C) 2006-2011 Antonin Delpeuch <wetneb@gmail.com>
 #                         Arjan Molenaar <gaphor@gmail.com>
 #
-# This file is part of Gaphor.
+# This file is part of Dabbler.
 #
-# Gaphor is free software: you can redistribute it and/or modify it under the
+# Dabbler is free software: you can redistribute it and/or modify it under the
 # terms of the GNU General Public License as published by the Free Software
 # Foundation, either version 2 of the License, or (at your option) any later
 # version.
 #
-# Gaphor is distributed in the hope that it will be useful, but WITHOUT ANY
+# Dabbler is distributed in the hope that it will be useful, but WITHOUT ANY
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
 # A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License along with
-# Gaphor.  If not, see <http://www.gnu.org/licenses/>.
+# Dabbler.  If not, see <http://www.gnu.org/licenses/>.
 
-# Russian Gaphor Translation
+# Russian Dabbler Translation
 msgid ""
 msgstr ""
-"Project-Id-Version: Gaphor 0.13.1\n"
+"Project-Id-Version: Dabbler 0.13.1\n"
 "POT-Creation-Date: 2010-06-20 10:40+CEST\n"
 "PO-Revision-Date: 2011-08-22 22:15+0700\n"
 "Last-Translator: Евгений Лежнин <z_lezhnin@mail2000.ru>\n"
@@ -34,193 +34,193 @@ msgstr ""
 "X-Generator: Virtaal 0.6.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
-#: gaphor/adapters/actions/partitionpage.py:30
+#: dabbler/adapters/actions/partitionpage.py:30
 msgid "External"
 msgstr "Внешний"
 
-#: gaphor/adapters/profiles/metaclasseditor.py:31
-#: gaphor/adapters/propertypages.py:552
+#: dabbler/adapters/profiles/metaclasseditor.py:31
+#: dabbler/adapters/propertypages.py:552
 msgid "Name"
 msgstr "Имя"
 
-#: gaphor/adapters/profiles/stereotypespage.py:140
+#: dabbler/adapters/profiles/stereotypespage.py:140
 msgid "Attribute"
 msgstr "Атрибут"
 
-#: gaphor/adapters/profiles/stereotypespage.py:140
-#: gaphor/ui/diagramtoolbox.py:72
+#: dabbler/adapters/profiles/stereotypespage.py:140
+#: dabbler/ui/diagramtoolbox.py:72
 msgid "Stereotype"
 msgstr "Стереотип"
 
-#: gaphor/adapters/profiles/stereotypespage.py:167
+#: dabbler/adapters/profiles/stereotypespage.py:167
 msgid "Value"
 msgstr "Значение"
 
-#: gaphor/adapters/profiles/stereotypespage.py:219
+#: dabbler/adapters/profiles/stereotypespage.py:219
 msgid "Show stereotypes attributes"
 msgstr "Показывать атрибуты стереотипов"
 
-#: gaphor/adapters/propertypages.py:505 gaphor/ui/diagramtoolbox.py:26
+#: dabbler/adapters/propertypages.py:505 dabbler/ui/diagramtoolbox.py:26
 msgid "Comment"
 msgstr "Комментарий"
 
-#: gaphor/adapters/propertypages.py:627
+#: dabbler/adapters/propertypages.py:627
 msgid "Abstract"
 msgstr "Абстракция"
 
-#: gaphor/adapters/propertypages.py:661
+#: dabbler/adapters/propertypages.py:661
 msgid "Folded"
 msgstr "Свёрнуто"
 
-#: gaphor/adapters/propertypages.py:737
+#: dabbler/adapters/propertypages.py:737
 msgid "Show attributes"
 msgstr "Показывать атрибуты"
 
-#: gaphor/adapters/propertypages.py:754
+#: dabbler/adapters/propertypages.py:754
 msgid "Attributes"
 msgstr "Атрибуты"
 
-#: gaphor/adapters/propertypages.py:754 gaphor/adapters/propertypages.py:827
+#: dabbler/adapters/propertypages.py:754 dabbler/adapters/propertypages.py:827
 msgid "S"
 msgstr "S"
 
-#: gaphor/adapters/propertypages.py:811
+#: dabbler/adapters/propertypages.py:811
 msgid "Show operations"
 msgstr "Показывать действия"
 
-#: gaphor/adapters/propertypages.py:827
+#: dabbler/adapters/propertypages.py:827
 msgid "Operation"
 msgstr "Действие"
 
-#: gaphor/adapters/propertypages.py:874 gaphor/ui/diagramtoolbox.py:33
+#: dabbler/adapters/propertypages.py:874 dabbler/ui/diagramtoolbox.py:33
 msgid "Dependency"
 msgstr "Зависимость"
 
-#: gaphor/adapters/propertypages.py:875
+#: dabbler/adapters/propertypages.py:875
 msgid "Usage"
 msgstr "Использование"
 
-#: gaphor/adapters/propertypages.py:876
+#: dabbler/adapters/propertypages.py:876
 msgid "Realization"
 msgstr "Реализация"
 
-#: gaphor/adapters/propertypages.py:877 gaphor/ui/diagramtoolbox.py:35
+#: dabbler/adapters/propertypages.py:877 dabbler/ui/diagramtoolbox.py:35
 msgid "Implementation"
 msgstr "Реализация"
 
-#: gaphor/adapters/propertypages.py:889
+#: dabbler/adapters/propertypages.py:889
 msgid "Dependency type"
 msgstr "Тип зависимости"
 
-#: gaphor/adapters/propertypages.py:897
+#: dabbler/adapters/propertypages.py:897
 msgid "Automatic"
 msgstr "Автоматический"
 
-#: gaphor/adapters/propertypages.py:977
+#: dabbler/adapters/propertypages.py:977
 msgid "Show direction"
 msgstr "Показывать направление"
 
-#: gaphor/adapters/propertypages.py:982
+#: dabbler/adapters/propertypages.py:982
 msgid "Invert Direction"
 msgstr "Инвертировать направление"
 
-#: gaphor/adapters/propertypages.py:988
+#: dabbler/adapters/propertypages.py:988
 #, fuzzy
 msgid "Head"
 msgstr "Голова"
 
-#: gaphor/adapters/propertypages.py:992
+#: dabbler/adapters/propertypages.py:992
 #, fuzzy
 msgid "Tail"
 msgstr "Хвост"
 
-#: gaphor/adapters/propertypages.py:1172
+#: dabbler/adapters/propertypages.py:1172
 msgid "Orthogonal"
 msgstr "Прямоугольный"
 
-#: gaphor/adapters/propertypages.py:1189
+#: dabbler/adapters/propertypages.py:1189
 msgid "Horizontal"
 msgstr "Горизонтальный"
 
-#: gaphor/adapters/propertypages.py:1225
+#: dabbler/adapters/propertypages.py:1225
 msgid "Upper bound"
 msgstr "Верхняя граница"
 
-#: gaphor/adapters/propertypages.py:1240
+#: dabbler/adapters/propertypages.py:1240
 msgid "Ordering"
 msgstr "Порядок"
 
-#: gaphor/adapters/propertypages.py:1288
+#: dabbler/adapters/propertypages.py:1288
 msgid "Join specification"
 msgstr "Способ соединения"
 
-#: gaphor/adapters/propertypages.py:1320
-#: gaphor/adapters/states/propertypages.py:32
+#: dabbler/adapters/propertypages.py:1320
+#: dabbler/adapters/states/propertypages.py:32
 msgid "Guard"
 msgstr "Защита"
 
-#: gaphor/adapters/propertypages.py:1373
+#: dabbler/adapters/propertypages.py:1373
 msgid "Indirectly instantiated"
 msgstr ""
 
-#: gaphor/adapters/propertypages.py:1408 gaphor/adapters/propertypages.py:1429
-#: gaphor/adapters/propertypages.py:1436 gaphor/ui/diagramtoolbox.py:55
+#: dabbler/adapters/propertypages.py:1408 dabbler/adapters/propertypages.py:1429
+#: dabbler/adapters/propertypages.py:1436 dabbler/ui/diagramtoolbox.py:55
 msgid "Message"
 msgstr "Сообщение"
 
-#: gaphor/adapters/propertypages.py:1431
+#: dabbler/adapters/propertypages.py:1431
 msgid "Additional Messages"
 msgstr "Дополнительные сообщение"
 
-#: gaphor/adapters/propertypages.py:1438
+#: dabbler/adapters/propertypages.py:1438
 msgid "Inverted Messages"
 msgstr ""
 
-#: gaphor/adapters/propertypages.py:1442
+#: dabbler/adapters/propertypages.py:1442
 msgid "Message sort"
 msgstr ""
 
-#: gaphor/adapters/states/propertypages.py:79
+#: dabbler/adapters/states/propertypages.py:79
 msgid "Entry"
 msgstr "Элемент"
 
-#: gaphor/adapters/states/propertypages.py:86
+#: dabbler/adapters/states/propertypages.py:86
 msgid "Exit"
 msgstr "Выход"
 
-#: gaphor/adapters/states/propertypages.py:93
+#: dabbler/adapters/states/propertypages.py:93
 msgid "Do Activity"
 msgstr ""
 
-#: gaphor/misc/errorhandler.py:21
+#: dabbler/misc/errorhandler.py:21
 msgid "An error occured."
 msgstr "Произошла ошибка."
 
-#: gaphor/misc/errorhandler.py:28
+#: dabbler/misc/errorhandler.py:28
 msgid ""
 "\n"
 "\n"
 "Do you want to debug?\n"
-"(Gaphor should have been started from the command line)"
+"(Dabbler should have been started from the command line)"
 msgstr ""
 "\n"
 "\n"
 "Вы хотите войти в режим отладки?\n"
-"(Gaphor должен быть запущен из командной строки)"
+"(Dabbler должен быть запущен из командной строки)"
 
-#: gaphor/plugins/xmiexport/__init__.py:39
+#: dabbler/plugins/xmiexport/__init__.py:39
 msgid "Export to XMI"
 msgstr "Экспорт в XMI"
 
-#: gaphor/plugins/xmiexport/__init__.py:40
+#: dabbler/plugins/xmiexport/__init__.py:40
 msgid "Export model to XMI (XML Model Interchange) format"
 msgstr "Экспорт модели в формат XMI (XML Model Interchange)"
 
-#: gaphor/services/diagramexportmanager.py:74
+#: dabbler/services/diagramexportmanager.py:74
 msgid "The file %s already exists. Do you want to replace it with the file you are exporting to?"
 msgstr "Файл %s существует. Хотите ли вы заменить его экспортируемым?"
 
-#: gaphor/services/filemanager.py:135
+#: dabbler/services/filemanager.py:135
 msgid ""
 "Opening a new model will flush the currently loaded model.\n"
 "Any changes made will not be saved. Do you want to continue?"
@@ -228,271 +228,271 @@ msgstr ""
 "Открытие новой модели вызовет удаление текущей.\n"
 "Любые изменения будут потеряны. Хотите продолжить?"
 
-#: gaphor/services/filemanager.py:144
+#: dabbler/services/filemanager.py:144
 msgid "New model"
 msgstr "Новая модель"
 
-#: gaphor/services/filemanager.py:147
+#: dabbler/services/filemanager.py:147
 msgid "main"
 msgstr "главная"
 
-#: gaphor/services/filemanager.py:163
+#: dabbler/services/filemanager.py:163
 msgid "Loading model from %s"
 msgstr "Загрузка модели из %s"
 
-#: gaphor/services/filemanager.py:163
+#: dabbler/services/filemanager.py:163
 msgid "Loading..."
 msgstr "Загрузка..."
 
-#: gaphor/services/filemanager.py:193
+#: dabbler/services/filemanager.py:193
 msgid "The model contains some references to items that are not maintained. Do you want to clean this before saving the model?"
 msgstr ""
 
-#: gaphor/services/filemanager.py:260
+#: dabbler/services/filemanager.py:260
 msgid "New from template"
 msgstr "Новый из шаблона"
 
-#: gaphor/services/filemanager.py:305
-msgid "Save Gaphor model as"
-msgstr "Сохранить модель Gaphor как"
+#: dabbler/services/filemanager.py:305
+msgid "Save Dabbler model as"
+msgstr "Сохранить модель Dabbler как"
 
-#: gaphor/storage/storage.py:186
+#: dabbler/storage/storage.py:186
 msgid "Loading %d elements..."
 msgstr "Загружается %d элементов..."
 
-#: gaphor/ui/diagramtab.py:76
+#: dabbler/ui/diagramtab.py:76
 msgid "<None>"
 msgstr "<пусто>"
 
-#: gaphor/ui/diagramtoolbox.py:22
+#: dabbler/ui/diagramtoolbox.py:22
 msgid "Pointer"
 msgstr "Указатель"
 
-#: gaphor/ui/diagramtoolbox.py:23
+#: dabbler/ui/diagramtoolbox.py:23
 msgid "Line"
 msgstr "Линия"
 
-#: gaphor/ui/diagramtoolbox.py:24
+#: dabbler/ui/diagramtoolbox.py:24
 msgid "Box"
 msgstr "Контейнер"
 
-#: gaphor/ui/diagramtoolbox.py:25
+#: dabbler/ui/diagramtoolbox.py:25
 msgid "Ellipse"
 msgstr "Эллипс"
 
-#: gaphor/ui/diagramtoolbox.py:27
+#: dabbler/ui/diagramtoolbox.py:27
 msgid "Comment line"
 msgstr "Линия к комментарию"
 
-#: gaphor/ui/diagramtoolbox.py:28
+#: dabbler/ui/diagramtoolbox.py:28
 msgid "Classes"
 msgstr "Классы"
 
-#: gaphor/ui/diagramtoolbox.py:29
+#: dabbler/ui/diagramtoolbox.py:29
 msgid "Class"
 msgstr "Класс"
 
-#: gaphor/ui/diagramtoolbox.py:30
+#: dabbler/ui/diagramtoolbox.py:30
 msgid "Interface"
 msgstr "Интерфейс"
 
-#: gaphor/ui/diagramtoolbox.py:31
+#: dabbler/ui/diagramtoolbox.py:31
 msgid "Package"
 msgstr "Пакет"
 
-#: gaphor/ui/diagramtoolbox.py:32 gaphor/ui/diagramtoolbox.py:66
+#: dabbler/ui/diagramtoolbox.py:32 dabbler/ui/diagramtoolbox.py:66
 msgid "Association"
 msgstr "Ассоциация"
 
-#: gaphor/ui/diagramtoolbox.py:34
+#: dabbler/ui/diagramtoolbox.py:34
 msgid "Generalization"
 msgstr "Обобщение"
 
-#: gaphor/ui/diagramtoolbox.py:36
+#: dabbler/ui/diagramtoolbox.py:36
 msgid "Components"
 msgstr "Компоненты"
 
-#: gaphor/ui/diagramtoolbox.py:37
+#: dabbler/ui/diagramtoolbox.py:37
 msgid "Component"
 msgstr "Компонент"
 
-#: gaphor/ui/diagramtoolbox.py:38
+#: dabbler/ui/diagramtoolbox.py:38
 msgid "Artifact"
 msgstr "Артефакт"
 
-#: gaphor/ui/diagramtoolbox.py:39
+#: dabbler/ui/diagramtoolbox.py:39
 msgid "Node"
 msgstr "Узел"
 
-#: gaphor/ui/diagramtoolbox.py:40
+#: dabbler/ui/diagramtoolbox.py:40
 msgid "Device"
 msgstr "Устройство"
 
-#: gaphor/ui/diagramtoolbox.py:41
+#: dabbler/ui/diagramtoolbox.py:41
 msgid "Subsystem"
 msgstr "Подсистема"
 
-#: gaphor/ui/diagramtoolbox.py:42
+#: dabbler/ui/diagramtoolbox.py:42
 msgid "Connector"
 msgstr "Соединитель"
 
-#: gaphor/ui/diagramtoolbox.py:43
+#: dabbler/ui/diagramtoolbox.py:43
 msgid "Actions"
 msgstr "Действия"
 
-#: gaphor/ui/diagramtoolbox.py:44
+#: dabbler/ui/diagramtoolbox.py:44
 msgid "Action"
 msgstr "Действие"
 
-#: gaphor/ui/diagramtoolbox.py:45
+#: dabbler/ui/diagramtoolbox.py:45
 msgid "Initial node"
 msgstr "Начальный узел"
 
-#: gaphor/ui/diagramtoolbox.py:46
+#: dabbler/ui/diagramtoolbox.py:46
 msgid "Activity final node"
 msgstr "Финальный узел деятельности"
 
-#: gaphor/ui/diagramtoolbox.py:47
+#: dabbler/ui/diagramtoolbox.py:47
 msgid "Flow final node"
 msgstr "Узел завершения потока"
 
-#: gaphor/ui/diagramtoolbox.py:48
+#: dabbler/ui/diagramtoolbox.py:48
 msgid "Decision/merge node"
 msgstr "Узел принятия решения или узел слияния"
 
-#: gaphor/ui/diagramtoolbox.py:49
+#: dabbler/ui/diagramtoolbox.py:49
 msgid "Fork/join node"
 msgstr "Узел раздвоения/слияния"
 
-#: gaphor/ui/diagramtoolbox.py:50
+#: dabbler/ui/diagramtoolbox.py:50
 msgid "Object node"
 msgstr "Узел данных"
 
-#: gaphor/ui/diagramtoolbox.py:51
+#: dabbler/ui/diagramtoolbox.py:51
 #, fuzzy
 msgid "Partition"
 msgstr "Раздел"
 
-#: gaphor/ui/diagramtoolbox.py:52
+#: dabbler/ui/diagramtoolbox.py:52
 msgid "Control/object flow"
 msgstr "Поток управления/объектов"
 
-#: gaphor/ui/diagramtoolbox.py:53
+#: dabbler/ui/diagramtoolbox.py:53
 msgid "Interactions"
 msgstr "Взаимодействия"
 
-#: gaphor/ui/diagramtoolbox.py:54
+#: dabbler/ui/diagramtoolbox.py:54
 msgid "Lifeline"
 msgstr "Линия жизни"
 
-#: gaphor/ui/diagramtoolbox.py:56
+#: dabbler/ui/diagramtoolbox.py:56
 msgid "Interaction"
 msgstr "Взаимодействие"
 
-#: gaphor/ui/diagramtoolbox.py:57
+#: dabbler/ui/diagramtoolbox.py:57
 msgid "States"
 msgstr "Состояния"
 
-#: gaphor/ui/diagramtoolbox.py:58
+#: dabbler/ui/diagramtoolbox.py:58
 msgid "State"
 msgstr "Состояние"
 
-#: gaphor/ui/diagramtoolbox.py:59
+#: dabbler/ui/diagramtoolbox.py:59
 msgid "Initial Pseudostate"
 msgstr "Начальное псевдосостояние"
 
-#: gaphor/ui/diagramtoolbox.py:60
+#: dabbler/ui/diagramtoolbox.py:60
 msgid "Final State"
 msgstr "Финальное псевдосостояние"
 
-#: gaphor/ui/diagramtoolbox.py:61
+#: dabbler/ui/diagramtoolbox.py:61
 msgid "History Pseudostate"
 msgstr ""
 
-#: gaphor/ui/diagramtoolbox.py:62
+#: dabbler/ui/diagramtoolbox.py:62
 msgid "Transition"
 msgstr "Переход"
 
-#: gaphor/ui/diagramtoolbox.py:63
+#: dabbler/ui/diagramtoolbox.py:63
 msgid "Use Cases"
 msgstr "Варианты использования"
 
-#: gaphor/ui/diagramtoolbox.py:64
+#: dabbler/ui/diagramtoolbox.py:64
 msgid "Use case"
 msgstr "Вариант использования"
 
-#: gaphor/ui/diagramtoolbox.py:65
+#: dabbler/ui/diagramtoolbox.py:65
 msgid "Actor"
 msgstr "Актёр"
 
-#: gaphor/ui/diagramtoolbox.py:67
+#: dabbler/ui/diagramtoolbox.py:67
 msgid "Include"
 msgstr "Включение"
 
-#: gaphor/ui/diagramtoolbox.py:68
+#: dabbler/ui/diagramtoolbox.py:68
 msgid "Extend"
 msgstr "Расширение"
 
-#: gaphor/ui/diagramtoolbox.py:69
+#: dabbler/ui/diagramtoolbox.py:69
 msgid "Profiles"
 msgstr "Профили"
 
-#: gaphor/ui/diagramtoolbox.py:70
+#: dabbler/ui/diagramtoolbox.py:70
 msgid "Profile"
 msgstr "Профиль"
 
-#: gaphor/ui/diagramtoolbox.py:71
+#: dabbler/ui/diagramtoolbox.py:71
 msgid "Metaclass"
 msgstr "Метакласс"
 
-#: gaphor/ui/diagramtoolbox.py:73
+#: dabbler/ui/diagramtoolbox.py:73
 msgid "Extension"
 msgstr "Расширение"
 
-#: gaphor/ui/elementeditor.py:23
+#: dabbler/ui/elementeditor.py:23
 msgid "Element Editor"
 msgstr "Редактор элементов"
 
-#: gaphor/ui/elementeditor.py:48
+#: dabbler/ui/elementeditor.py:48
 msgid "Editor"
 msgstr "Редактор"
 
-#: gaphor/ui/mainwindow.py:193
+#: dabbler/ui/mainwindow.py:193
 msgid "Save changed to your model before closing?"
 msgstr "Вы собираетесь закрыть окно. Хотите ли вы сохранить изменения?"
 
-#: gaphor/ui/mainwindow.py:195
+#: dabbler/ui/mainwindow.py:195
 msgid "If you close without saving, your changes will be discarded."
 msgstr "Если вы закроете окно без сохранения, все изменения будут потеряны"
 
-#: gaphor/ui/mainwindow.py:579
+#: dabbler/ui/mainwindow.py:579
 msgid "Rename"
 msgstr "Переименовать"
 
-#: gaphor/ui/mainwindow.py:592
+#: dabbler/ui/mainwindow.py:592
 msgid "_New diagram"
 msgstr "_Новая диаграмма"
 
-#: gaphor/ui/mainwindow.py:609
+#: dabbler/ui/mainwindow.py:609
 msgid "_Delete diagram"
 msgstr "Удалить _диаграмму"
 
-#: gaphor/ui/mainwindow.py:630
+#: dabbler/ui/mainwindow.py:630
 msgid "New _package"
 msgstr "Новый _пакет"
 
-#: gaphor/ui/mainwindow.py:646
+#: dabbler/ui/mainwindow.py:646
 msgid "Delete pac_kage"
 msgstr "Удалить па_кет"
 
-#: gaphor/ui/mainwindow.py:654
+#: dabbler/ui/mainwindow.py:654
 msgid "_Refresh"
 msgstr "_Обновить"
 
-#: gaphor/ui/mainwindow.py:659
+#: dabbler/ui/mainwindow.py:659
 msgid "_Reset tool"
 msgstr "_Возврат"
 
-#: gaphor/ui/propertyeditor.py:28
+#: dabbler/ui/propertyeditor.py:28
 msgid "Properties"
 msgstr "Параметры"

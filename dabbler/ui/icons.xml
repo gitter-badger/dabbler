@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<stock-icons>
+  <icon id="dabbler-pointer">
+    <file>pointer.png</file>
+  </icon>
+  <icon id="dabbler-line">
+    <file>line.png</file>
+  </icon>
+  <icon id="dabbler-box">
+    <file>box.png</file>
+  </icon>
+  <icon id="dabbler-ellipse">
+    <file>ellipse.png</file>
+  </icon>
+  <icon id="dabbler-activity-final-node">
+    <file>activity-final-node.png</file>
+    <element>ActivityFinalNode</element>
+  </icon>
+  <icon id="dabbler-action">
+    <file>action.png</file>
+    <element>Action</element>
+  </icon>
+  <icon id="dabbler-send-signal-action">
+    <file>send-signal-action.png</file>
+    <element>SendSignalAction</element>
+  </icon>
+  <icon id="dabbler-accept-event-action">
+    <file>accept-event-action.png</file>
+    <element>AcceptEventAction</element>
+  </icon>
+  <icon id="dabbler-actor">
+    <file>actor.png</file>
+    <element>Actor</element>
+  </icon>
+  <icon id="dabbler-association">
+    <file>association.png</file>
+    <element>Association</element>
+  </icon>
+  <icon id="dabbler-artifact">
+    <file>artifact.png</file>
+    <element>Artifact</element>
+  </icon>
+  <icon id="dabbler-class">
+    <file>class.png</file>
+    <element>Class</element>
+  </icon>
+  <icon id="dabbler-metaclass">
+    <file>class.png</file>
+    <element>Class</element>
+    <option>metaclass</option>
+  </icon>
+  <icon id="dabbler-comment">
+    <file>comment.png</file>
+    <element>Comment</element>
+  </icon>
+  <icon id="dabbler-comment-line">
+    <file>comment-line.png</file>
+  </icon>
+  <icon id="dabbler-component">
+    <file>component.png</file>
+    <element>Component</element>
+  </icon>
+  <icon id="dabbler-connector">
+    <file>connector.png</file>
+    <element>Connector</element>
+  </icon>
+  <icon id="dabbler-control-flow">
+    <file>control-flow.png</file>
+    <element>ControlFlow</element>
+  </icon>
+  <icon id="dabbler-decision-node">
+    <file>decision-node.png</file>
+    <element>DecisionNode</element>
+  </icon>
+  <icon id="dabbler-fork-node">
+    <file>fork-node.png</file>
+    <element>ForkNode</element>
+  </icon>
+  <icon id="dabbler-object-node">
+    <file>object-node.png</file>
+    <element>ObjectNode</element>
+  </icon>
+  <icon id="dabbler-flow-final-node">
+    <file>flow-final-node.png</file>
+    <element>FlowFinalNode</element>
+  </icon>
+  <icon id="dabbler-dependency">
+    <file>dependency.png</file>
+    <element>Dependency</element>
+  </icon>
+  <icon id="dabbler-diagram">
+    <file>diagram.png</file>
+    <element>Diagram</element>
+  </icon>
+  <icon id="dabbler-extend">
+    <file>extend.png</file>
+    <element>Extend</element>
+  </icon>
+  <icon id="dabbler-extension">
+    <file>extension.png</file>
+    <element>Extension</element>
+  </icon>
+  <icon id="dabbler-generalization">
+    <file>generalization.png</file>
+    <element>Generalization</element>
+  </icon>
+  <icon id="dabbler-implementation">
+    <file>implementation.png</file>
+    <element>Implementation</element>
+  </icon>
+  <icon id="dabbler-include">
+    <file>include.png</file>
+    <element>Include</element>
+  </icon>
+  <icon id="dabbler-initial-node">
+    <file>initial-node.png</file>
+    <element>InitialNode</element>
+  </icon>
+  <icon id="dabbler-interaction">
+    <file>interaction.png</file>
+    <element>Interaction</element>
+  </icon>
+  <icon id="dabbler-interface">
+    <file>interface.png</file>
+    <element>Interface</element>
+  </icon>
+  <icon id="dabbler-lifeline">
+    <file>lifeline.png</file>
+    <element>Lifeline</element>
+  </icon>
+  <icon id="dabbler-message">
+    <file>message.png</file>
+    <element>Message</element>
+  </icon>
+  <icon id="dabbler-node">
+    <file>node.png</file>
+    <element>Node</element>
+  </icon>
+  <icon id="dabbler-device">
+    <file>device.png</file>
+    <element>Device</element>
+  </icon>
+  <icon id="dabbler-operation">
+    <file>operation.png</file>
+    <element>Operation</element>
+  </icon>
+  <icon id="dabbler-package">
+    <file>package.png</file>
+    <element>Package</element>
+  </icon>
+  <icon id="dabbler-parameter">
+    <file>pointer.png</file>
+    <element>Parameter</element>
+  </icon>
+  <icon id="dabbler-profile">
+    <file>profile.png</file>
+    <element>Profile</element>
+  </icon>
+  <icon id="dabbler-property">
+    <file>attribute.png</file>
+    <element>Property</element>
+  </icon>
+  <icon id="dabbler-association-end">
+    <file>association.png</file>
+    <element>Property</element>
+    <option>association-end</option>
+  </icon>
+  <icon id="dabbler-state">
+    <file>state.png</file>
+    <element>State</element>
+  </icon>
+  <icon id="dabbler-final-state">
+    <file>final-state.png</file>
+    <element>FinalState</element>
+  </icon>
+  <icon id="dabbler-initial-pseudostate">
+    <file>pseudostate.png</file>
+    <element>Pseudostate</element>
+  </icon>
+  <icon id="dabbler-transition">
+    <file>transition.png</file>
+    <element>Transition</element>
+  </icon>
+  <icon id="dabbler-stereotype">
+    <file>stereotype.png</file>
+    <element>Stereotype</element>
+  </icon>
+  <icon id="dabbler-usecase">
+    <file>use-case.png</file>
+    <element>UseCase</element>
+  </icon>
+  <icon id="dabbler-subsystem">
+    <file>subsystem.png</file>
+    <element>Component</element>
+    <option>subsystem</option>
+  </icon>
+  <icon id="dabbler-partition">
+    <file>activity-partition.png</file>
+    <element>ActivityPartition</element>
+  </icon>
+</stock-icons>

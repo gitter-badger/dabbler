@@ -4,24 +4,24 @@
 #                         Arjan Molenaar <gaphor@gmail.com>
 #                         Ygor Mutti <mamutti@icaju.com>
 #
-# This file is part of Gaphor.
+# This file is part of Dabbler.
 #
-# Gaphor is free software: you can redistribute it and/or modify it under the
+# Dabbler is free software: you can redistribute it and/or modify it under the
 # terms of the GNU General Public License as published by the Free Software
 # Foundation, either version 2 of the License, or (at your option) any later
 # version.
 #
-# Gaphor is distributed in the hope that it will be useful, but WITHOUT ANY
+# Dabbler is distributed in the hope that it will be useful, but WITHOUT ANY
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
 # A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License along with
-# Gaphor.  If not, see <http://www.gnu.org/licenses/>.
+# Dabbler.  If not, see <http://www.gnu.org/licenses/>.
 
-# Swedish Gaphor Translation
+# Swedish Dabbler Translation
 msgid ""
 msgstr ""
-"Project-Id-Version: gaphor\n"
+"Project-Id-Version: dabbler\n"
 "POT-Creation-Date: Thu Jun 10 15:59:38 2010\n"
 "PO-Revision-Date: 2006-05-11 16:34+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
@@ -31,199 +31,199 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.4\n"
 
-#: gaphor/adapters/actions/partitionpage.py:30
+#: dabbler/adapters/actions/partitionpage.py:30
 msgid "External"
 msgstr ""
 
-#: gaphor/adapters/profiles/metaclasseditor.py:31
-#: gaphor/adapters/propertypages.py:552
+#: dabbler/adapters/profiles/metaclasseditor.py:31
+#: dabbler/adapters/propertypages.py:552
 msgid "Name"
 msgstr ""
 
-#: gaphor/adapters/profiles/stereotypespage.py:140
+#: dabbler/adapters/profiles/stereotypespage.py:140
 msgid "Attribute"
 msgstr ""
 
-#: gaphor/adapters/profiles/stereotypespage.py:140
-#: gaphor/ui/diagramtoolbox.py:72
+#: dabbler/adapters/profiles/stereotypespage.py:140
+#: dabbler/ui/diagramtoolbox.py:72
 msgid "Stereotype"
 msgstr ""
 
-#: gaphor/adapters/profiles/stereotypespage.py:167
+#: dabbler/adapters/profiles/stereotypespage.py:167
 msgid "Value"
 msgstr ""
 
-#: gaphor/adapters/profiles/stereotypespage.py:219
+#: dabbler/adapters/profiles/stereotypespage.py:219
 msgid "Show stereotypes attributes"
 msgstr ""
 
-#: gaphor/adapters/propertypages.py:505 gaphor/ui/diagramtoolbox.py:26
+#: dabbler/adapters/propertypages.py:505 dabbler/ui/diagramtoolbox.py:26
 #, fuzzy
 msgid "Comment"
 msgstr "Komponenter"
 
-#: gaphor/adapters/propertypages.py:627
+#: dabbler/adapters/propertypages.py:627
 msgid "Abstract"
 msgstr ""
 
-#: gaphor/adapters/propertypages.py:661
+#: dabbler/adapters/propertypages.py:661
 msgid "Folded"
 msgstr ""
 
-#: gaphor/adapters/propertypages.py:737
+#: dabbler/adapters/propertypages.py:737
 msgid "Show attributes"
 msgstr ""
 
-#: gaphor/adapters/propertypages.py:754
+#: dabbler/adapters/propertypages.py:754
 msgid "Attributes"
 msgstr ""
 
-#: gaphor/adapters/propertypages.py:754 gaphor/adapters/propertypages.py:827
+#: dabbler/adapters/propertypages.py:754 dabbler/adapters/propertypages.py:827
 msgid "S"
 msgstr ""
 
-#: gaphor/adapters/propertypages.py:811
+#: dabbler/adapters/propertypages.py:811
 msgid "Show operations"
 msgstr ""
 
-#: gaphor/adapters/propertypages.py:827
+#: dabbler/adapters/propertypages.py:827
 #, fuzzy
 msgid "Operation"
 msgstr "Interaktioner"
 
-#: gaphor/adapters/propertypages.py:874 gaphor/ui/diagramtoolbox.py:33
+#: dabbler/adapters/propertypages.py:874 dabbler/ui/diagramtoolbox.py:33
 msgid "Dependency"
 msgstr ""
 
-#: gaphor/adapters/propertypages.py:875
+#: dabbler/adapters/propertypages.py:875
 msgid "Usage"
 msgstr ""
 
-#: gaphor/adapters/propertypages.py:876
+#: dabbler/adapters/propertypages.py:876
 msgid "Realization"
 msgstr ""
 
-#: gaphor/adapters/propertypages.py:877 gaphor/ui/diagramtoolbox.py:35
+#: dabbler/adapters/propertypages.py:877 dabbler/ui/diagramtoolbox.py:35
 #, fuzzy
 msgid "Implementation"
 msgstr "Interaktioner"
 
-#: gaphor/adapters/propertypages.py:889
+#: dabbler/adapters/propertypages.py:889
 msgid "Dependency type"
 msgstr ""
 
-#: gaphor/adapters/propertypages.py:897
+#: dabbler/adapters/propertypages.py:897
 msgid "Automatic"
 msgstr ""
 
-#: gaphor/adapters/propertypages.py:977
+#: dabbler/adapters/propertypages.py:977
 msgid "Show direction"
 msgstr ""
 
-#: gaphor/adapters/propertypages.py:982
+#: dabbler/adapters/propertypages.py:982
 #, fuzzy
 msgid "Invert Direction"
 msgstr "Interaktioner"
 
-#: gaphor/adapters/propertypages.py:988
+#: dabbler/adapters/propertypages.py:988
 msgid "Head"
 msgstr ""
 
-#: gaphor/adapters/propertypages.py:992
+#: dabbler/adapters/propertypages.py:992
 msgid "Tail"
 msgstr ""
 
-#: gaphor/adapters/propertypages.py:1181
+#: dabbler/adapters/propertypages.py:1181
 msgid "Orthogonal"
 msgstr ""
 
-#: gaphor/adapters/propertypages.py:1198
+#: dabbler/adapters/propertypages.py:1198
 msgid "Horizontal"
 msgstr ""
 
-#: gaphor/adapters/propertypages.py:1234
+#: dabbler/adapters/propertypages.py:1234
 msgid "Upper bound"
 msgstr ""
 
-#: gaphor/adapters/propertypages.py:1249
+#: dabbler/adapters/propertypages.py:1249
 msgid "Ordering"
 msgstr ""
 
-#: gaphor/adapters/propertypages.py:1297
+#: dabbler/adapters/propertypages.py:1297
 msgid "Join specification"
 msgstr ""
 
-#: gaphor/adapters/propertypages.py:1329
-#: gaphor/adapters/states/propertypages.py:32
+#: dabbler/adapters/propertypages.py:1329
+#: dabbler/adapters/states/propertypages.py:32
 msgid "Guard"
 msgstr ""
 
-#: gaphor/adapters/propertypages.py:1382
+#: dabbler/adapters/propertypages.py:1382
 msgid "Indirectly instantiated"
 msgstr ""
 
-#: gaphor/adapters/propertypages.py:1417 gaphor/adapters/propertypages.py:1438
-#: gaphor/adapters/propertypages.py:1445 gaphor/ui/diagramtoolbox.py:55
+#: dabbler/adapters/propertypages.py:1417 dabbler/adapters/propertypages.py:1438
+#: dabbler/adapters/propertypages.py:1445 dabbler/ui/diagramtoolbox.py:55
 msgid "Message"
 msgstr ""
 
-#: gaphor/adapters/propertypages.py:1440
+#: dabbler/adapters/propertypages.py:1440
 msgid "Additional Messages"
 msgstr ""
 
-#: gaphor/adapters/propertypages.py:1447
+#: dabbler/adapters/propertypages.py:1447
 msgid "Inverted Messages"
 msgstr ""
 
-#: gaphor/adapters/propertypages.py:1451
+#: dabbler/adapters/propertypages.py:1451
 msgid "Message sort"
 msgstr ""
 
-#: gaphor/adapters/states/propertypages.py:79
+#: dabbler/adapters/states/propertypages.py:79
 msgid "Entry"
 msgstr ""
 
-#: gaphor/adapters/states/propertypages.py:86
+#: dabbler/adapters/states/propertypages.py:86
 #, fuzzy
 msgid "Exit"
 msgstr "R_edigera"
 
-#: gaphor/adapters/states/propertypages.py:93
+#: dabbler/adapters/states/propertypages.py:93
 msgid "Do Activity"
 msgstr ""
 
-#: gaphor/misc/errorhandler.py:21
+#: dabbler/misc/errorhandler.py:21
 msgid "An error occured."
 msgstr "Ett fel har inträffat."
 
-#: gaphor/misc/errorhandler.py:28
+#: dabbler/misc/errorhandler.py:28
 msgid ""
 "\n"
 "\n"
 "Do you want to debug?\n"
-"(Gaphor should have been started from the command line)"
+"(Dabbler should have been started from the command line)"
 msgstr ""
 "\n"
 "\n"
 "Vill du felsöka?\n"
-"(Gaphor bör ha startats från kommandoraden)"
+"(Dabbler bör ha startats från kommandoraden)"
 
-#: gaphor/plugins/xmiexport/__init__.py:39
+#: dabbler/plugins/xmiexport/__init__.py:39
 #, fuzzy
 msgid "Export to XMI"
 msgstr "_Exportera"
 
-#: gaphor/plugins/xmiexport/__init__.py:40
+#: dabbler/plugins/xmiexport/__init__.py:40
 msgid "Export model to XMI (XML Model Interchange) format"
 msgstr ""
 
-#: gaphor/services/diagramexportmanager.py:74
+#: dabbler/services/diagramexportmanager.py:74
 msgid ""
 "The file %s already exists. Do you want to replace it with the file you are "
 "exporting to?"
 msgstr ""
 
-#: gaphor/services/filemanager.py:135
+#: dabbler/services/filemanager.py:135
 msgid ""
 "Opening a new model will flush the currently loaded model.\n"
 "Any changes made will not be saved. Do you want to continue?"
@@ -232,288 +232,288 @@ msgstr ""
 "inlästa modellen. Eventuella ändringar kommer inte att sparas.\n"
 "Vill du fortsätta?"
 
-#: gaphor/services/filemanager.py:144
+#: dabbler/services/filemanager.py:144
 msgid "New model"
 msgstr ""
 
-#: gaphor/services/filemanager.py:147
+#: dabbler/services/filemanager.py:147
 msgid "main"
 msgstr ""
 
-#: gaphor/services/filemanager.py:163
+#: dabbler/services/filemanager.py:163
 msgid "Loading model from %s"
 msgstr "Läser in modell från %s"
 
-#: gaphor/services/filemanager.py:163
+#: dabbler/services/filemanager.py:163
 msgid "Loading..."
 msgstr "Läser in..."
 
-#: gaphor/services/filemanager.py:193
+#: dabbler/services/filemanager.py:193
 msgid ""
 "The model contains some references to items that are not maintained. Do you "
 "want to clean this before saving the model?"
 msgstr ""
 
-#: gaphor/services/filemanager.py:260
+#: dabbler/services/filemanager.py:260
 msgid "New from template"
 msgstr ""
 
-#: gaphor/services/filemanager.py:305
-msgid "Save Gaphor model as"
-msgstr "Spara Gaphor-modell som"
+#: dabbler/services/filemanager.py:305
+msgid "Save Dabbler model as"
+msgstr "Spara Dabbler-modell som"
 
-#: gaphor/storage/storage.py:186
+#: dabbler/storage/storage.py:186
 msgid "Loading %d elements..."
 msgstr "Läser in %d element..."
 
-#: gaphor/ui/diagramtab.py:76
+#: dabbler/ui/diagramtab.py:76
 msgid "<None>"
 msgstr ""
 
-#: gaphor/ui/diagramtoolbox.py:22
+#: dabbler/ui/diagramtoolbox.py:22
 msgid "Pointer"
 msgstr ""
 
-#: gaphor/ui/diagramtoolbox.py:23
+#: dabbler/ui/diagramtoolbox.py:23
 msgid "Line"
 msgstr ""
 
-#: gaphor/ui/diagramtoolbox.py:24
+#: dabbler/ui/diagramtoolbox.py:24
 msgid "Box"
 msgstr ""
 
-#: gaphor/ui/diagramtoolbox.py:25
+#: dabbler/ui/diagramtoolbox.py:25
 msgid "Ellipse"
 msgstr ""
 
-#: gaphor/ui/diagramtoolbox.py:27
+#: dabbler/ui/diagramtoolbox.py:27
 msgid "Comment line"
 msgstr ""
 
-#: gaphor/ui/diagramtoolbox.py:28
+#: dabbler/ui/diagramtoolbox.py:28
 msgid "Classes"
 msgstr "Klasser"
 
-#: gaphor/ui/diagramtoolbox.py:29
+#: dabbler/ui/diagramtoolbox.py:29
 #, fuzzy
 msgid "Class"
 msgstr "Klasser"
 
-#: gaphor/ui/diagramtoolbox.py:30
+#: dabbler/ui/diagramtoolbox.py:30
 #, fuzzy
 msgid "Interface"
 msgstr "Interaktioner"
 
-#: gaphor/ui/diagramtoolbox.py:31
+#: dabbler/ui/diagramtoolbox.py:31
 msgid "Package"
 msgstr ""
 
-#: gaphor/ui/diagramtoolbox.py:32 gaphor/ui/diagramtoolbox.py:66
+#: dabbler/ui/diagramtoolbox.py:32 dabbler/ui/diagramtoolbox.py:66
 #, fuzzy
 msgid "Association"
 msgstr "Åtgärder"
 
-#: gaphor/ui/diagramtoolbox.py:34
+#: dabbler/ui/diagramtoolbox.py:34
 #, fuzzy
 msgid "Generalization"
 msgstr "Interaktioner"
 
-#: gaphor/ui/diagramtoolbox.py:36
+#: dabbler/ui/diagramtoolbox.py:36
 msgid "Components"
 msgstr "Komponenter"
 
-#: gaphor/ui/diagramtoolbox.py:37
+#: dabbler/ui/diagramtoolbox.py:37
 #, fuzzy
 msgid "Component"
 msgstr "Komponenter"
 
-#: gaphor/ui/diagramtoolbox.py:38
+#: dabbler/ui/diagramtoolbox.py:38
 msgid "Artifact"
 msgstr ""
 
-#: gaphor/ui/diagramtoolbox.py:39
+#: dabbler/ui/diagramtoolbox.py:39
 msgid "Node"
 msgstr ""
 
-#: gaphor/ui/diagramtoolbox.py:40
+#: dabbler/ui/diagramtoolbox.py:40
 msgid "Device"
 msgstr ""
 
-#: gaphor/ui/diagramtoolbox.py:41
+#: dabbler/ui/diagramtoolbox.py:41
 msgid "Subsystem"
 msgstr ""
 
-#: gaphor/ui/diagramtoolbox.py:42
+#: dabbler/ui/diagramtoolbox.py:42
 msgid "Connector"
 msgstr ""
 
-#: gaphor/ui/diagramtoolbox.py:43
+#: dabbler/ui/diagramtoolbox.py:43
 msgid "Actions"
 msgstr "Åtgärder"
 
-#: gaphor/ui/diagramtoolbox.py:44
+#: dabbler/ui/diagramtoolbox.py:44
 #, fuzzy
 msgid "Action"
 msgstr "Åtgärder"
 
-#: gaphor/ui/diagramtoolbox.py:45
+#: dabbler/ui/diagramtoolbox.py:45
 msgid "Initial node"
 msgstr ""
 
-#: gaphor/ui/diagramtoolbox.py:46
+#: dabbler/ui/diagramtoolbox.py:46
 msgid "Activity final node"
 msgstr ""
 
-#: gaphor/ui/diagramtoolbox.py:47
+#: dabbler/ui/diagramtoolbox.py:47
 msgid "Flow final node"
 msgstr ""
 
-#: gaphor/ui/diagramtoolbox.py:48
+#: dabbler/ui/diagramtoolbox.py:48
 msgid "Decision/merge node"
 msgstr ""
 
-#: gaphor/ui/diagramtoolbox.py:49
+#: dabbler/ui/diagramtoolbox.py:49
 msgid "Fork/join node"
 msgstr ""
 
-#: gaphor/ui/diagramtoolbox.py:50
+#: dabbler/ui/diagramtoolbox.py:50
 msgid "Object node"
 msgstr ""
 
-#: gaphor/ui/diagramtoolbox.py:51
+#: dabbler/ui/diagramtoolbox.py:51
 msgid "Partition"
 msgstr ""
 
-#: gaphor/ui/diagramtoolbox.py:52
+#: dabbler/ui/diagramtoolbox.py:52
 msgid "Control/object flow"
 msgstr ""
 
-#: gaphor/ui/diagramtoolbox.py:53
+#: dabbler/ui/diagramtoolbox.py:53
 msgid "Interactions"
 msgstr "Interaktioner"
 
-#: gaphor/ui/diagramtoolbox.py:54
+#: dabbler/ui/diagramtoolbox.py:54
 msgid "Lifeline"
 msgstr ""
 
-#: gaphor/ui/diagramtoolbox.py:56
+#: dabbler/ui/diagramtoolbox.py:56
 #, fuzzy
 msgid "Interaction"
 msgstr "Interaktioner"
 
-#: gaphor/ui/diagramtoolbox.py:57
+#: dabbler/ui/diagramtoolbox.py:57
 msgid "States"
 msgstr ""
 
-#: gaphor/ui/diagramtoolbox.py:58
+#: dabbler/ui/diagramtoolbox.py:58
 msgid "State"
 msgstr ""
 
-#: gaphor/ui/diagramtoolbox.py:59
+#: dabbler/ui/diagramtoolbox.py:59
 msgid "Initial Pseudostate"
 msgstr ""
 
-#: gaphor/ui/diagramtoolbox.py:60
+#: dabbler/ui/diagramtoolbox.py:60
 msgid "Final State"
 msgstr ""
 
-#: gaphor/ui/diagramtoolbox.py:61
+#: dabbler/ui/diagramtoolbox.py:61
 msgid "History Pseudostate"
 msgstr ""
 
-#: gaphor/ui/diagramtoolbox.py:62
+#: dabbler/ui/diagramtoolbox.py:62
 msgid "Transition"
 msgstr ""
 
 # Osäker på denna
-#: gaphor/ui/diagramtoolbox.py:63
+#: dabbler/ui/diagramtoolbox.py:63
 msgid "Use Cases"
 msgstr "Använd lådor"
 
 # Osäker på denna
-#: gaphor/ui/diagramtoolbox.py:64
+#: dabbler/ui/diagramtoolbox.py:64
 #, fuzzy
 msgid "Use case"
 msgstr "Använd lådor"
 
-#: gaphor/ui/diagramtoolbox.py:65
+#: dabbler/ui/diagramtoolbox.py:65
 #, fuzzy
 msgid "Actor"
 msgstr "Åtgärder"
 
-#: gaphor/ui/diagramtoolbox.py:67
+#: dabbler/ui/diagramtoolbox.py:67
 msgid "Include"
 msgstr ""
 
-#: gaphor/ui/diagramtoolbox.py:68
+#: dabbler/ui/diagramtoolbox.py:68
 msgid "Extend"
 msgstr ""
 
-#: gaphor/ui/diagramtoolbox.py:69
+#: dabbler/ui/diagramtoolbox.py:69
 msgid "Profiles"
 msgstr "Profiler"
 
-#: gaphor/ui/diagramtoolbox.py:70
+#: dabbler/ui/diagramtoolbox.py:70
 #, fuzzy
 msgid "Profile"
 msgstr "Profiler"
 
-#: gaphor/ui/diagramtoolbox.py:71
+#: dabbler/ui/diagramtoolbox.py:71
 msgid "Metaclass"
 msgstr ""
 
-#: gaphor/ui/diagramtoolbox.py:73
+#: dabbler/ui/diagramtoolbox.py:73
 msgid "Extension"
 msgstr ""
 
-#: gaphor/ui/elementeditor.py:23
+#: dabbler/ui/elementeditor.py:23
 msgid "Element Editor"
 msgstr ""
 
-#: gaphor/ui/elementeditor.py:48
+#: dabbler/ui/elementeditor.py:48
 #, fuzzy
 msgid "Editor"
 msgstr "_Redigerare"
 
-#: gaphor/ui/mainwindow.py:193
+#: dabbler/ui/mainwindow.py:193
 msgid "Save changed to your model before closing?"
 msgstr ""
 
-#: gaphor/ui/mainwindow.py:195
+#: dabbler/ui/mainwindow.py:195
 msgid "If you close without saving, your changes will be discarded."
 msgstr ""
 
-#: gaphor/ui/mainwindow.py:579
+#: dabbler/ui/mainwindow.py:579
 #, fuzzy
 msgid "Rename"
 msgstr "_Byt namn"
 
-#: gaphor/ui/mainwindow.py:592
+#: dabbler/ui/mainwindow.py:592
 msgid "_New diagram"
 msgstr "_Nytt diagram"
 
-#: gaphor/ui/mainwindow.py:609
+#: dabbler/ui/mainwindow.py:609
 msgid "_Delete diagram"
 msgstr "_Ta bort diagram"
 
-#: gaphor/ui/mainwindow.py:630
+#: dabbler/ui/mainwindow.py:630
 msgid "New _package"
 msgstr ""
 
-#: gaphor/ui/mainwindow.py:646
+#: dabbler/ui/mainwindow.py:646
 #, fuzzy
 msgid "Delete pac_kage"
 msgstr "_Ta bort diagram"
 
-#: gaphor/ui/mainwindow.py:654
+#: dabbler/ui/mainwindow.py:654
 msgid "_Refresh"
 msgstr "_Uppdatera"
 
-#: gaphor/ui/mainwindow.py:659
+#: dabbler/ui/mainwindow.py:659
 msgid "_Reset tool"
 msgstr ""
 
-#: gaphor/ui/propertyeditor.py:28
+#: dabbler/ui/propertyeditor.py:28
 #, fuzzy
 msgid "Properties"
 msgstr "Profiler"

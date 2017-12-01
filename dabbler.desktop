@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Dabbler
+Comment=UML modeling environment
+Comment[nl]=UML modelleer omgeving environment
+Comment[pl]=Środowisko modelowania UML
+Exec=dabbler
+Icon=dabbler-48x48.png
+Terminal=false
+MultipleArgs=false
+Type=Application
+Categories=GTK;GNOME;Development;ProjectManagement;
+# vi: encoding=utf-8

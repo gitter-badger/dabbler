@@ -3,19 +3,19 @@
 # Copyright (C) 2009-2017 Arjan Molenaar <gaphor@gmail.com>
 #                         Dan Yeaw <dan@yeaw.me>
 #
-# This file is part of Gaphor.
+# This file is part of Dabbler.
 #
-# Gaphor is free software: you can redistribute it and/or modify it under the
+# Dabbler is free software: you can redistribute it and/or modify it under the
 # terms of the GNU General Public License as published by the Free Software
 # Foundation, either version 2 of the License, or (at your option) any later
 # version.
 #
-# Gaphor is distributed in the hope that it will be useful, but WITHOUT ANY
+# Dabbler is distributed in the hope that it will be useful, but WITHOUT ANY
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
 # A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License along with
-# Gaphor.  If not, see <http://www.gnu.org/licenses/>.
+# Dabbler.  If not, see <http://www.gnu.org/licenses/>.
 """
 Test GitHub issue #4. Diagram could not be loaded due to JuggleError
 (presumed cyclic resolving of diagram items).
@@ -23,8 +23,8 @@ Test GitHub issue #4. Diagram could not be loaded due to JuggleError
 
 from __future__ import absolute_import
 
-from gaphor.storage.storage import load
-from gaphor.tests import TestCase
+from dabbler.storage.storage import load
+from dabbler.tests import TestCase
 
 
 class CyclicDiagramTestCase(TestCase):
@@ -40,7 +40,7 @@ class CyclicDiagramTestCase(TestCase):
         This does not nearly resemble the error, since the model should
         be loaded from within the mainloop (which will delay all updates).
         """
-        load('test-diagrams/diagram-#4.gaphor', self.element_factory)
+        load('test-diagrams/diagram-#4.dabbler', self.element_factory)
 
     def test_bug_idle(self):
         """
@@ -52,7 +52,7 @@ class CyclicDiagramTestCase(TestCase):
         import gobject, gtk
         def handler():
             try:
-                load('test-diagrams/diagram-#4.gaphor', self.element_factory)
+                load('test-diagrams/diagram-#4.dabbler', self.element_factory)
             finally:
                 gtk.main_quit()
 

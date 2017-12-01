@@ -1,29 +1,29 @@
-Feel free to hack Gaphor. Patches are welcome.
+Feel free to hack Dabbler. Pull Requests are welcome.
 
 Fetching Development Dependencies
 =================================
 
-Gaphor uses pip to manage in easy way its dependencies.
+Dabbler uses pip to manage in easy way its dependencies.
 
 To fetch and install dependencies as non-root user:
 In Linux recommend using a virtual environment for installation. Since pyGTK doesn't work well with a virtualenv,
 install it outside the virtual environment and then start your the virtualenv using the --system-site-packages option:
   $ virtualenv --system-site-packages venv
   $ source venv/bin/activate
-  $ pip install gaphor
+  $ pip install dabbler
 
 Running Tests
 =============
 To run tests on Unix machine
 
     Xvfb :2.0 &
-    DISPLAY=:2.0 nosetests gaphor/ 2>&1 | tee tests.log
+    DISPLAY=:2.0 nosetests dabbler/ 2>&1 | tee tests.log
 
 
 Structure
 =========
 
-Gaphor contains the following modules:
+Dabbler contains the following modules:
 
 UML
 ---
@@ -31,8 +31,8 @@ The UML module contains the UML 2.0 data model. This part is
 quite stable and it is unlikely that code has to be changed
 here.
 
-  NOTE:	The code is generated from a Gaphor model: uml2.gaphor. This
-	file can be loaded in gaphor.
+  NOTE:	The code is generated from a Dabbler model: uml2.dabbler. This
+	file can be loaded in dabbler.
 
 diagram
 -------
