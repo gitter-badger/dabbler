@@ -3,25 +3,25 @@
 # Copyright (C) 2010-2017 Arjan Molenaar <gaphor@gmail.com>
 #                         Dan Yeaw <dan@yeaw.me>
 #
-# This file is part of Gaphor.
+# This file is part of Dabbler.
 #
-# Gaphor is free software: you can redistribute it and/or modify it under the
+# Dabbler is free software: you can redistribute it and/or modify it under the
 # terms of the GNU General Public License as published by the Free Software
 # Foundation, either version 2 of the License, or (at your option) any later
 # version.
 #
-# Gaphor is distributed in the hope that it will be useful, but WITHOUT ANY
+# Dabbler is distributed in the hope that it will be useful, but WITHOUT ANY
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
 # A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License along with
-# Gaphor.  If not, see <http://www.gnu.org/licenses/>.
+# Dabbler.  If not, see <http://www.gnu.org/licenses/>.
 from __future__ import absolute_import
 
-from gaphor.UML import uml2
-from gaphor.diagram.items import FlowItem, ActionItem
-from gaphor.storage import storage
-from gaphor.tests import TestCase
+from dabbler.UML import uml2
+from dabbler.diagram.items import FlowItem, ActionItem
+from dabbler.storage import storage
+from dabbler.tests import TestCase
 
 
 class ActionIssueTestCase(TestCase):
@@ -30,7 +30,7 @@ class ActionIssueTestCase(TestCase):
         Test an issue when loading a freshly created action diagram.
         """
         ef = self.element_factory
-        storage.load('test-diagrams/action-issue.gaphor', ef)
+        storage.load('test-diagrams/action-issue.dabbler', ef)
 
         actions = ef.lselect(lambda e: e.isKindOf(uml2.Action))
         flows = ef.lselect(lambda e: e.isKindOf(uml2.ControlFlow))

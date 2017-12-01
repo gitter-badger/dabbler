@@ -1,8 +1,8 @@
 build
 dist
-gaphor/UML/uml2.py
-gaphor/data
-po/gaphor.pot
+dabbler/UML/uml2.py
+dabbler/data
+po/dabbler.pot
 html
 *.swp
 *.egg

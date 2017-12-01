@@ -4,21 +4,21 @@
 #                         Artur Wroblewski <wrobell@pld-linux.org>
 #                         Dan Yeaw <dan@yeaw.me>
 #
-# This file is part of Gaphor.
+# This file is part of Dabbler.
 #
-# Gaphor is free software: you can redistribute it and/or modify it under the
+# Dabbler is free software: you can redistribute it and/or modify it under the
 # terms of the GNU General Public License as published by the Free Software
 # Foundation, either version 2 of the License, or (at your option) any later
 # version.
 #
-# Gaphor is distributed in the hope that it will be useful, but WITHOUT ANY
+# Dabbler is distributed in the hope that it will be useful, but WITHOUT ANY
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
 # A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License along with
-# Gaphor.  If not, see <http://www.gnu.org/licenses/>.
+# Dabbler.  If not, see <http://www.gnu.org/licenses/>.
 """
-Command for running gaphor and tests directly from setup.py.
+Command for running dabbler and tests directly from setup.py.
 """
 
 from __future__ import absolute_import
@@ -32,13 +32,13 @@ from pkg_resources import load_entry_point
 
 
 class run(Command):
-    description = 'Launch Gaphor from the local directory'
+    description = 'Launch Dabbler from the local directory'
 
     user_options = [
         ('build-dir=', None, ''),
         ('command=', 'c', 'execute command'),
         ('file=', 'f', 'execute file'),
-        ('doctest=', 'd', 'execute doctests in module (e.g. gaphor.geometry)'),
+        ('doctest=', 'd', 'execute doctests in module (e.g. dabbler.geometry)'),
         ('unittest=', 'u', 'execute unittest file (e.g. tests/test-ns.py)'),
         ('model=', 'm', 'load a model file'),
         ('coverage', None, 'Calculate coverage (requires coverage.py)'),
@@ -61,7 +61,7 @@ class run(Command):
                                    ('build_lib', 'build_lib'))
 
     def run(self):
-        print('Starting Gaphor...')
+        print('Starting Dabbler...')
 
         if self.model:
             print('Starting with model file', self.model)
@@ -110,7 +110,7 @@ class run(Command):
             print('Running test cases in unittest file: %s...' % self.unittest)
             import imp, unittest
             fp = open(self.unittest)
-            test_module = imp.load_source('gaphor_test', self.unittest, fp)
+            test_module = imp.load_source('dabbler_test', self.unittest, fp)
             test_suite = unittest.TestLoader().loadTestsFromModule(test_module)
             # test_suite = unittest.TestLoader().loadTestsFromName(self.unittest)
             test_runner = unittest.TextTestRunner(verbosity=self.verbosity)
@@ -128,9 +128,9 @@ class run(Command):
             # sys.path.append(dir)
             exec (compile(open(self.file).read(), self.file, 'exec'), {})
         else:
-            print('Launching Gaphor...')
+            print('Launching Dabbler...')
             del sys.argv[1:]
-            starter = load_entry_point('gaphor==%s' % (self.distribution.get_version(),), 'console_scripts', 'gaphor')
+            starter = load_entry_point('dabbler==%s' % (self.distribution.get_version(),), 'console_scripts', 'dabbler')
 
             if self.profile:
                 print('Enabling profiling...')
@@ -139,15 +139,15 @@ class run(Command):
                     import pstats
                     prof = cProfile.Profile()
                     prof.runcall(starter)
-                    prof.dump_stats('gaphor.prof')
-                    p = pstats.Stats('gaphor.prof')
+                    prof.dump_stats('dabbler.prof')
+                    p = pstats.Stats('dabbler.prof')
                     p.strip_dirs().sort_stats('time').print_stats(20)
                 except ImportError as ex:
                     import hotshot, hotshot.stats
-                    prof = hotshot.Profile('gaphor.prof')
+                    prof = hotshot.Profile('dabbler.prof')
                     prof.runcall(starter)
                     prof.close()
-                    stats = hotshot.stats.load('gaphor.prof')
+                    stats = hotshot.stats.load('dabbler.prof')
                     stats.strip_dirs()
                     stats.sort_stats('time', 'calls')
                     stats.print_stats(20)

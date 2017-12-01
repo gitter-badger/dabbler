@@ -4,25 +4,25 @@
 #                         Artur Wroblewski <wrobell@pld-linux.org>
 #                         Dan Yeaw <dan@yeaw.me>
 #
-# This file is part of Gaphor.
+# This file is part of Dabbler.
 #
-# Gaphor is free software: you can redistribute it and/or modify it under the
+# Dabbler is free software: you can redistribute it and/or modify it under the
 # terms of the GNU General Public License as published by the Free Software
 # Foundation, either version 2 of the License, or (at your option) any later
 # version.
 #
-# Gaphor is distributed in the hope that it will be useful, but WITHOUT ANY
+# Dabbler is distributed in the hope that it will be useful, but WITHOUT ANY
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
 # A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License along with
-# Gaphor.  If not, see <http://www.gnu.org/licenses/>.
-"""Report differences in two Gaphor models.
+# Dabbler.  If not, see <http://www.gnu.org/licenses/>.
+"""Report differences in two Dabbler models.
 
 This can be called as:
-    python compare.py model1.gaphor model2.gaphor
+    python compare.py model1.dabbler model2.dabbler
 
-This file is part of Gaphor.
+This file is part of Dabbler.
 """
 
 from __future__ import absolute_import
@@ -37,9 +37,9 @@ try:
 except ImportError:
     pass
 
-import gaphor.UML
-import gaphor.storage
-import gaphor.storage.parser
+import dabbler.UML
+import dabbler.storage
+import dabbler.storage.parser
 
 
 class Compare(object):
@@ -71,7 +71,7 @@ class Compare(object):
         else:
             msg = '+'
 
-        if isinstance(element, gaphor.storage.parser.canvas):
+        if isinstance(element, dabbler.storage.parser.canvas):
             msg += ' <canvas>:'
         else:
             if self.show_id:
@@ -82,7 +82,7 @@ class Compare(object):
             if self.show_id or n:
                 msg += ':'
 
-        msg += ' %s' % (isinstance(element, gaphor.storage.parser.canvas) and 'Canvas' or element.type)
+        msg += ' %s' % (isinstance(element, dabbler.storage.parser.canvas) and 'Canvas' or element.type)
 
         if name:
             msg += '.%s' % name
@@ -102,10 +102,10 @@ class Compare(object):
         """Load the model file and create a factory.
         A tuple (elements, factory) is returned.
         """
-        elements = gaphor.storage.parser.parse(filename)
-        factory = gaphor.UML.ElementFactory()
+        elements = dabbler.storage.parser.parse(filename)
+        factory = dabbler.UML.ElementFactory()
         try:
-            gaphor.storage.load_elements(elements, factory)
+            dabbler.storage.load_elements(elements, factory)
         except Exception as e:
             self.out('! File %s could not be loaded completely.' % filename)
             self.out('! Trying to diff on parsed elements only.')

@@ -1,7 +1,7 @@
-Description of Gaphors data model
+Description of Dabblers data model
 =================================
 
-Gaphor is an UML tool. In order to keep as close as possible to the UML
+Dabbler is an UML tool. In order to keep as close as possible to the UML
 specification the data model is based on the UML Metamodel. Since the OMG has
 an XMI (XML) specification of the metamodel, the easiest way to do that is to
 generate the code directly from the model. Doing this raises two issues:
@@ -34,7 +34,7 @@ references object two and visa versa)? Well, this is basically the same as the
 uni-directional reference. Only now we need to add some extra information to
 the dictionary at class level. We just define and extra field that gives us
 the name of the opposite reference and viola, we can create bi-directional
-references. You should check out the code in ``gaphor/UML/element.py`` for more details.
+references. You should check out the code in ``dabbler/UML/element.py`` for more details.
 
 Implementation
 --------------
@@ -62,10 +62,10 @@ The datamodel itself code is generated.
 Extensions to the data model
 ----------------------------
 
-A few changes have been made to Gaphors implementation of the metamodel. First
+A few changes have been made to Dabblers implementation of the metamodel. First
 of all some relationships have to be modified since the same name is used for
 different relationships. Some n:m relationships have been made 1:n. These are
-all small changed and should not restrict the usability of Gaphors model.
+all small changed and should not restrict the usability of Dabblers model.
 
 The biggest change is the addition of a whole new class: Diagram. Diagram is
 inherited from Namespace and is used to hold a diagram. It contains a
@@ -76,6 +76,6 @@ inherited from Namespace and is used to hold a diagram. It contains a
 
 UML.Element
 -----------
-.. autoclass:: gaphor.UML.element.Element
+.. autoclass:: dabbler.UML.element.Element
    :members:
 

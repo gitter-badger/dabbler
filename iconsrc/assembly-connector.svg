@@ -14,9 +14,9 @@
    id="svg2"
    sodipodi:version="0.32"
    inkscape:version="0.42.2"
-   sodipodi:docbase="/home/users/wrobell/projects/gaphor/data/pixmaps"
+   sodipodi:docbase="/home/users/wrobell/projects/dabbler/data/pixmaps"
    sodipodi:docname="assembly-connector.svg"
-   inkscape:export-filename="/home/users/wrobell/projects/gaphor/data/pixmaps/assembly-connector.png"
+   inkscape:export-filename="/home/users/wrobell/projects/dabbler/data/pixmaps/assembly-connector.png"
    inkscape:export-xdpi="22.500000"
    inkscape:export-ydpi="22.500000">
   <defs
@@ -152,7 +152,7 @@
        d="M 90.000000,43.100266 C 90.000000,43.100266 62.000000,43.000000 62.000000,43.000000"
        id="path2096"
        sodipodi:nodetypes="cs"
-       inkscape:export-filename="/home/users/wrobell/projects/gaphor/data/pixmaps/flowfinal.png"
+       inkscape:export-filename="/home/users/wrobell/projects/dabbler/data/pixmaps/flowfinal.png"
        inkscape:export-xdpi="24.185572"
        inkscape:export-ydpi="24.185572" />
     <path
@@ -168,7 +168,7 @@
        sodipodi:end="11.257374"
        transform="matrix(1.343420,2.133488e-3,-2.470523e-3,1.160147,-25.08638,-10.45947)"
        sodipodi:open="true"
-       inkscape:export-filename="/home/users/wrobell/projects/gaphor/data/pixmaps/assembly-connector.png"
+       inkscape:export-filename="/home/users/wrobell/projects/dabbler/data/pixmaps/assembly-connector.png"
        inkscape:export-xdpi="24.185572"
        inkscape:export-ydpi="24.185572" />
     <path
@@ -189,7 +189,7 @@
        d="M 18.000000,43.000000 C 18.000000,43.000000 3.0000000,43.000000 3.0000000,43.000000"
        id="path2122"
        sodipodi:nodetypes="cs"
-       inkscape:export-filename="/home/users/wrobell/projects/gaphor/data/pixmaps/flowfinal.png"
+       inkscape:export-filename="/home/users/wrobell/projects/dabbler/data/pixmaps/flowfinal.png"
        inkscape:export-xdpi="24.185572"
        inkscape:export-ydpi="24.185572" />
     <use

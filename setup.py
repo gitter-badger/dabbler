@@ -5,21 +5,21 @@
 #                         slmm <noreply@example.com>
 #                         wrobell <wrobell@pld-linux.org>
 #
-# This file is part of Gaphor.
+# This file is part of Dabbler.
 #
-# Gaphor is free software: you can redistribute it and/or modify it under the
+# Dabbler is free software: you can redistribute it and/or modify it under the
 # terms of the GNU General Public License as published by the Free Software
 # Foundation, either version 2 of the License, or (at your option) any later
 # version.
 #
-# Gaphor is distributed in the hope that it will be useful, but WITHOUT ANY
+# Dabbler is distributed in the hope that it will be useful, but WITHOUT ANY
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
 # A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License along with
-# Gaphor.  If not, see <http://www.gnu.org/licenses/>.
+# Dabbler.  If not, see <http://www.gnu.org/licenses/>.
 """
-Setup script for Gaphor.
+Setup script for Dabbler.
 
 Run 'python setup.py develop' to set up a development environment, including
 dependencies.
@@ -71,15 +71,15 @@ class build_py_with_sub_commands(build_py):
 build_py_with_sub_commands.sub_commands.append(('build_uml', None))
 
 setup(
-    name='gaphor',
+    name='dabbler',
     version=VERSION,
-    url='http://mbse.gitlab.io/gaphor',
+    url='https://dabbler.readthedocs.io',
     author='Dan Yeaw',
     author_email='dan@yeaw.me',
     license='GNU General Public License',
-    description='Gaphor is a UML modeling tool',
+    description='Dabbler is a UML modeling tool',
     long_description="""
-Gaphor is a UML modeling tool written in Python.
+Dabbler is a UML modeling tool written in Python.
 
 It uses the GTK+ environment for user interaction.
 """,
@@ -128,40 +128,40 @@ It uses the GTK+ environment for user interaction.
 
     entry_points={
         'console_scripts': [
-            'gaphor = gaphor:main',
-            'gaphorconvert = gaphor.tools.gaphorconvert:main',
+            'dabbler = dabbler:main',
+            'dabblerconvert = dabbler.tools.dabblerconvert:main',
         ],
-        'gaphor.services': [
-            'component_registry = gaphor.services.componentregistry:ZopeComponentRegistry',
-            # 'event_dispatcher = gaphor.services.eventdispatcher:EventDispatcher',
-            'adapter_loader = gaphor.services.adapterloader:AdapterLoader',
-            'properties = gaphor.services.properties:Properties',
-            'undo_manager = gaphor.services.undomanager:UndoManager',
-            'element_factory = gaphor.UML.elementfactory:ElementFactoryService',
-            'file_manager = gaphor.services.filemanager:FileManager',
-            # 'backup_service = gaphor.services.backupservice:BackupService',
-            'diagram_export_manager = gaphor.services.diagramexportmanager:DiagramExportManager',
-            'action_manager = gaphor.services.actionmanager:ActionManager',
-            'ui_manager = gaphor.services.actionmanager:UIManager',
-            'main_window = gaphor.ui.mainwindow:MainWindow',
-            'copy = gaphor.services.copyservice:CopyService',
-            'sanitizer = gaphor.services.sanitizerservice:SanitizerService',
-            'element_dispatcher = gaphor.services.elementdispatcher:ElementDispatcher',
-            # 'property_dispatcher = gaphor.services.propertydispatcher:PropertyDispatcher',
-            'xmi_export = gaphor.plugins.xmiexport:XMIExport',
-            'diagram_layout = gaphor.plugins.diagramlayout:DiagramLayout',
-            'pynsource = gaphor.plugins.pynsource:PyNSource',
-            # 'check_metamodel = gaphor.plugins.checkmetamodel:CheckModelWindow',
-            # 'live_object_browser = gaphor.plugins.liveobjectbrowser:LiveObjectBrowser',
-            'alignment = gaphor.plugins.alignment:Alignment',
-            'help = gaphor.services.helpservice:HelpService',
+        'dabbler.services': [
+            'component_registry = dabbler.services.componentregistry:ZopeComponentRegistry',
+            # 'event_dispatcher = dabbler.services.eventdispatcher:EventDispatcher',
+            'adapter_loader = dabbler.services.adapterloader:AdapterLoader',
+            'properties = dabbler.services.properties:Properties',
+            'undo_manager = dabbler.services.undomanager:UndoManager',
+            'element_factory = dabbler.UML.elementfactory:ElementFactoryService',
+            'file_manager = dabbler.services.filemanager:FileManager',
+            # 'backup_service = dabbler.services.backupservice:BackupService',
+            'diagram_export_manager = dabbler.services.diagramexportmanager:DiagramExportManager',
+            'action_manager = dabbler.services.actionmanager:ActionManager',
+            'ui_manager = dabbler.services.actionmanager:UIManager',
+            'main_window = dabbler.ui.mainwindow:MainWindow',
+            'copy = dabbler.services.copyservice:CopyService',
+            'sanitizer = dabbler.services.sanitizerservice:SanitizerService',
+            'element_dispatcher = dabbler.services.elementdispatcher:ElementDispatcher',
+            # 'property_dispatcher = dabbler.services.propertydispatcher:PropertyDispatcher',
+            'xmi_export = dabbler.plugins.xmiexport:XMIExport',
+            'diagram_layout = dabbler.plugins.diagramlayout:DiagramLayout',
+            'pynsource = dabbler.plugins.pynsource:PyNSource',
+            # 'check_metamodel = dabbler.plugins.checkmetamodel:CheckModelWindow',
+            # 'live_object_browser = dabbler.plugins.liveobjectbrowser:LiveObjectBrowser',
+            'alignment = dabbler.plugins.alignment:Alignment',
+            'help = dabbler.services.helpservice:HelpService',
         ],
-        'gaphor.uicomponents': [
-            # 'mainwindow = gaphor.ui.mainwindow:MainWindow',
-            'namespace = gaphor.ui.mainwindow:Namespace',
-            'toolbox = gaphor.ui.mainwindow:Toolbox',
-            'consolewindow = gaphor.ui.consolewindow:ConsoleWindow',
-            'elementeditor = gaphor.ui.elementeditor:ElementEditor',
+        'dabbler.uicomponents': [
+            # 'mainwindow = dabbler.ui.mainwindow:MainWindow',
+            'namespace = dabbler.ui.mainwindow:Namespace',
+            'toolbox = dabbler.ui.mainwindow:Toolbox',
+            'consolewindow = dabbler.ui.consolewindow:ConsoleWindow',
+            'elementeditor = dabbler.ui.elementeditor:ElementEditor',
         ],
     },
 
