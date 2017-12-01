@@ -46,7 +46,7 @@ Contributing
 If you experience problems with Dabbler, `log them on GitHub`_. If you
 want to contribute code, please `fork the code`_ and `submit a pull request`_.
 
-.. _Read The Docs: https://toga.readthedocs.io
+.. _Read The Docs: https://dabbler.readthedocs.io
 .. _dabblers: https://gitter.im/dabblers
 .. _log them on Github: https://github.com/danyeaw/dabbler/issues
 .. _fork the code: https://github.com/danyeaw/dabbler
