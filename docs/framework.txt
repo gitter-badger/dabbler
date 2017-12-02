@@ -1,7 +1,7 @@
-Gaphor's Framework
+Dabbler's Framework
 ==================
 
-Gaphor is built in a light, service oriented fashion. The application is split
+Dabbler is built in a light, service oriented fashion. The application is split
 in a series of services, such as a file manager, undo manager and GUI manager.
 Those services are loaded based on entry points defined in Python Eggs
 (see :doc:`Service oriented design <so>`).
@@ -16,12 +16,12 @@ in (so the diagram item should check if the element that sent the event is
 actually the event the item is representing).
 
 
-Gaphor is transactional. Transactions work simply by sending an event when a
+Dabbler is transactional. Transactions work simply by sending an event when a
 transaction starts and sending another when a transaction ends. E.g. undo
 management is transactional.
 
 It all starts with an Application. Only one Application instance is permitted.
-The Application will look for services defined as :doc:`gaphor.services 
+The Application will look for services defined as :doc:`dabbler.services
 <services>`. Those services are loaded and initialized.
 
 The most notable services are:
@@ -53,11 +53,11 @@ element_factory
   case all changes are played back directly.
 
 element_dispatcher
-  Although Gaphor makes use of a central dispatch engine, this solution is not
+  Although Dabbler makes use of a central dispatch engine, this solution is not
   efficient when it comes to dispatching events of UML model elements. For
   this purpose the `element_dispatcher` can help out. It maintains a path of
   elements reaching from the root (e.g. from a diagram item) to the element of
   interest and will only signal in case this element changes.
   This makes complex dispatching very efficient.
 
-.. autoclass:: gaphor.services.elementdispatcher.ElementDispatcher
+.. autoclass:: dabbler.services.elementdispatcher.ElementDispatcher

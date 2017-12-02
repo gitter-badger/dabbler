@@ -4,20 +4,20 @@
 #                         Artur Wroblewski <wrobell@pld-linux.org>
 #                         Dan Yeaw <dan@yeaw.me>
 #
-# This file is part of Gaphor.
+# This file is part of Dabbler.
 #
-# Gaphor is free software: you can redistribute it and/or modify it under the
+# Dabbler is free software: you can redistribute it and/or modify it under the
 # terms of the GNU General Public License as published by the Free Software
 # Foundation, either version 2 of the License, or (at your option) any later
 # version.
 #
-# Gaphor is distributed in the hope that it will be useful, but WITHOUT ANY
+# Dabbler is distributed in the hope that it will be useful, but WITHOUT ANY
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
 # A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License along with
-# Gaphor.  If not, see <http://www.gnu.org/licenses/>.
-"""This script list classes and optionally attributes from UML model created with Gaphor."""
+# Dabbler.  If not, see <http://www.gnu.org/licenses/>.
+"""This script list classes and optionally attributes from UML model created with Dabbler."""
 
 from __future__ import absolute_import
 from __future__ import print_function
@@ -25,11 +25,11 @@ from __future__ import print_function
 import optparse
 import sys
 
-from gaphor.UML import uml2
-from gaphor import Application
+from dabbler.UML import uml2
+from dabbler import Application
 
 # Setup command line options.
-usage = 'usage: %prog [options] file.gaphor'
+usage = 'usage: %prog [options] file.dabbler'
 
 parser = optparse.OptionParser(usage=usage)
 
@@ -44,7 +44,7 @@ if len(args) != 1:
 # The model file to load.
 model = args[0]
 
-# Create the Gaphor application object.
+# Create the Dabbler application object.
 Application.init()
 
 # Get services we need.

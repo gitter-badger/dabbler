@@ -1,7 +1,7 @@
 Creating models
 ===============
 
-Once Gaphor is started a new empty model is automatically created. The `main`
+Once Dabbler is started a new empty model is automatically created. The `main`
 diagram is already open in the :doc:`Diagram section <working>`.
 
 Select an element you want to place (e.g. a class) by clicking on the icon in
@@ -17,10 +17,10 @@ It's simple to add elements to a diagram.
 Some elements are not directly visible. The section in the toolbox is collapsed
 and needs to be clicked first to reveal its contents.
 
-Gaphor does not make any assumptions about which elements should be placed on a
+Dabbler does not make any assumptions about which elements should be placed on a
 diagram. A diagram is a diagram. UML defines all different kinds of diagrams,
 such as Class diagrams, Component diagrams, Action diagrams, Sequence diagrams.
-But Gaphor does not restrict the user.
+But Dabbler does not restrict the user.
 
 Creating new diagrams
 =====================
@@ -50,5 +50,5 @@ be added.
 Elements can also be dragged within the Navigation section. This way classes
 and packages can be rearranged for example.
 
-.. [1] Command-Click for MacOS X users running Gaphor in X11.
+.. [1] Command-Click for MacOS X users running Dabbler in X11.
 

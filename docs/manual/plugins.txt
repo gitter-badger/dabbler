@@ -6,7 +6,7 @@ There is little difference in writing a plugin or a service.
 Accessing model related data
 ----------------------------
 
-The datamodel classes are located in the `gaphor.UML` module. Data objects can
+The datamodel classes are located in the `dabbler.UML` module. Data objects can
 be accessed through the ElementFactory. This is a special class for creating
 and managing data objects. Items can be queried using this element factory.
 It's registered in the application as `element_factory`. When writing a service
@@ -67,4 +67,4 @@ The variable ``it`` in the query refers to the evaluated object (in this case
 all operations with a return parameter are taken into account).
 
 
-.. [1] See http://github.com/amolenaar/gaphor/blob/master/gaphor/misc/listmixins.py
+.. [1] See http://github.com/amolenaar/dabbler/blob/master/dabbler/misc/listmixins.py

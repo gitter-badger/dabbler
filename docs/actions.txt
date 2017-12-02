@@ -51,26 +51,26 @@ decorator and let the class create an ActionGroup using some
 actionGroup factory function (no inheritance needed here). 
 
 Note that ActionGroup is a GTK class and should technically only be used in the
-gaphor.ui package.
+dabbler.ui package.
 
 Autonom controllers can be defined, which provide a piece of functionality.
 They can register handlers in order to update their state.
 
 Maybe it's nice to configure those through the egg-info system. I suppose
-gaphor.service will serve well (as they need to be initialized anyway)
+dabbler.service will serve well (as they need to be initialized anyway)
 
  * also inherit IActionProvider from IService?
 
 ::
 
-    [gaphor.services]
-    xx = gaphor.actions.whatever:SomeActionProviderClass
+    [dabbler.services]
+    xx = dabbler.actions.whatever:SomeActionProviderClass
 
 ----
 
 .. _action_doc:
 
-.. autoclass:: gaphor.action.action
+.. autoclass:: dabbler.action.action
    :members:
 
 

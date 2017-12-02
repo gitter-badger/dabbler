@@ -1,14 +1,14 @@
-Gaphor on Windows
+Dabbler on Windows
 =================
 
-Gaphor even runs on windows. 
+Dabbler even runs on windows.
 
 .. warning :: 
 
   The installer is currently broken. For now, use the alternative way
   as described below (see #128).
 
-Download the installer: http://downloads.sourceforge.net/gaphor/. 
+Download the installer: http://downloads.sourceforge.net/dabbler/.
 This installer will download all required files and install them (you will
 require an internet connection when running the installer).  
 
@@ -27,19 +27,19 @@ After installing ``easy_install``, first install [http://pypi.python.org/pypi/zo
 
 Here version 3.3.0 is installed (instead of the latest version). This is due 
 to the fact that no binary distribution is available for the latest
-``zope.interface`` module. No problem. Gaphor will work with an older
+``zope.interface`` module. No problem. Dabbler will work with an older
 version of ``zope.interface`` too.
 
-After a successful installation of ``zope.interface`` Gaphor should be installed by executing::
+After a successful installation of ``zope.interface`` Dabbler should be installed by executing::
 
-   C:\>"c:\Program Files\PyGTK\Python\Scripts\easy_install.exe" gaphor
+   C:\>"c:\Program Files\PyGTK\Python\Scripts\easy_install.exe" dabbler
 
-Now you should be able to start Gaphor my executing ``C:\Program Files\PyGTK\Python\Scripts\gaphor.py``. This work from within the explorer.
+Now you should be able to start Dabbler my executing ``C:\Program Files\PyGTK\Python\Scripts\dabbler.py``. This work from within the explorer.
 
 
 If you're a developer and already have Python 2.4 installed you can, as an
-alternative, check out the ``gaphor-win32-libs`` module from Gaphors
-subversion repository or download the zip file from http://svn.devjavu.com/gaphor/gaphor-win32-libs/zips/gaphor-win32-libs.zip.
+alternative, check out the ``dabbler-win32-libs`` module from Dabblers
+subversion repository or download the zip file from http://svn.devjavu.com/dabbler/dabbler-win32-libs/zips/dabbler-win32-libs.zip.
 Follow the instructions in the ``README.txt`` file.
 
 

@@ -3,19 +3,19 @@
 # Copyright (C) 2003-2017 Arjan Molenaar <gaphor@gmail.com>
 #                         Dan Yeaw <dan@yeaw.me>
 #
-# This file is part of Gaphor.
+# This file is part of Dabbler.
 #
-# Gaphor is free software: you can redistribute it and/or modify it under the
+# Dabbler is free software: you can redistribute it and/or modify it under the
 # terms of the GNU General Public License as published by the Free Software
 # Foundation, either version 2 of the License, or (at your option) any later
 # version.
 #
-# Gaphor is distributed in the hope that it will be useful, but WITHOUT ANY
+# Dabbler is distributed in the hope that it will be useful, but WITHOUT ANY
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
 # A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License along with
-# Gaphor.  If not, see <http://www.gnu.org/licenses/>.
+# Dabbler.  If not, see <http://www.gnu.org/licenses/>.
 """build_mo
 
 Generate .mo files from po files.
@@ -55,7 +55,7 @@ class build_mo(Command):
         if self.build_dir is None:
             self.set_undefined_options('build',
                                        ('build_lib', 'build_dir'))
-            self.build_dir = os.path.join(self.build_dir, 'gaphor', 'data', 'locale')
+            self.build_dir = os.path.join(self.build_dir, 'dabbler', 'data', 'locale')
 
         self.all_linguas = self.all_linguas.split(',')
 
@@ -68,7 +68,7 @@ class build_mo(Command):
             pofile = os.path.join('po', lingua + '.po')
             outdir = os.path.join(self.build_dir, lingua, 'LC_MESSAGES')
             self.mkpath(outdir)
-            outfile = os.path.join(outdir, 'gaphor.mo')
+            outfile = os.path.join(outdir, 'dabbler.mo')
             if self.force or newer(pofile, outfile):
                 print('converting %s -> %s' % (pofile, outfile))
                 msgfmt.make(pofile, outfile)

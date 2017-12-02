@@ -26,7 +26,7 @@ Unix/Linux
 
 Prefix `~/.py-site-packages` can be changed to something more suitable for your setup.
 
- **Note for Linux users:** Make sure you have the `python-dev` package installed for your Python version, as some code needs to be compiled (those are packages Gaphor depends on, not Gaphor itself).
+ **Note for Linux users:** Make sure you have the `python-dev` package installed for your Python version, as some code needs to be compiled (those are packages Dabbler depends on, not Dabbler itself).
 
  **Note for Ubuntu Linux users:** Make sure you have the `build-essential` package installed. This package installs header files and what more, required to compile the C-extensions of `zope.interface`.
 

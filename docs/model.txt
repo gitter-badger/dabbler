@@ -1,7 +1,7 @@
 UML datamodel
 =============
 
-Gaphor uses the UML metamodel specs as guidelines for its data storage.
+Dabbler uses the UML metamodel specs as guidelines for its data storage.
 In fact, the datamodel is generated for a model file. 
 
 The model is built using smart properties (descriptors). Those descriptors fire

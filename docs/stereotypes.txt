@@ -39,7 +39,7 @@ This window should contain:
 6. The profile it belongs to.
 
 When a stereotype is used, an instance is created of the Stereotype
-(meta)class. This is not really possible for our application. Gaphor should
+(meta)class. This is not really possible for our application. Dabbler should
 figure out another way to do this. Should check XMI and see how they do it
 (maybe a property is enough).
 

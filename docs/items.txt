@@ -1,4 +1,4 @@
-Gaphor Diagram Items
+Dabbler Diagram Items
 ====================
 The diagram items (or in short `items`) represent UML metamodel on a diagram.
 The following sections present the basic items.
@@ -7,50 +7,50 @@ DiagramItem
 -----------
 Basic diagram item supporting item style, text elements and stereotypes.
 
-.. autoclass:: gaphor.diagram.diagramitem.DiagramItem
+.. autoclass:: dabbler.diagram.diagramitem.DiagramItem
    :members:
 
 ElementItem
 -----------
 Rectangular canvas item.
 
-.. autoclass:: gaphor.diagram.elementitem.ElementItem
+.. autoclass:: dabbler.diagram.elementitem.ElementItem
 
 NamedItem
 ---------
 NamedElement (UML metamodel) representation using rectangular canvas item.
 
-.. autoclass:: gaphor.diagram.nameditem.NamedItem
+.. autoclass:: dabbler.diagram.nameditem.NamedItem
 
 CompartmentItem
 ---------------
 An item with compartments (i.e. Class or State)
 
-.. autoclass:: gaphor.diagram.compartment.CompartmentItem
+.. autoclass:: dabbler.diagram.compartment.CompartmentItem
 
 ClassifierItem
 --------------
 Classifer (UML metamodel) representation.
 
-.. autoclass:: gaphor.diagram.classifier.ClassifierItem
+.. autoclass:: dabbler.diagram.classifier.ClassifierItem
 
 DiagramLine
 -----------
 Line canvas item.
 
-.. autoclass:: gaphor.diagram.diagramline.DiagramLine
+.. autoclass:: dabbler.diagram.diagramline.DiagramLine
 
 NamedLine
 ---------
 NamedElement (UML metamodel) representation using line canvas item.
 
-.. autoclass:: gaphor.diagram.diagramline.NamedLine
+.. autoclass:: dabbler.diagram.diagramline.NamedLine
 
 FeatureItem
 -----------
 Diagram representation of UML metamodel classes like property, operation,
 stereotype attribute, etc.
 
-.. autoclass:: gaphor.diagram.compartment.FeatureItem
+.. autoclass:: dabbler.diagram.compartment.FeatureItem
 
 

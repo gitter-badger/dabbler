@@ -1,9 +1,9 @@
-Working with Gaphor
+Working with Dabbler
 ###################
 
-Once Gaphor is launched, it provides you an almost empty user interface. A new model is already created and the diagram is opened.
+Once Dabbler is launched, it provides you an almost empty user interface. A new model is already created and the diagram is opened.
 
-The layout of the Gaphor interface is divided into four sections, namely:
+The layout of the Dabbler interface is divided into four sections, namely:
 
 * Navigation
 * Main Canvas Diagram
@@ -17,7 +17,7 @@ Navigation
 
 The navigation section of the interface displays a hierarchical view of your model.  Every model element you create will be inserted into the navigation section.  This view acts as a tree where you can expand and collapse different elements of your model.  This provides an easy way to view the elements of your model from an elided perspective.  That is, you can collapse those model elements that are irrelevant to the task at hand.
 
-.. image:: gaphor-treeview.png
+.. image:: dabbler-treeview.png
 
 In the figure on the left, you will see that there are three elements in the navigation view.  The root element, `New Model` is a package.  Notice the small arrow beside `New Model` that is pointing downward.  This indicates that the element is expanded.  You will also notice the two sub-elements are slightly indented in relation to `New Model`.  The `NewClass` element is a class and the `main` element is a diagram.
 
